@@ -1,0 +1,12 @@
+{
+  "name": "velociclos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "deploy": "vercel --prod"
+  },
+  "devDependencies": {
+    "vercel": "^37.10.0"
+  }
+}
