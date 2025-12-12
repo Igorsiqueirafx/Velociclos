@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipos de Gráficos (Candlestick, Linha, Barras) - Análise Técnica Básica - Velociclos</title>
+    <meta name="description" content="Aprenda sobre os diferentes tipos de gráficos utilizados na análise técnica: Candlestick, Linha e Barras. Domine a leitura de gráficos no Forex.">
+    <meta name="author" content="Velociclos">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="../../CSS/styles.css">
+    <link rel="stylesheet" href="curso.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="icon" type="image/png" href="../../public/favicon.png">
+</head>
+<body>
+
+    <header>
+        <div class="container header-container">
+            <nav class="nav-menu">
+                <a href="../../index.html" class="nav-link">Home</a>
+                <a href="../../cursos.html" class="nav-link active">Cursos</a>
+                <a href="../../conquistas.html" class="nav-link">EA Velociclos</a>
+            </nav>
+
+            <div class="user-info" id="user-info" style="display: none;">
+                <img id="user-avatar" class="user-avatar" src="" alt="Avatar do Usuário" style="display: none;">
+                <span id="user-name" class="user-name"></span>
+                <button id="logout-btn" class="logout-btn" title="Sair">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+            <div class="theme-switch-wrapper" id="theme-toggle">
+                <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon" style="display: none;"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container main-container">
+            <div class="lesson-content">
+                <div class="lesson-header">
+                    <h1>Tipos de Gráficos (Candlestick, Linha, Barras)</h1>
+                    <div class="lesson-meta">
+                        <span class="duration"><i class="fas fa-clock"></i> 20 min</span>
+                        <span class="type"><i class="fas fa-play-circle"></i> Vídeo</span>
+                    </div>
+                </div>
+
+                <div class="lesson-navigation">
+                    <button id="prev-lesson" class="nav-btn" disabled>
+                        <i class="fas fa-chevron-left"></i> Anterior
+                    </button>
+                    <span class="lesson-counter">1 de 1</span>
+                    <button id="next-lesson" class="nav-btn" disabled>
+                        Próximo <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="lesson-body">
+                    <div class="video-container" id="video-container">
+                        <iframe src="https://drive.google.com/file/d/1QO1zDCpWO0CYIDY5I1AGmKv9LieE_tOk/preview" width="100%" height="400" allowfullscreen></iframe>
+                    </div>
+
+                    <div class="lesson-text">
+                        <h2>Conteúdo da Aula</h2>
+                        <div class="content-placeholder">
+                            <p><strong>Tipos de Gráficos (Candlestick, Linha, Barras)</strong></p>
+                            <p>Nesta aula, vamos aprender sobre os três principais tipos de gráficos utilizados na análise técnica do mercado Forex: gráficos de linha, gráficos de barras e gráficos de candlestick (velas japonesas).</p>
+
+                            <h3>O que você aprenderá nesta aula:</h3>
+                            <ul>
+                                <li>Gráfico de Linha - Simples e direto</li>
+                                <li>Gráfico de Barras - Mais informações visuais</li>
+                                <li>Gráfico de Candlestick - O mais completo e usado</li>
+                                <li>Como interpretar cada tipo de gráfico</li>
+                                <li>Vantagens e desvantagens de cada formato</li>
+                                <li>Timeframes e períodos de análise</li>
+                            </ul>
+
+                            <h3>1. Gráfico de Linha</h3>
+                            <p>O gráfico de linha é o tipo mais simples de representação gráfica. Ele conecta apenas os preços de fechamento de cada período, criando uma linha contínua.</p>
+
+                            <h4>Características:</h4>
+                            <ul>
+                                <li><strong>Simplicidade:</strong> Fácil de interpretar</li>
+                                <li><strong>Limpeza visual:</strong> Menos informações para processar</li>
+                                <li><strong>Tendências:</strong> Mostra bem a direção geral do mercado</li>
+                                <li><strong>Limitação:</strong> Não mostra abertura, máxima ou mínima</li>
+                            </ul>
+
+                            <h4>Quando usar:</h4>
+                            <ul>
+                                <li>Análise de longo prazo</li>
+                                <li>Visualização de tendências gerais</li>
+                                <li>Comparação de múltiplos ativos</li>
+                                <li>Análise fundamentalista</li>
+                            </ul>
+
+                            <h3>2. Gráfico de Barras</h3>
+                            <p>O gráfico de barras (OHLC - Open, High, Low, Close) mostra muito mais informações que o gráfico de linha. Cada barra representa um período específico.</p>
+
+                            <h4>Elementos de uma Barra:</h4>
+                            <ul>
+                                <li><strong>Linha vertical:</strong> Representa a amplitude total (High-Low)</li>
+                                <li><strong>Tick esquerdo:</strong> Preço de abertura</li>
+                                <li><strong>Tick direito:</strong> Preço de fechamento</li>
+                                <li><strong>Cor:</strong> Verde (fechamento > abertura) ou vermelho (fechamento < abertura)</li>
+                            </ul>
+
+                            <h4>Vantagens:</h4>
+                            <ul>
+                                <li>Mostra todos os preços importantes do período</li>
+                                <li>Permite análise detalhada da volatilidade</li>
+                                <li>Identifica suportes e resistências</li>
+                                <li>Mostra força relativa de alta/baixa</li>
+                            </ul>
+
+                            <h3>3. Gráfico de Candlestick (Velas Japonesas)</h3>
+                            <p>O gráfico de candlestick é o mais popular e completo. Desenvolvido no Japão no século XVIII, combina elementos visuais que facilitam a interpretação rápida do mercado.</p>
+
+                            <h4>Estrutura de uma Vela:</h4>
+                            <ul>
+                                <li><strong>Corpo (Body):</strong> Área entre abertura e fechamento</li>
+                                <li><strong>Branco/Verde:</strong> Fechamento > Abertura (Bullish)</li>
+                                <li><strong>Preto/Vermelho:</strong> Fechamento < Abertura (Bearish)</li>
+                                <li><strong>Shadow Superior:</strong> Máxima do período</li>
+                                <li><strong>Shadow Inferior:</strong> Mínima do período</li>
+                            </ul>
+
+                            <h4>Padrões Básicos de Velas:</h4>
+                            <h5>Velas de Alta (Bullish):</h5>
+                            <ul>
+                                <li><strong>Marubozu Branco:</strong> Corpo branco longo, sem sombras</li>
+                                <li><strong>Hammer:</strong> Corpo pequeno na parte superior, sombra inferior longa</li>
+                                <li><strong>Engulfing Bullish:</strong> Vela branca engole a preta anterior</li>
+                            </ul>
+
+                            <h5>Velas de Baixa (Bearish):</h5>
+                            <ul>
+                                <li><strong>Marubozu Preto:</strong> Corpo preto longo, sem sombras</li>
+                                <li><strong>Shooting Star:</strong> Corpo pequeno na parte inferior, sombra superior longa</li>
+                                <li><strong>Engulfing Bearish:</strong> Vela preta engole a branca anterior</li>
+                            </ul>
+
+                            <h3>Timeframes e Períodos</h3>
+                            <h4>Timeframes Comuns:</h4>
+                            <ul>
+                                <li><strong>1 minuto (M1):</strong> Scalping</li>
+                                <li><strong>5 minutos (M5):</strong> Day Trading</li>
+                                <li><strong>15 minutos (M15):</strong> Day Trading</li>
+                                <li><strong>1 hora (H1):</strong> Swing Trading</li>
+                                <li><strong>4 horas (H4):</strong> Position Trading</li>
+                                <li><strong>1 dia (D1):</strong> Análise de longo prazo</li>
+                                <li><strong>1 semana (W1):</strong> Tendências macro</li>
+                            </ul>
+
+                            <h3>Dicas Práticas:</h3>
+                            <ul>
+                                <li><strong>Comece com H1 ou H4:</strong> Timeframes intermediários são ideais para iniciantes</li>
+                                <li><strong>Use múltiplos timeframes:</strong> Análise em diferentes perspectivas</li>
+                                <li><strong>Candlestick é o padrão:</strong> 90% dos traders usam velas japonesas</li>
+                                <li><strong>Pratique a leitura:</strong> Passe tempo observando gráficos sem operar</li>
+                                <li><strong>Combine com indicadores:</strong> Use médias móveis e RSI junto com velas</li>
+                            </ul>
+
+                            <h3>Exercícios Práticos:</h3>
+                            <ol>
+                                <li>Abra um gráfico EUR/USD em timeframe H1</li>
+                                <li>Identifique 5 velas de alta e 5 de baixa</li>
+                                <li>Observe como as sombras mostram rejeição de preços</li>
+                                <li>Compare o mesmo período em diferentes timeframes</li>
+                                <li>Pratique identificação de padrões básicos</li>
+                            </ol>
+
+                            <div class="lesson-actions">
+                                <button class="btn-primary" onclick="markAsCompleted()">
+                                    <i class="fas fa-check"></i> Marcar como Concluída
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Velociclos. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+            <script src="../../js/auth.js" defer></script>
+    <script src="../../js/theme-toggle.js"></script>
+    <script src="../../js/course-functions.js" defer></script>
+    <script src="../../js/lesson-navigation.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.initializeLessonNavigation('at1-1', 'analise-tecnica-basica');
+        });
+    </script>
+    <script src="../../js/course-functions.js" defer></script>
+    <script src="../../js/lesson-navigation.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.initializeLessonNavigation('at1-1', 'analise-tecnica-basica');
+        });
+    </script>
+    <script src="../../js/course-functions.js" defer></script>
+    <script>
+        // Dados da lição atual
+        const lessonData = {
+            id: 'at1-1',
+            courseId: 'analise-tecnica-basica',
+            title: 'Tipos de Gráficos (Candlestick, Linha, Barras)',
+            duration: '20 min',
+            type: 'Vídeo',
+            currentLesson: parseInt('1'),
+            totalLessons: parseInt('1')
+        };
+
+        // Função para marcar aula como concluída
+        function markAsCompleted() {
+            alert('Parabéns! Você concluiu a aula sobre Tipos de Gráficos. Agora você sabe ler gráficos como um profissional!');
+            // Aqui seria implementada a lógica para salvar o progresso
+        }
+
+
+        // Navegação entre aulas
+        document.getElementById('prev-lesson').addEventListener('click', function() {
+            // Lógica para aula anterior
+            alert('Esta é a primeira aula do curso!');
+        });
+
+        document.getElementById('next-lesson').addEventListener('click', function() {
+            // Lógica para próxima aula
+            alert('Esta é a última aula deste módulo!');
+        });
+    </script>
+        <nav class="navigation lesson-nav">
+            <a class="nav-button prev" href="#" aria-label="Anterior">← Anterior</a>
+            <a class="nav-button next" href="#" aria-label="Próximo">Próximo →</a>
+        </nav>
+    <script src="../../js/aula-nav.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos de Forex - Velociclos | Aprenda Trading do Zero</title>
+    <meta name="description" content="Cursos completos de Forex: Iniciante, Análise Técnica, Gestão de Risco, Estratégias e Psicologia do Trader. Certificação incluída.">
+    <meta name="keywords" content="cursos forex, trading, análise técnica, gestão risco, psicologia trader, mt5, metatrader, cursos online">
+    <meta name="author" content="Velociclos">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Cursos de Forex - Velociclos">
+    <meta property="og:description" content="Aprenda Forex do zero com cursos profissionais. Análise técnica, gestão de risco e estratégias comprovadas.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://velociclos.com/cursos.html">
+    <link rel="canonical" href="https://velociclos.com/cursos.html">
+    <link rel="stylesheet" href="./CSS/styles.css">
+    <link rel="stylesheet" href="./CSS/cursos-layout-optimized.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="icon" type="image/png" href="./public/favicon.png">
+</head>
+<body>
+
+    <header>
+        <div class="container header-container">
+            <nav class="nav-menu">
+                <a href="./index.html" class="nav-link">Home</a>
+                <a href="./cursos.html" class="nav-link active">Cursos</a>
+                <a href="./conquistas.html" class="nav-link">EA Velociclos</a>
+            </nav>
+
+            <div class="user-info" id="user-info" style="display: none;">
+                <img id="user-avatar" class="user-avatar" src="" alt="Avatar do Usuário" style="display: none;">
+                <span id="user-name" class="user-name"></span>
+                <button id="logout-btn" class="logout-btn" title="Sair">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+            <div class="theme-switch-wrapper" id="theme-toggle">
+                <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="content-wrapper">
+
+            <!-- Hero Section - Otimizada -->
+            <section class="hero-optimized">
+                <div class="container">
+                    <div class="hero-content-grid">
+                        <div class="hero-text-content">
+                            <h1 class="hero-title">
+                                Domine o <span class="accent-text">Forex</span>
+                                <span class="text-break">do Zero à Lucratividade</span>
+                            </h1>
+                            <p class="hero-subtitle">
+                                Saiba o que realmente te faz ser lucrativo!
+                            </p>
+                            <div class="hero-cta">
+                             
+                                <div class="hero-stats-compact">
+                                    <div class="stat-item">
+                                        <span class="stat-number">Forex</span>
+                                        <span class="stat-label">Descomplicado</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">Operar</span>
+                                        <span class="stat-label">Lucrar sempre</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-number">Confiança</span>
+                                        <span class="stat-label">Em si mesmo</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-visual">
+                            <div class="hero-chart-modern">
+                                <div class="chart-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="chart-text">
+                                    <h3>O Mercado se move em Ciclos</h3>
+                                    <p>Adaptar-se a ele é o nosso trabalho</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Benefits -->
+            <section class="benefits-section">
+                <div class="container">
+                    <div class="benefits-grid">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Conta Real</h3>
+                            <p>Desenvolvido e refinado com experiências reais do mercado</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Método Comprovado</h3>
+                            <p>Técnicas testadas e validadas por anos de experiência prática</p>
+                        </div>
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <h3>Comprovado e Testado</h3>
+                            <p>Receba em Dólares e conquiste suas metas profissionais</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Courses Section -->
+            <section class="courses-section" id="courses-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Nossos Cursos</h2>
+                        <p class="section-subtitle">
+                            Escolha o curso perfeito para seu nível e objetivos
+                        </p>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="courses-filters">
+                        <div class="filter-group">
+                            <button class="filter-btn active" data-filter="all">Todos</button>
+                            <button class="filter-btn" data-filter="iniciante">Iniciante</button>
+                            <button class="filter-btn" data-filter="intermediario">Intermediário</button>
+                            <button class="filter-btn" data-filter="avancado">Avançado</button>
+                        </div>
+                    </div>
+
+                    <!-- Courses Grid -->
+                    <div class="courses-grid-modern" id="courses-grid">
+                        <!-- Course Card 1 -->
+                        <a href="./cursos-estáticos/forex-iniciante/f1-1.html" class="course-card-modern" data-category="iniciante">
+                            <div class="course-header">
+                                <div class="course-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="course-badge iniciante">Iniciante</div>
+                            </div>
+                            <div class="course-content">
+                                <h3>Forex para Iniciantes</h3>
+                                <p>Aprenda os fundamentos do mercado Forex do zero com metodologia prática</p>
+                                <div class="course-meta">
+                                    <div class="meta-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>8 horas</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <i class="fas fa-signal"></i>
+                                        <span>Iniciante</span>
+                                    </div>
+                                </div>
+                                <div class="course-footer">
+                                    <div class="course-price">
+                                        <span class="price-currency">R$</span>
+                                        <span class="price-value">97</span>
+                                    </div>
+                                    <span class="btn btn-primary course-btn">
+                                        Ver Detalhes
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Course Card 2 -->
+                        <a href="./cursos-estáticos/analise-tecnica-basica/at1-1.html" class="course-card-modern" data-category="intermediario">
+                            <div class="course-header">
+                                <div class="course-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="course-badge intermediario">Intermediário</div>
+                            </div>
+                            <div class="course-content">
+                                <h3>Análise Técnica Básica</h3>
+                                <p>Domine os principais indicadores e padrões gráficos para decisões assertivas</p>
+                                <div class="course-meta">
+                                    <div class="meta-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>12 horas</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <i class="fas fa-signal"></i>
+                                        <span>Intermediário</span>
+                                    </div>
+                                </div>
+                                <div class="course-footer">
+                                    <div class="course-price">
+                                        <span class="price-currency">R$</span>
+                                        <span class="price-value">197</span>
+                                    </div>
+                                    <span class="btn btn-primary course-btn">
+                                        Ver Detalhes
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Course Card 3 -->
+                        <a href="./cursos-estáticos/gestão-risco-avançada/gr1-1.html" class="course-card-modern" data-category="avancado">
+                            <div class="course-header">
+                                <div class="course-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="course-badge avancado">Avançado</div>
+                            </div>
+                            <div class="course-content">
+                                <h3>Gestão de Risco Avançada</h3>
+                                <p>Proteja seu capital com técnicas profissionais e estratégias avançadas</p>
+                                <div class="course-meta">
+                                    <div class="meta-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>6 horas</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <i class="fas fa-signal"></i>
+                                        <span>Avançado</span>
+                                    </div>
+                                </div>
+                                <div class="course-footer">
+                                    <div class="course-price">
+                                        <span class="price-currency">R$</span>
+                                        <span class="price-value">297</span>
+                                    </div>
+                                    <span class="btn btn-primary course-btn">
+                                        Ver Detalhes
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Course Card 4 -->
+                        <a href="./cursos-estáticos/estrategias-trading/et1-1.html" class="course-card-modern" data-category="intermediario">
+                            <div class="course-header">
+                                <div class="course-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="course-badge intermediario">Intermediário</div>
+                            </div>
+                            <div class="course-content">
+                                <h3>Estratégias de Trading</h3>
+                                <p>Aprenda estratégias comprovadas e testadas no mercado real</p>
+                                <div class="course-meta">
+                                    <div class="meta-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>10 horas</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <i class="fas fa-signal"></i>
+                                        <span>Intermediário</span>
+                                    </div>
+                                </div>
+                                <div class="course-footer">
+                                    <div class="course-price">
+                                        <span class="price-currency">R$</span>
+                                        <span class="price-value">247</span>
+                                    </div>
+                                    <span class="btn btn-primary course-btn">
+                                        Ver Detalhes
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Course Card 5 -->
+                        <a href="./cursos-estáticos/pscicologia-trader/pt1-1.html" class="course-card-modern" data-category="iniciante">
+                            <div class="course-header">
+                                <div class="course-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div class="course-badge iniciante">Iniciante</div>
+                            </div>
+                            <div class="course-content">
+                                <h3>Psicologia do Trader</h3>
+                                <p>Controle suas emoções e desenvolva disciplina para o sucesso</p>
+                                <div class="course-meta">
+                                    <div class="meta-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>5 horas</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <i class="fas fa-signal"></i>
+                                        <span>Iniciante</span>
+                                    </div>
+                                </div>
+                                <div class="course-footer">
+                                    <div class="course-price">
+                                        <span class="price-currency">R$</span>
+                                        <span class="price-value">147</span>
+                                    </div>
+                                    <span class="btn btn-primary course-btn">
+                                        Ver Detalhes
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Course Card 6 -->
+                        <a href="./cursos-estáticos/expert-advisor-velociclos/ea1-1.html" class="course-card-modern" data-category="avancado">
+                            <div class="course-header">
+                                <div class="course-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="course-badge avancado">Avançado</div>
+                            </div>
+                            <div class="course-content">
+                                <h3>Expert Advisor Velociclos</h3>
+                                <p>Automatize suas operações com nosso EA exclusivo e eficiente</p>
+                                <div class="course-meta">
+                                    <div class="meta-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>4 horas</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <i class="fas fa-signal"></i>
+                                        <span>Avançado</span>
+                                    </div>
+                                </div>
+                                <div class="course-footer">
+                                    <div class="course-price">
+                                        <span class="price-currency">R$</span>
+                                        <span class="price-value">497</span>
+                                    </div>
+                                    <span class="btn btn-primary course-btn">
+                                        Ver Detalhes
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <div class="container">
+                    <div class="cta-content-modern">
+                        <div class="cta-text">
+                            <h2>Pronto para prosperar de Verdade?</h2>
+                            <p>Invista em seu futuro financeiro hoje mesmo</p>
+                        </div>
+
+                        <div class="cta-features">
+                            <div class="cta-feature">
+                                <i class="fas fa-check-circle text-success"></i>
+                                <span>Resultados que falam por si</span>
+                            </div>
+                            <div class="cta-feature">
+                                <i class="fas fa-users text-accent"></i>
+                                <span>Pessoas de sucesso pagam o preço</span>
+                            </div>
+                            <div class="cta-feature">
+                                <i class="fas fa-headset text-warning"></i>
+                                <span>O que te impede de crescer?</span>
+                            </div>
+                        </div>
+
+                        <div class="cta-pricing">
+                            <div class="price-main">
+                                <span class="currency">U$</span>
+                                <span class="amount">18</span>
+                            </div>
+                            <div class="price-alt">
+                                ou R$ 97
+                            </div>
+                        </div>
+
+                        <div class="cta-actions">
+                            <button class="btn btn-primary btn-large">
+                                <i class="fas fa-shopping-cart"></i>
+                                Comprar Agora
+                            </button>
+                            <button class="btn btn-secondary btn-large" onclick="scrollToCourses()">
+                                <i class="fas fa-arrow-up"></i>
+                                Ver Cursos
+                            </button>
+                        </div>
+
+                        <div class="cta-security">
+                            <i class="fas fa-shield-alt text-success"></i>
+                            <span>Compra 100% segura</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Modal de Detalhes do Curso (removido - agora redireciona para páginas de curso) -->
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Velociclos. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/auth.js" defer></script>
+    <script src="./js/veloacademy.js"></script>
+    <script src="./js/theme-toggle.js"></script>
+
+    <script>
+        // Funcionalidades específicas da página de cursos
+
+        // Filtro de cursos
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const courseCards = document.querySelectorAll('.course-card-modern');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+
+                    // Atualizar botões ativos
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Filtrar cursos
+                    courseCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'flex';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 50);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+        });
+
+        function scrollToCourses() {
+            document.getElementById('courses-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Animação de entrada para os cards
+        function animateCards() {
+            const cards = document.querySelectorAll('.course-card-modern');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
+
+        // Executar animação após carregamento
+        window.addEventListener('load', animateCards);
+    </script>
+</body>
+</html>
