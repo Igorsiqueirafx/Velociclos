@@ -14,6 +14,7 @@ CTrade trade;
 input int      VelasParaCA         = 4;
 // input double   Lote                = 0.01;
 input double   RiscoPercent           = 2.0;          // % do saldo por operacao
+input int      TamanhoMaximoCanal    = 1000;         // Fatia canais maiores que isso (pontos)
 input int      Slippage            = 3;
 input double   DistanciaSantinho   = 33            // Offset para SL (pontos)
 input double   OffsetTP_Pontos     =  33;           // Offset para TP (positivo = além C2)
@@ -40,6 +41,10 @@ bool CA_Criado   = false;
 bool C1_Criado   = false;
 bool C2_Criado   = false;
 bool OrdemEnviada = false;
+
+// Variaveis para fatiamento de canais grandes
+int NumFatias = 0;
+double FatiaAltura[] = {};        // Array com as alturas de cada fatia
 
 //+------------------------------------------------------------------+
 //| Calcula lote baseado em % de risco                               |
@@ -96,6 +101,36 @@ double CalculaLotePorRisco(double precoEntrada, double slPrice)
          " | LoteFinal=", DoubleToString(lote, 3));
 
    return(lote);
+}
+
+//+------------------------------------------------------------------+
+//| Fatia canais grandes (>1000) em segmentos menores                |
+//+------------------------------------------------------------------+
+void FatiarCanalGrande()
+{
+   if (Altura_CA <= TamanhoMaximoCanal)
+   {
+      NumFatias = 1;
+      ArrayResize(FatiaAltura, 1);
+      FatiaAltura[0] = Altura_CA;
+      Print("Canal normal (nao fatiar): ", DoubleToString(Altura_CA, _Digits), " pontos");
+      return;
+   }
+
+   // Calcula numero de fatias
+   NumFatias = (int)MathCeil((double)Altura_CA / TamanhoMaximoCanal);
+   ArrayResize(FatiaAltura, NumFatias);
+
+   // Distribui a altura do canal pelas fatias
+   double alturaUnitaria = Altura_CA / NumFatias;
+
+   for (int i = 0; i < NumFatias; i++)
+   {
+      FatiaAltura[i] = alturaUnitaria;
+   }
+
+   Print("Canal grande fatiado: ", DoubleToString(Altura_CA, _Digits), " pontos em ",
+         NumFatias, " fatias de ", DoubleToString(alturaUnitaria, _Digits), " pontos cada");
 }
 
 //+------------------------------------------------------------------+
