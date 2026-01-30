@@ -1,28 +1,28 @@
 //+------------------------------------------------------------------+
-//| EA_Fimathe_PCM_FixoAteOperacao_Otimizado.mq5                    |
+//| EA_Fimathe_PCM_FixoAteOperacao_Otimizado.mq5                     |
 //| CA fixo até o término da operação | Ignora candle > 1.5× CA      |
 //+------------------------------------------------------------------+
 #property copyright "Automatização PCM - CA fixo Otimizado"
-#property version   "1.10"
+#property version   "1.09"
+#property strict
 #property description "CA fixo | Ignora candles > 1.5× CA | Reset + novo CA em movimentos extremos"
 
-#include <Trade\\Trade.mqh>
+#include <Trade\Trade.mqh>
 CTrade trade;
 
 // Inputs
-input int      VelasParaCA            = 4;
-// input double   Lote                 = 0.01;        // REMOVIDO - agora é por risco
-input double   RiscoPercent           = 2.0;          // % do saldo por operação
-input int      Slippage               = 3;
-input double   DistanciaSantinho      = 33;           // Offset para SL (pontos)
-input double   OffsetTP_Pontos        = 33;           // Offset para TP (positivo = além C2)
-input double   IgnorarCandleMaiorQue  = 1.5;          // Ignora candle se amplitude ≥ X × Altura_CA
-input bool     DesenharObjetos        = true;
-input bool     OtimizadoParaTeste     = true;
-input color    Cor_CA                 = clrBlue;
-input color    Cor_C1                 = clrBlue;
-input color    Cor_C2                 = clrBlue;
-input color    Cor_Texto              = clrBlue;
+input int      VelasParaCA         = 4;
+input double   Lote                = 0.01;
+input int      Slippage            = 3;
+input double   DistanciaSantinho   = 33            // Offset para SL (pontos)
+input double   OffsetTP_Pontos     =  33;           // Offset para TP (positivo = além C2)
+input double   IgnorarCandleMaiorQue = 1.5;          // Ignora candle se amplitude ≥ X × Altura_CA
+input bool     DesenharObjetos     = true;
+input bool     OtimizadoParaTeste  = true;
+input color    Cor_CA              = clrBlue;
+input color    Cor_C1              = clrBlue;
+input color    Cor_C2              = clrBlue;
+input color    Cor_Texto           = clrBlue;
 
 // Globais
 datetime UltimaBarraProcessada = 0;
@@ -35,68 +35,10 @@ double Altura_CA         = 0;
 double Preco_C1 = 0;
 double Preco_C2 = 0;
 
-bool CA_Criado    = false;
-bool C1_Criado    = false;
-bool C2_Criado    = false;
+bool CA_Criado   = false;
+bool C1_Criado   = false;
+bool C2_Criado   = false;
 bool OrdemEnviada = false;
-
-//+------------------------------------------------------------------+
-//| Calcula lote baseado em % de risco                               |
-//+------------------------------------------------------------------+
-double CalculaLotePorRisco(double precoEntrada, double slPrice)
-{
-   double saldo    = AccountInfoDouble(ACCOUNT_BALANCE);
-   double riscoVal = saldo * (RiscoPercent / 100.0);
-
-   double tickValue = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);
-   double tickSize  = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
-
-   if (tickValue <= 0.0 || tickSize <= 0.0)
-   {
-      Print(\"Erro: tickValue ou tickSize inválidos para símbolo \", _Symbol);
-      return(0.0);
-   }
-
-   double distanciaPreco = MathAbs(precoEntrada - slPrice);    // em preço
-   double distanciaTicks = distanciaPreco / tickSize;          // em ticks
-
-   if (distanciaTicks <= 0.0)
-   {
-      Print(\"Erro: distanciaTicks <= 0, precoEntrada=\", precoEntrada, \" sl=\", slPrice);
-      return(0.0);
-   }
-
-   double perdaPorLote = distanciaTicks * tickValue;           // perda em moeda por 1.0 lote
-   if (perdaPorLote <= 0.0)
-   {
-      Print(\"Erro: perdaPorLote <= 0\");
-      return(0.0);
-   }
-
-   double loteBruto = riscoVal / perdaPorLote;
-
-   double lotStep = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_STEP);
-   double minLot  = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);
-   double maxLot  = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MAX);
-
-   if (lotStep <= 0.0)
-      lotStep = 0.01; // fallback simples
-
-   // normaliza para o step
-   double lote = MathFloor(loteBruto / lotStep) * lotStep;
-
-   if (lote < minLot) lote = minLot;
-   if (lote > maxLot) lote = maxLot;
-
-   Print(\"RiscoPercent=\", DoubleToString(RiscoPercent, 2),
-         \"% | Saldo=\", DoubleToString(saldo, 2),
-         \" | RiscoVal=\", DoubleToString(riscoVal, 2),
-         \" | DistTicks=\", DoubleToString(distanciaTicks, 2),
-         \" | LoteBruto=\", DoubleToString(loteBruto, 3),
-         \" | LoteFinal=\", DoubleToString(lote, 3));
-
-   return(lote);
-}
 
 //+------------------------------------------------------------------+
 //| Expert initialization                                            |
@@ -105,8 +47,7 @@ int OnInit()
 {
    trade.SetDeviationInPoints(Slippage);
    LimparObjetosAntigos();
-   Print(\"EA inicializado | IgnorarCandleMaiorQue=\", IgnorarCandleMaiorQue,
-         \" | RiscoPercent=\", DoubleToString(RiscoPercent, 2), \"%\");
+   Print("EA inicializado | IgnorarCandleMaiorQue=", IgnorarCandleMaiorQue);
    return(INIT_SUCCEEDED);
 }
 
@@ -124,15 +65,15 @@ void OnDeinit(const int reason)
 void OnTick()
 {
    bool agoraTemPosicao = (PositionsTotal() > 0);
-
+   
    if (agoraTemPosicao != TemPosicaoAberta)
    {
       TemPosicaoAberta = agoraTemPosicao;
-
+      
       if (!TemPosicaoAberta)
       {
-         Print(TimeToString(TimeCurrent(), TIME_DATE|TIME_MINUTES),
-               \" - Posição fechada → resetando CA e ciclos\");
+         Print(TimeToString(TimeCurrent(), TIME_DATE|TIME_MINUTES), 
+               " - Posição fechada → resetando CA e ciclos");
          ResetarTudo();
       }
    }
@@ -162,20 +103,20 @@ void OnTick()
    if (amplitudeCandle >= limiarGrande)
    {
       Print(TimeToString(TimeCurrent(), TIME_MINUTES|TIME_SECONDS),
-            \" - Candle ignorado (grande demais): amplitude=\", DoubleToString(amplitudeCandle,_Digits),
-            \" >= limiar=\", DoubleToString(limiarGrande,_Digits));
+            " - Candle ignorado (grande demais): amplitude=", DoubleToString(amplitudeCandle,_Digits),
+            " >= limiar=", DoubleToString(limiarGrande,_Digits));
       return;  // Pula essa barra, continua na próxima
    }
 
    // Reset + novo CA se candle abre no CA e fecha muito longe (exemplo da foto)
    bool abreNoCA = (openAnterior >= Preco_CA_Inferior && openAnterior <= Preco_CA_Superior);
-   bool fechaMuitoLonge = (C2_Criado &&
+   bool fechaMuitoLonge = (C2_Criado && 
                            ((closeAnterior > Preco_C2 + Altura_CA) || (closeAnterior < Preco_C2 - Altura_CA)));
 
    if (abreNoCA && fechaMuitoLonge)
    {
       Print(TimeToString(TimeCurrent(), TIME_MINUTES|TIME_SECONDS),
-            \" - Candle abre no CA e fecha fora do C2 extremo → RESET + novo CA\");
+            " - Candle abre no CA e fecha fora do C2 extremo → RESET + novo CA");
       ResetarTudo();
       CriarCanalAbertura();  // Força novo CA imediatamente
       return;
@@ -193,12 +134,12 @@ void OnTick()
 
          if (DesenharObjetos && !OtimizadoParaTeste)
          {
-            CriarLinhaCanal(\"Linha_C1\", Preco_C1, Cor_C1);
-            ExibirTexto(\"Texto_C1\", \"C1\", alta ? Preco_CA_Superior : Preco_C1, alta ? Preco_C1 : Preco_CA_Inferior);
+            CriarLinhaCanal("Linha_C1", Preco_C1, Cor_C1);
+            ExibirTexto("Texto_C1", "C1", alta ? Preco_CA_Superior : Preco_C1, alta ? Preco_C1 : Preco_CA_Inferior);
          }
 
          C1_Criado = true;
-         Print(\"C1 criado em: \", DoubleToString(Preco_C1, _Digits));
+         Print("C1 criado em: ", DoubleToString(Preco_C1, _Digits));
       }
    }
 
@@ -216,18 +157,18 @@ void OnTick()
 
          if (DesenharObjetos && !OtimizadoParaTeste)
          {
-            CriarLinhaCanal(\"Linha_C2\", Preco_C2, Cor_C2);
-            ExibirTexto(\"Texto_C2\", \"C2\", isBuy ? top : bottom, isBuy ? Preco_C2 : bottom);
-
+            CriarLinhaCanal("Linha_C2", Preco_C2, Cor_C2);
+            ExibirTexto("Texto_C2", "C2", isBuy ? top : bottom, isBuy ? Preco_C2 : bottom);
+            
             double offset = DistanciaSantinho * _Point;
-            ExibirTexto(\"Texto_Dedinho\", \"$\", Preco_C2, Preco_C2 + (isBuy ? -offset : +offset));
+            ExibirTexto("Texto_Dedinho", "$", Preco_C2, Preco_C2 + (isBuy ? -offset : +offset));
          }
 
          ExecutarOrdem(isBuy);
 
-         C2_Criado    = true;
+         C2_Criado = true;
          OrdemEnviada = true;
-         Print(\"C2 criado + ordem enviada: \", isBuy ? \"COMPRA\" : \"VENDA\");
+         Print("C2 criado + ordem enviada: ", isBuy ? "COMPRA" : "VENDA");
       }
    }
 }
@@ -243,7 +184,7 @@ void CriarCanalAbertura()
 
    if (CopyRates(_Symbol, PERIOD_CURRENT, 1, VelasParaCA, rates) != VelasParaCA)
    {
-      Print(\"Erro ao copiar rates para CA\");
+      Print("Erro ao copiar rates para CA");
       return;
    }
 
@@ -260,20 +201,20 @@ void CriarCanalAbertura()
 
    Preco_CA_Superior = maximo;
    Preco_CA_Inferior = minimo;
-   Altura_CA         = maximo - minimo;
+   Altura_CA = maximo - minimo;
 
    CA_Criado = true;
 
    if (DesenharObjetos && !OtimizadoParaTeste)
    {
-      CriarLinhaCanal(\"Linha_CA_Superior\", Preco_CA_Superior, Cor_CA);
-      CriarLinhaCanal(\"Linha_CA_Inferior\", Preco_CA_Inferior, Cor_CA);
-      ExibirTexto(\"Texto_CA\", \"CA\", Preco_CA_Superior, Preco_CA_Inferior);
+      CriarLinhaCanal("Linha_CA_Superior", Preco_CA_Superior, Cor_CA);
+      CriarLinhaCanal("Linha_CA_Inferior", Preco_CA_Inferior, Cor_CA);
+      ExibirTexto("Texto_CA", "CA", Preco_CA_Superior, Preco_CA_Inferior);
    }
 
-   Print(\"CA FIXO criado → Superior: \", DoubleToString(Preco_CA_Superior,_Digits),
-         \" | Inferior: \", DoubleToString(Preco_CA_Inferior,_Digits),
-         \" | Altura: \", DoubleToString(Altura_CA,_Digits));
+   Print("CA FIXO criado → Superior: ", DoubleToString(Preco_CA_Superior,_Digits),
+         " | Inferior: ", DoubleToString(Preco_CA_Inferior,_Digits),
+         " | Altura: ", DoubleToString(Altura_CA,_Digits));
 }
 
 //+------------------------------------------------------------------+
@@ -301,7 +242,7 @@ void ResetarTudo()
 void CriarLinhaCanal(string nome, double preco, color cor)
 {
    if (ObjectFind(0, nome) >= 0) ObjectDelete(0, nome);
-
+   
    ObjectCreate(0, nome, OBJ_HLINE, 0, 0, preco);
    ObjectSetInteger(0, nome, OBJPROP_COLOR, cor);
    ObjectSetInteger(0, nome, OBJPROP_STYLE, STYLE_SOLID);
@@ -316,8 +257,8 @@ void ExibirTexto(string nome, string texto, double p1, double p2)
    if (ObjectFind(0, nome) >= 0)
       ObjectDelete(0, nome);
 
-   double   centro = (p1 + p2) / 2.0;
-   datetime tempo  = iTime(_Symbol, PERIOD_CURRENT, 0);
+   double centro = (p1 + p2) / 2.0;
+   datetime tempo = iTime(_Symbol, PERIOD_CURRENT, 0);
 
    ObjectCreate(0, nome, OBJ_TEXT, 0, tempo, centro);
    ObjectSetString(0, nome, OBJPROP_TEXT, texto);
@@ -328,16 +269,16 @@ void ExibirTexto(string nome, string texto, double p1, double p2)
 }
 
 //+------------------------------------------------------------------+
-//| Executa ordem com TP ajustável e lote por risco                  |
+//| Executa ordem com TP ajustável                                   |
 //+------------------------------------------------------------------+
 void ExecutarOrdem(bool isBuy)
 {
    double offset_sl = DistanciaSantinho * _Point;
    double offset_tp = OffsetTP_Pontos * _Point;
 
-   double precoEntrada = isBuy ? SymbolInfoDouble(_Symbol, SYMBOL_ASK)
+   double precoEntrada = isBuy ? SymbolInfoDouble(_Symbol, SYMBOL_ASK) 
                                : SymbolInfoDouble(_Symbol, SYMBOL_BID);
-
+   
    double sl, tp;
 
    if (isBuy)
@@ -354,38 +295,29 @@ void ExecutarOrdem(bool isBuy)
    sl = NormalizeDouble(sl, _Digits);
    tp = NormalizeDouble(tp, _Digits);
 
-   // cálculo de lote por risco
-   double lote = CalculaLotePorRisco(precoEntrada, sl);
-   if (lote <= 0.0)
-   {
-      Print(\"Falha no cálculo do lote. Lote=\", DoubleToString(lote, 2));
-      return;
-   }
-
    MqlTradeRequest request = {};
    MqlTradeResult  result  = {};
 
    request.action    = TRADE_ACTION_DEAL;
    request.symbol    = _Symbol;
-   request.volume    = lote;
+   request.volume    = Lote;
    request.type      = isBuy ? ORDER_TYPE_BUY : ORDER_TYPE_SELL;
    request.price     = precoEntrada;
    request.sl        = sl;
    request.tp        = tp;
    request.deviation = Slippage;
    request.magic     = 123456;
-   request.comment   = \"PCM Rompimento\";
+   request.comment   = "PCM Rompimento";
 
    if (!OrderSend(request, result))
    {
-      Print(\"Erro ao enviar ordem: \", result.retcode, \" - \", GetLastError());
+      Print("Erro ao enviar ordem: ", result.retcode, " - ", GetLastError());
    }
    else
    {
-      Print(\"Ordem executada: \", isBuy ? \"COMPRA\" : \"VENDA\",
-            \" | Lote: \", DoubleToString(lote, 2),
-            \" | TP: \", DoubleToString(tp, _Digits),
-            \" | Ticket: \", result.order);
+      Print("Ordem executada: ", isBuy ? "COMPRA" : "VENDA", 
+            " | TP ajustado: ", DoubleToString(tp, _Digits), 
+            " | Ticket: ", result.order);
    }
 }
 
@@ -394,6 +326,6 @@ void ExecutarOrdem(bool isBuy)
 //+------------------------------------------------------------------+
 void LimparObjetosAntigos()
 {
-   ObjectsDeleteAll(0, \"Linha_\");
-   ObjectsDeleteAll(0, \"Texto_\");
+   ObjectsDeleteAll(0, "Linha_");
+   ObjectsDeleteAll(0, "Texto_");
 }
