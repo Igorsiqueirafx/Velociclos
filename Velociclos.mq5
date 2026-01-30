@@ -14,7 +14,7 @@ CTrade trade;
 input int      VelasParaCA         = 4;
 input double   Lote                = 0.01;
 input int      Slippage            = 3;
-input double   DistanciaSantinho   = 33            // Offset para SL (pontos)
+input double   DistanciaSantinho   = 33;            // Offset para SL (pontos)
 input double   OffsetTP_Pontos     =  33;           // Offset para TP (positivo = além C2)
 input double   IgnorarCandleMaiorQue = 1.5;          // Ignora candle se amplitude ≥ X × Altura_CA
 input bool     DesenharObjetos     = true;
