@@ -3,7 +3,7 @@
 //| CA fixo até o término da operação | Ignora candle > 1.5× CA      |
 //+------------------------------------------------------------------+
 #property copyright "Automatização PCM - CA fixo Otimizado"
-#property version   "1.09"
+#property version   "1.10"
 #property strict
 #property description "CA fixo | Ignora candles > 1.5× CA | Reset + novo CA em movimentos extremos"
 
@@ -12,7 +12,8 @@ CTrade trade;
 
 // Inputs
 input int      VelasParaCA         = 4;
-input double   Lote                = 0.01;
+// input double   Lote                = 0.01;
+input double   RiscoPercent           = 2.0;          // % do saldo por operacao
 input int      Slippage            = 3;
 input double   DistanciaSantinho   = 33            // Offset para SL (pontos)
 input double   OffsetTP_Pontos     =  33;           // Offset para TP (positivo = além C2)
@@ -39,6 +40,63 @@ bool CA_Criado   = false;
 bool C1_Criado   = false;
 bool C2_Criado   = false;
 bool OrdemEnviada = false;
+
+//+------------------------------------------------------------------+
+//| Calcula lote baseado em % de risco                               |
+//+------------------------------------------------------------------+
+double CalculaLotePorRisco(double precoEntrada, double slPrice)
+{
+   double saldo    = AccountInfoDouble(ACCOUNT_BALANCE);
+   double riscoVal = saldo * (RiscoPercent / 100.0);
+
+   double tickValue = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);
+   double tickSize  = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
+
+   if (tickValue <= 0.0 || tickSize <= 0.0)
+   {
+      Print("Erro: tickValue ou tickSize invalidos para simbolo ", _Symbol);
+      return(0.0);
+   }
+
+   double distanciaPreco = MathAbs(precoEntrada - slPrice);
+   double distanciaTicks = distanciaPreco / tickSize;
+
+   if (distanciaTicks <= 0.0)
+   {
+      Print("Erro: distanciaTicks <= 0, precoEntrada=", precoEntrada, " sl=", slPrice);
+      return(0.0);
+   }
+
+   double perdaPorLote = distanciaTicks * tickValue;
+   if (perdaPorLote <= 0.0)
+   {
+      Print("Erro: perdaPorLote <= 0");
+      return(0.0);
+   }
+
+   double loteBruto = riscoVal / perdaPorLote;
+
+   double lotStep = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_STEP);
+   double minLot  = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);
+   double maxLot  = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MAX);
+
+   if (lotStep <= 0.0)
+      lotStep = 0.01;
+
+   double lote = MathFloor(loteBruto / lotStep) * lotStep;
+
+   if (lote < minLot) lote = minLot;
+   if (lote > maxLot) lote = maxLot;
+
+   Print("RiscoPercent=", DoubleToString(RiscoPercent, 2),
+         "% | Saldo=", DoubleToString(saldo, 2),
+         " | RiscoVal=", DoubleToString(riscoVal, 2),
+         " | DistTicks=", DoubleToString(distanciaTicks, 2),
+         " | LoteBruto=", DoubleToString(loteBruto, 3),
+         " | LoteFinal=", DoubleToString(lote, 3));
+
+   return(lote);
+}
 
 //+------------------------------------------------------------------+
 //| Expert initialization                                            |
@@ -295,12 +353,20 @@ void ExecutarOrdem(bool isBuy)
    sl = NormalizeDouble(sl, _Digits);
    tp = NormalizeDouble(tp, _Digits);
 
+   // calculo de lote por risco
+   double lote = CalculaLotePorRisco(precoEntrada, sl);
+   if (lote <= 0.0)
+   {
+      Print("Falha no calculo do lote. Lote=", DoubleToString(lote, 2));
+      return;
+   }
+
    MqlTradeRequest request = {};
    MqlTradeResult  result  = {};
 
    request.action    = TRADE_ACTION_DEAL;
    request.symbol    = _Symbol;
-   request.volume    = Lote;
+   request.volume    = lote;
    request.type      = isBuy ? ORDER_TYPE_BUY : ORDER_TYPE_SELL;
    request.price     = precoEntrada;
    request.sl        = sl;
