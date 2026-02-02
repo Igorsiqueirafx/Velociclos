@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scalping vs Day Trading - Estratégias de Trading - Velociclos</title>
-    <meta name="description" content="Scalping vs Day Trading: conheça as diferenças entre essas estratégias de trading e qual é a ideal para seu perfil.">
+    <title>Estratégias de Trading - Aula 1</title>
+    <meta name="description" content="Aula 1: Setup Fimathe e Estruturas de Mercado.">
     <meta name="author" content="Velociclos">
-    <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="../../CSS/styles.css">
-    <link rel="stylesheet" href="curso.css">
+    <link rel="stylesheet" href="../../CSS/lesson.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link rel="icon" type="image/png" href="../../public/favicon.png">
 </head>
-<body>
 
+<body>
     <header>
         <div class="container header-container">
             <nav class="nav-menu">
@@ -22,206 +22,64 @@
                 <a href="../../cursos.html" class="nav-link active">Cursos</a>
                 <a href="../../conquistas.html" class="nav-link">EA Velociclos</a>
             </nav>
-
-            <div class="user-info" id="user-info" style="display: none;">
-                <img id="user-avatar" class="user-avatar" src="" alt="Avatar do Usuário" style="display: none;">
-                <span id="user-name" class="user-name"></span>
-                <button id="logout-btn" class="logout-btn" title="Sair">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
             <div class="theme-switch-wrapper" id="theme-toggle">
-                <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon" style="display: none;"></i>
+                <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon"></i>
             </div>
         </div>
     </header>
 
     <main>
-        <div class="container main-container">
-            <div class="lesson-content">
-                <div class="lesson-header">
-                    <h1>Scalping vs Day Trading</h1>
-                    <div class="lesson-meta">
-                        <span class="duration"><i class="fas fa-clock"></i> 25 min</span>
-                        <span class="type"><i class="fas fa-play-circle"></i> Vídeo</span>
-                    </div>
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>O Poder do Fimathe</h1>
+                <div class="lesson-meta">
+                    <span class="duration"><i class="fas fa-clock"></i> 20 min</span>
+                    <span class="type"><i class="fas fa-play-circle"></i> Vídeo</span>
+                </div>
+            </div>
+
+            <div class="lesson-navigation">
+                <button id="prev-lesson" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> Anterior</button>
+                <span class="lesson-counter">Carregando...</span>
+                <button id="next-lesson" class="btn btn-primary">Próximo <i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <div class="lesson-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <span class="progress-text">0% concluído</span>
+            </div>
+
+            <div class="lesson-body">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" allowfullscreen></iframe>
                 </div>
 
-                <div class="lesson-navigation">
-                    <button id="prev-lesson" class="nav-btn" disabled>
-                        <i class="fas fa-chevron-left"></i> Anterior
-                    </button>
-                    <span class="lesson-counter">1 de 1</span>
-                    <button id="next-lesson" class="nav-btn" disabled>
-                        Próximo <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
+                <div class="lesson-text">
+                    <h2>Entendendo a Expansão</h2>
+                    <div class="lesson-content">
+                        <p>O mercado se move em expansões e retrações. O método Fimathe foca em identificar o canal de
+                            referência e projetar alvos baseados nesse canal.</p>
 
-                <div class="lesson-body">
-                    <div class="video-container" id="video-container">
-                        <iframe src="https://drive.google.com/file/d/1QO1zDCpWO0CYIDY5I1AGmKv9LieE_tOk/preview" width="100%" height="400" allowfullscreen></iframe>
-                    </div>
-
-                    <div class="lesson-text">
-                        <h2>Conteúdo da Aula</h2>
-                        <div class="content-placeholder">
-                            <p><strong>Scalping vs Day Trading</strong></p>
-                            <p>Nesta aula, vamos comparar as duas estratégias de trading mais populares: Scalping (operações de segundos/minutos) e Day Trading (operações intradiárias). Entenda qual estilo combina com seu perfil e objetivos.</p>
-
-                            <h3>O que você aprenderá nesta aula:</h3>
-                            <ul>
-                                <li>Definição completa de Scalping</li>
-                                <li>Características do Day Trading</li>
-                                <li>Diferenças fundamentais entre os estilos</li>
-                                <li>Vantagens e desvantagens de cada um</li>
-                                <li>Perfil psicológico necessário</li>
-                                <li>Qual escolher baseado no seu perfil</li>
-                                <li>Exemplos práticos e setups</li>
-                            </ul>
-
-                            <h3>O que é Scalping?</h3>
-                            <p>Scalping é uma estratégia de trading de alta frequência onde o trader abre e fecha posições em questão de segundos ou minutos, buscando pequenos lucros repetidamente ao longo do dia.</p>
-
-                            <h4>Características do Scalping:</h4>
-                            <ul>
-                                <li><strong>Duração:</strong> Segundos a poucos minutos</li>
-                                <li><strong>Objetivo:</strong> 5-15 pips por operação</li>
-                                <li><strong>Frequência:</strong> 10-100 operações por dia</li>
-                                <li><strong>Timeframe:</strong> M1, M5 (1-5 minutos)</li>
-                                <li><strong>Stop Loss:</strong> 2-5 pips</li>
-                                <li><strong>Take Profit:</strong> 3-10 pips</li>
-                            </ul>
-
-                            <h4>Vantagens do Scalping:</h4>
-                            <ul>
-                                <li><strong>Baixo Risco por Trade:</strong> Stops muito próximos</li>
-                                <li><strong>Lucro Composto:</strong> Muitos pequenos lucros somam muito</li>
-                                <li><strong>Menos Exposição:</strong> Posições abertas por pouco tempo</li>
-                                <li><strong>Disciplina:</strong> Regras muito claras e objetivas</li>
-                                <li><strong>Não depende de análise fundamental:</strong> Foco em price action</li>
-                            </ul>
-
-                            <h4>Desvantagens do Scalping:</h4>
-                            <ul>
-                                <li><strong>Estresse Extremo:</strong> Decisões em segundos</li>
-                                <li><strong>Concentração Total:</strong> Não pode se distrair</li>
-                                <li><strong>Spread Mata:</strong> Custos elevados por operação</li>
-                                <li><strong>Disciplina de Ferro:</strong> Qualquer erro custa caro</li>
-                                <li><strong>Horário Limitado:</strong> Só durante alta liquidez</li>
-                            </ul>
-
-                            <h3>O que é Day Trading?</h3>
-                            <p>Day Trading é uma estratégia onde o trader abre posições durante o pregão e as fecha no mesmo dia, nunca mantendo posições overnight.</p>
-
-                            <h4>Características do Day Trading:</h4>
-                            <ul>
-                                <li><strong>Duração:</strong> Minutos a horas</li>
-                                <li><strong>Objetivo:</strong> 20-100+ pips por operação</li>
-                                <li><strong>Frequência:</strong> 3-10 operações por dia</li>
-                                <li><strong>Timeframe:</strong> M5, M15, H1 (5min-1hora)</li>
-                                <li><strong>Stop Loss:</strong> 20-50 pips</li>
-                                <li><strong>Take Profit:</strong> 40-150+ pips</li>
-                            </ul>
-
-                            <h4>Vantagens do Day Trading:</h4>
-                            <ul>
-                                <li><strong>Menos Estresse:</strong> Mais tempo para analisar</li>
-                                <li><strong>Maior Flexibilidade:</strong> Pode trabalhar outras coisas</li>
-                                <li><strong>Setup Mais Confiável:</strong> Melhor análise possível</li>
-                                <li><strong>Menor Impacto do Spread:</strong> Custos relativos menores</li>
-                                <li><strong>Análise Técnica Completa:</strong> Pode usar todos os indicadores</li>
-                            </ul>
-
-                            <h4>Desvantagens do Day Trading:</h4>
-                            <ul>
-                                <li><strong>Risco Maior por Trade:</strong> Stops mais distantes</li>
-                                <li><strong>Gap de Abertura:</strong> Pode abrir com gap</li>
-                                <li><strong>Swap/Rollover:</strong> Evitar posições overnight</li>
-                                <li><strong>Psicologia Mais Complexa:</strong> Esperar por setups perfeitos</li>
-                                <li><strong>Capital Necessário:</strong> Maior para mesma exposição</li>
-                            </ul>
-
-                            <h3>Qual Escolher? Análise de Perfil</h3>
-                            <h4>Perfil Ideal para Scalping:</h4>
-                            <ul>
-                                <li><strong>Personalidade:</strong> Hiperativo, disciplinado, focado</li>
-                                <li><strong>Tempo Disponível:</strong> Pode dedicar 4-8 horas diárias</li>
-                                <li><strong>Tolerância ao Estresse:</strong> Muito alta</li>
-                                <li><strong>Experiência:</strong> Já tem experiência em trading</li>
-                                <li><strong>Capital:</strong> Qualquer tamanho (pode usar micro lotes)</li>
-                                <li><strong>Objetivo:</strong> Renda consistente diária</li>
-                            </ul>
-
-                            <h4>Perfil Ideal para Day Trading:</h4>
-                            <ul>
-                                <li><strong>Personalidade:</strong> Analítico, paciente, estratégico</li>
-                                <li><strong>Tempo Disponível:</strong> 2-4 horas diárias</li>
-                                <li><strong>Tolerância ao Estresse:</strong> Média a alta</li>
-                                <li><strong>Experiência:</strong> Qualquer nível (mais fácil para iniciantes)</li>
-                                <li><strong>Capital:</strong> Maior para boa diversificação</li>
-                                <li><strong>Objetivo:</strong> Crescimento consistente da conta</li>
-                            </ul>
-
-                            <h3>Exemplo Prático: Scalping</h3>
-                            <h4>Setup: EUR/USD no Timeframe M1</h4>
-                            <ul>
-                                <li><strong>Entrada:</strong> Quebra de resistência menor</li>
-                                <li><strong>Stop Loss:</strong> 3 pips abaixo da entrada</li>
-                                <li><strong>Take Profit:</strong> 5 pips acima da entrada</li>
-                                <li><strong>Risco/Recompensa:</strong> 1:1.67</li>
-                                <li><strong>Objetivo Diário:</strong> 50 pips (10 operações boas)</li>
-                            </ul>
-
-                            <h3>Exemplo Prático: Day Trading</h3>
-                            <h4>Setup: GBP/USD no Timeframe H1</h4>
-                            <ul>
-                                <li><strong>Entrada:</strong> Pullback em tendência de alta</li>
-                                <li><strong>Stop Loss:</strong> Suporte anterior</li>
-                                <li><strong>Take Profit:</strong> Resistência psicológica</li>
-                                <li><strong>Risco/Recompensa:</strong> 1:3</li>
-                                <li><strong>Objetivo Diário:</strong> 50-100 pips (2-3 operações)</li>
-                            </ul>
-
-                            <h3>Como Escolher a Estratégia Certa</h3>
-                            <h4>Teste na Prática:</h4>
+                        <div class="content-section">
+                            <h3>Passo a Passo</h3>
                             <ol>
-                                <li><strong>Semana 1-2:</strong> Pratique Scalping em conta demo</li>
-                                <li><strong>Semana 3-4:</strong> Pratique Day Trading em conta demo</li>
-                                <li><strong>Análise:</strong> Qual estilo te deixa mais confortável?</li>
-                                <li><strong>Resultado:</strong> Qual teve melhor performance?</li>
-                                <li><strong>Decisão:</strong> Escolha baseado em conforto E resultado</li>
+                                <li>Identifique o canal atual (consolidação ou tendência).</li>
+                                <li>Meça o tamanho do canal (Zona Neutra).</li>
+                                <li>Projete 1 ou 2 níveis para o Take Profit.</li>
                             </ol>
+                        </div>
 
-                            <h4>Fatores Decisivos:</h4>
-                            <ul>
-                                <li><strong>Seu Tempo:</strong> Scalping exige dedicação total</li>
-                                <li><strong>Sua Personalidade:</strong> Não force contra sua natureza</li>
-                                <li><strong>Seu Capital:</strong> Day Trading precisa de mais capital</li>
-                                <li><strong>Seu Objetivo:</strong> Renda diária vs crescimento consistente</li>
-                                <li><strong>Sua Disciplina:</strong> Scalping testa limites extremos</li>
-                            </ul>
+                        <div class="highlight-box">
+                            <i class="fas fa-bullseye"></i>
+                            <div><strong>Disciplina:</strong> Só entre quando o candle fechar fora da zona neutra
+                                confirmando o rompimento.</div>
+                        </div>
 
-                            <h3>Dicas para Iniciantes</h3>
-                            <ul>
-                                <li><strong>Comece com Day Trading:</strong> Mais fácil de aprender</li>
-                                <li><strong>Desenvolva Disciplina Primeiro:</strong> Antes de escolher estilo</li>
-                                <li><strong>Teste os Dois:</strong> Experiência prática é fundamental</li>
-                                <li><strong>Considere Swing Trading:</strong> Alternativa menos estressante</li>
-                                <li><strong>Seja Honesto Consigo:</strong> Conheça suas limitações</li>
-                                <li><strong>Busque Mentoria:</strong> Aprenda com quem já teve sucesso</li>
-                            </ul>
-
-                            <h3>Conclusão</h3>
-                            <p>Não existe estratégia "melhor" - existe a estratégia certa para VOCÊ. O Scalping pode gerar mais renda diária, mas exige sacrifícios enormes. O Day Trading oferece melhor equilíbrio entre risco, recompensa e qualidade de vida.</p>
-
-                            <p><strong>Lembre-se:</strong> A consistência vem da estratégia que você consegue seguir disciplinadamente, não da que parece mais lucrativa no papel.</p>
-
-                            <div class="lesson-actions">
-                                <button class="btn-primary" onclick="markAsCompleted()">
-                                    <i class="fas fa-check"></i> Marcar como Concluída
-                                </button>
-                                </button>
-                            </div>
+                        <div class="lesson-actions">
+                            <button class="btn btn-primary" onclick="markAsCompleted()"><i class="fas fa-check"></i>
+                                Marcar como Concluída</button>
                         </div>
                     </div>
                 </div>
@@ -229,70 +87,14 @@
         </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Velociclos. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-            <script src="../../js/auth.js" defer></script>
+    <div id="toast-container" class="toast-container"></div>
+    <script src="../../js/toast.js"></script>
+    <script src="../../js/auth.js"></script>
     <script src="../../js/theme-toggle.js"></script>
-    <script src="../../js/course-functions.js" defer></script>
-    <script src="../../js/lesson-navigation.js" defer></script>
+    <script src="../../js/lesson.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            window.initializeLessonNavigation('et1-1', 'estrategias-trading');
-        });
+        document.addEventListener('DOMContentLoaded', () => initializeLesson('et1-1', 'estrategias-trading'));
     </script>
-    <script src="../../js/course-functions.js" defer></script>
-    <script src="../../js/lesson-navigation.js" defer></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            window.initializeLessonNavigation('et1-1', 'estrategias-trading');
-        });
-    </script>
-    <script src="../../js/course-functions.js" defer></script>
-    <script>
-        // Dados da lição atual
-        const lessonData = {
-            id: 'et1-1',
-            courseId: 'estrategias-trading',
-            title: 'Scalping vs Day Trading',
-            duration: '25 min',
-            type: 'Vídeo',
-            currentLesson: parseInt('1'),
-            totalLessons: parseInt('1')
-        };
-
-        // Função para marcar aula como concluída
-        function markAsCompleted() {
-            alert('Parabéns! Agora você sabe escolher entre Scalping e Day Trading. Lembre-se: a melhor estratégia é aquela que combina com seu perfil!');
-            // Aqui seria implementada a lógica para salvar o progresso
-        }
-
-        // Função para fazer quiz
-            // Aqui seria implementada a navegação para o quiz
-        }
-
-        // Navegação entre aulas
-        document.getElementById('prev-lesson').addEventListener('click', function() {
-            // Lógica para aula anterior
-            alert('Esta é a primeira aula do curso!');
-        });
-
-        document.getElementById('next-lesson').addEventListener('click', function() {
-            // Lógica para próxima aula
-            alert('Esta é a última aula deste módulo!');
-        });
-
-        
-        });
-    </script>
-        <nav class="navigation lesson-nav">
-            <a class="nav-button prev" href="#" aria-label="Anterior">← Anterior</a>
-            <a class="nav-button next" href="#" aria-label="Próximo">Próximo →</a>
-        </nav>
-    <script src="../../js/aula-nav.js" defer></script>
 </body>
-</html>
 
+</html>

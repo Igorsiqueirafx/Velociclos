@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stop Loss e Take Profit - Gestão de Risco Avançada - Velociclos</title>
-    <meta name="description" content="Aprenda sobre Stop Loss e Take Profit. Técnicas avançadas de proteção de capital e gerenciamento de risco no Forex.">
+    <title>Gestão de Risco Avançada - Aula 1</title>
+    <meta name="description" content="Aula 1: A Importância da Preservação de Capital. Aprenda a durar no mercado.">
     <meta name="author" content="Velociclos">
-    <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="../../CSS/styles.css">
-    <link rel="stylesheet" href="curso.css">
+    <link rel="stylesheet" href="../../CSS/lesson.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link rel="icon" type="image/png" href="../../public/favicon.png">
 </head>
-<body>
 
+<body>
     <header>
         <div class="container header-container">
             <nav class="nav-menu">
@@ -22,198 +22,61 @@
                 <a href="../../cursos.html" class="nav-link active">Cursos</a>
                 <a href="../../conquistas.html" class="nav-link">EA Velociclos</a>
             </nav>
-
-            <div class="user-info" id="user-info" style="display: none;">
-                <img id="user-avatar" class="user-avatar" src="" alt="Avatar do Usuário" style="display: none;">
-                <span id="user-name" class="user-name"></span>
-                <button id="logout-btn" class="logout-btn" title="Sair">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
             <div class="theme-switch-wrapper" id="theme-toggle">
-                <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon" style="display: none;"></i>
+                <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon"></i>
             </div>
         </div>
     </header>
 
     <main>
-        <div class="container main-container">
-            <div class="lesson-content">
-                <div class="lesson-header">
-                    <h1>Stop Loss e Take Profit</h1>
-                    <div class="lesson-meta">
-                        <span class="duration"><i class="fas fa-clock"></i> 18 min</span>
-                        <span class="type"><i class="fas fa-play-circle"></i> Vídeo</span>
-                    </div>
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Preservação de Capital</h1>
+                <div class="lesson-meta">
+                    <span class="duration"><i class="fas fa-clock"></i> 15 min</span>
+                    <span class="type"><i class="fas fa-play-circle"></i> Vídeo</span>
+                </div>
+            </div>
+
+            <div class="lesson-navigation">
+                <button id="prev-lesson" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> Anterior</button>
+                <span class="lesson-counter">Carregando...</span>
+                <button id="next-lesson" class="btn btn-primary">Próximo <i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <div class="lesson-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <span class="progress-text">0% concluído</span>
+            </div>
+
+            <div class="lesson-body">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" allowfullscreen></iframe>
                 </div>
 
-                <div class="lesson-navigation">
-                    <button id="prev-lesson" class="nav-btn" disabled>
-                        <i class="fas fa-chevron-left"></i> Anterior
-                    </button>
-                    <span class="lesson-counter">1 de 1</span>
-                    <button id="next-lesson" class="nav-btn" disabled>
-                        Próximo <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
+                <div class="lesson-text">
+                    <h2>Regra #1: Não perca dinheiro</h2>
+                    <div class="lesson-content">
+                        <p>O maior erro dos traders iniciantes é focar apenas em quanto podem <strong>GANHAR</strong>. O
+                            profissional foca em quanto pode <strong>PERDER</strong>.</p>
 
-                <div class="lesson-body">
-                    <div class="video-container" id="video-container">
-                        <iframe src="https://drive.google.com/file/d/1QO1zDCpWO0CYIDY5I1AGmKv9LieE_tOk/preview" width="100%" height="400" allowfullscreen></iframe>
-                    </div>
+                        <div class="warning-box">
+                            <i class="fas fa-shield-alt"></i>
+                            <div><strong>Risco de Ruína:</strong> Se você arriscar 10% da sua conta por trade, uma
+                                sequência ruim pode te tirar do jogo em dias. Recomendamos 0.5% a 2% no máximo.</div>
+                        </div>
 
-                    <div class="lesson-text">
-                        <h2>Conteúdo da Aula</h2>
-                        <div class="content-placeholder">
-                            <p><strong>Stop Loss e Take Profit</strong></p>
-                            <p>Nesta aula, vamos aprender sobre as duas ferramentas mais importantes para a gestão de risco no Forex: Stop Loss (proteção contra perdas) e Take Profit (garantia de lucros).</p>
+                        <div class="content-section">
+                            <h3>Matemática do Loss</h3>
+                            <p>Se você perde 50% do capital, precisa fazer 100% de lucro apenas para voltar ao zero a
+                                zero. Proteja seu capital a todo custo.</p>
+                        </div>
 
-                            <h3>O que você aprenderá nesta aula:</h3>
-                            <ul>
-                                <li>O que é Stop Loss e sua importância</li>
-                                <li>Como definir Take Profit adequado</li>
-                                <li>Relação risco-recompensa ideal</li>
-                                <li>Tipos de Stop Loss (fixo, trailing, baseado em indicadores)</li>
-                                <li>Take Profit dinâmico vs estático</li>
-                                <li>Erros comuns e como evitá-los</li>
-                            </ul>
-
-                            <h3>Por que Stop Loss é Essencial?</h3>
-                            <p>O Stop Loss é a diferença entre traders ricos e quebrados. Sem ele, uma única operação ruim pode destruir toda sua conta. O Stop Loss limita suas perdas automaticamente.</p>
-
-                            <h4>Benefícios do Stop Loss:</h4>
-                            <ul>
-                                <li><strong>Proteção de Capital:</strong> Limita perdas em operações ruins</li>
-                                <li><strong>Disciplina Emocional:</strong> Remove decisões emocionais</li>
-                                <li><strong>Gestão de Risco:</strong> Permite calcular exposição máxima</li>
-                                <li><strong>Consistência:</strong> Padroniza abordagem de risco</li>
-                            </ul>
-
-                            <h3>Como Definir Stop Loss</h3>
-                            <h4>Método 1: Baseado em Suporte/Resistência</h4>
-                            <ul>
-                                <li>Coloque Stop Loss logo abaixo do suporte mais próximo</li>
-                                <li>Para vendas, acima da resistência mais próxima</li>
-                                <li>Use níveis psicológicos (redondos) como referência</li>
-                            </ul>
-
-                            <h4>Método 2: Baseado em Pips/Percentual</h4>
-                            <ul>
-                                <li>Stop Loss fixo em X pips (ex: 50 pips)</li>
-                                <li>Stop Loss baseado em % da conta (ex: 1-2%)</li>
-                                <li>Combinação: mínimo de pips E máximo de %</li>
-                            </ul>
-
-                            <h4>Método 3: Trailing Stop Loss</h4>
-                            <ul>
-                                <li>Stop Loss que "segue" o preço favorável</li>
-                                <li>Aumenta automaticamente quando o preço sobe</li>
-                                <li>Ideal para tendências fortes</li>
-                                <li>Risco: pode ser acionado por volatilidade</li>
-                            </ul>
-
-                            <h3>Take Profit: Garantindo Lucros</h3>
-                            <p>O Take Profit é tão importante quanto o Stop Loss. Ele garante que você saia da operação com lucro, evitando que uma operação boa vire ruim.</p>
-
-                            <h4>Estratégias de Take Profit:</h4>
-                            <h5>1. Relação Fixa Risco/Recompensa</h5>
-                            <ul>
-                                <li>Risco 1% para ganhar 2-3%</li>
-                                <li>Exemplo: Stop 50 pips, Take 100-150 pips</li>
-                                <li>Consistente e matemático</li>
-                            </ul>
-
-                            <h5>2. Baseado em Suportes/Resistências</h5>
-                            <ul>
-                                <li>Próxima resistência como alvo</li>
-                                <li>Níveis psicológicos importantes</li>
-                                <li>Padrões de reversão</li>
-                            </ul>
-
-                            <h5>3. Take Profit Parcial</h5>
-                            <ul>
-                                <li>Fecha parte da posição no primeiro alvo</li>
-                                <li>Move Stop Loss para break-even</li>
-                                <li>Deixa resto correr com trailing stop</li>
-                            </ul>
-
-                            <h3>Relação Risco-Recompensa Ideal</h3>
-                            <h4>Regra Geral:</h4>
-                            <ul>
-                                <li><strong>Mínimo 1:2</strong> (risco 1 para ganhar 2)</li>
-                                <li><strong>Ideal 1:3</strong> (risco 1 para ganhar 3)</li>
-                                <li><strong>Excelente 1:4+</strong> (operações de longo prazo)</li>
-                            </ul>
-
-                            <h4>Cálculo Prático:</h4>
-                            <p>Se você arrisca R$ 100 por trade, deve buscar pelo menos R$ 200 de lucro. Com ratio 1:3, o alvo seria R$ 300.</p>
-
-                            <h3>Erros Comuns a Evitar</h3>
-                            <h4>Stop Loss Muito Próximo:</h4>
-                            <ul>
-                                <li>Acionado por volatilidade normal</li>
-                                <li>Não dá espaço para o trade respirar</li>
-                                <li>Resultado: muitas perdas pequenas</li>
-                            </ul>
-
-                            <h4>Stop Loss Muito Longe:</h4>
-                            <ul>
-                                <li>Perdas grandes quando errado</li>
-                                <li>Exposição excessiva ao risco</li>
-                                <li>Difícil manter consistência</li>
-                            </ul>
-
-                            <h4>Sem Take Profit:</h4>
-                            <ul>
-                                <li>Deixa lucros virarem perdas</li>
-                                <li>Decisões emocionais de saída</li>
-                                <li>Não garante lucro mínimo</li>
-                            </ul>
-
-                            <h4>Take Profit Muito Próximo:</h4>
-                            <ul>
-                                <li>Não compensa o risco assumido</li>
-                                <li>Ratio risco/recompensa ruim</li>
-                                <li>Resultado: ganha pouco, perde muito</li>
-                            </ul>
-
-                            <h3>Exemplo Prático Completo</h3>
-                            <h4>Operação EUR/USD:</h4>
-                            <ul>
-                                <li><strong>Capital:</strong> $1.000</li>
-                                <li><strong>Risco máximo:</strong> 1% = $10</li>
-                                <li><strong>Stop Loss:</strong> 50 pips</li>
-                                <li><strong>Valor por pip:</strong> ~$1 (lote mini)</li>
-                                <li><strong>Lotes:</strong> 10 mini-lotes (0.1 lote padrão)</li>
-                                <li><strong>Take Profit:</strong> 100 pips (ratio 1:2)</li>
-                                <li><strong>Lucro potencial:</strong> $20</li>
-                            </ul>
-
-                            <h3>Dicas Profissionais</h3>
-                            <ul>
-                                <li><strong>Sempre use Stop Loss:</strong> Nunca entre sem proteção</li>
-                                <li><strong>Calcule antes:</strong> Saiba quanto pode perder antes de entrar</li>
-                                <li><strong>Seja consistente:</strong> Mesmo método em todas as operações</li>
-                                <li><strong>Ajuste gradualmente:</strong> Comece conservador e aumente experiência</li>
-                                <li><strong>Documente tudo:</strong> Registre stops e takes para análise posterior</li>
-                                <li><strong>Use ordens pendentes:</strong> Stop Loss e Take Profit automáticos</li>
-                            </ul>
-
-                            <h3>Exercícios Práticos</h3>
-                            <ol>
-                                <li>Calcule seu Stop Loss ideal baseado em 1% do capital</li>
-                                <li>Defina Take Profit com ratio mínimo 1:2</li>
-                                <li>Pratique em conta demo por uma semana</li>
-                                <li>Analise 10 operações passadas e veja onde colocou stops</li>
-                                <li>Crie um plano de gestão de risco pessoal</li>
-                            </ol>
-
-                            <div class="lesson-actions">
-                                <button class="btn-primary" onclick="markAsCompleted()">
-                                    <i class="fas fa-check"></i> Marcar como Concluída
-                                </button>
-                                </button>
-                            </div>
+                        <div class="lesson-actions">
+                            <button class="btn btn-primary" onclick="markAsCompleted()"><i class="fas fa-check"></i>
+                                Marcar como Concluída</button>
                         </div>
                     </div>
                 </div>
@@ -221,70 +84,14 @@
         </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Velociclos. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-            <script src="../../js/auth.js" defer></script>
+    <div id="toast-container" class="toast-container"></div>
+    <script src="../../js/toast.js"></script>
+    <script src="../../js/auth.js"></script>
     <script src="../../js/theme-toggle.js"></script>
-    <script src="../../js/course-functions.js" defer></script>
-    <script src="../../js/lesson-navigation.js" defer></script>
+    <script src="../../js/lesson.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            window.initializeLessonNavigation('gr1-1', 'gestão-risco-avançada');
-        });
+        document.addEventListener('DOMContentLoaded', () => initializeLesson('gr1-1', 'gestão-risco-avançada'));
     </script>
-    <script src="../../js/course-functions.js" defer></script>
-    <script src="../../js/lesson-navigation.js" defer></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            window.initializeLessonNavigation('gr1-1', 'gestão-risco-avançada');
-        });
-    </script>
-    <script src="../../js/course-functions.js" defer></script>
-    <script>
-        // Dados da lição atual
-        const lessonData = {
-            id: 'gr1-1',
-            courseId: 'gestao-risco-avancada',
-            title: 'Stop Loss e Take Profit',
-            duration: '18 min',
-            type: 'Vídeo',
-            currentLesson: parseInt('1'),
-            totalLessons: parseInt('1')
-        };
-
-        // Função para marcar aula como concluída
-        function markAsCompleted() {
-            alert('Parabéns! Você aprendeu a proteger seu capital com Stop Loss e Take Profit. Esta é a base da gestão de risco profissional!');
-            // Aqui seria implementada a lógica para salvar o progresso
-        }
-
-        // Função para fazer quiz
-            // Aqui seria implementada a navegação para o quiz
-        }
-
-        // Navegação entre aulas
-        document.getElementById('prev-lesson').addEventListener('click', function() {
-            // Lógica para aula anterior
-            alert('Esta é a primeira aula do curso!');
-        });
-
-        document.getElementById('next-lesson').addEventListener('click', function() {
-            // Lógica para próxima aula
-            alert('Esta é a última aula deste módulo!');
-        });
-
-        
-        });
-    </script>
-        <nav class="navigation lesson-nav">
-            <a class="nav-button prev" href="#" aria-label="Anterior">← Anterior</a>
-            <a class="nav-button next" href="#" aria-label="Próximo">Próximo →</a>
-        </nav>
-    <script src="../../js/aula-nav.js" defer></script>
 </body>
-</html>
 
+</html>

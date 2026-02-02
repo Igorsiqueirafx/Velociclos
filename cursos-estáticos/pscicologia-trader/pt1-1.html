@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de Emoções no Trading - Psicologia do Trader - Velociclos</title>
-    <meta name="description" content="Controle de Emoções no Trading: aprenda a dominar o medo, ganância e impulsividade que sabotam traders. Desenvolva mente de campeão.">
+    <title>Psicologia do Trader - Aula 1</title>
+    <meta name="description" content="Aula 1: A Mente Vencedora. Controle Emocional no Trading.">
     <meta name="author" content="Velociclos">
-    <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="../../CSS/styles.css">
-    <link rel="stylesheet" href="curso.css">
+    <link rel="stylesheet" href="../../CSS/lesson.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link rel="icon" type="image/png" href="../../public/favicon.png">
 </head>
-<body>
 
+<body>
     <header>
         <div class="container header-container">
             <nav class="nav-menu">
@@ -22,204 +22,65 @@
                 <a href="../../cursos.html" class="nav-link active">Cursos</a>
                 <a href="../../conquistas.html" class="nav-link">EA Velociclos</a>
             </nav>
-
-            <div class="user-info" id="user-info" style="display: none;">
-                <img id="user-avatar" class="user-avatar" src="" alt="Avatar do Usuário" style="display: none;">
-                <span id="user-name" class="user-name"></span>
-                <button id="logout-btn" class="logout-btn" title="Sair">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
             <div class="theme-switch-wrapper" id="theme-toggle">
-                <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon" style="display: none;"></i>
+                <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon"></i>
             </div>
         </div>
     </header>
 
     <main>
-        <div class="container main-container">
-            <div class="lesson-content">
-                <div class="lesson-header">
-                    <h1>Controle de Emoções no Trading</h1>
-                    <div class="lesson-meta">
-                        <span class="duration"><i class="fas fa-clock"></i> 20 min</span>
-                        <span class="type"><i class="fas fa-play-circle"></i> Vídeo</span>
-                    </div>
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Mindset de Campeão</h1>
+                <div class="lesson-meta">
+                    <span class="duration"><i class="fas fa-clock"></i> 10 min</span>
+                    <span class="type"><i class="fas fa-play-circle"></i> Vídeo</span>
+                </div>
+            </div>
+
+            <div class="lesson-navigation">
+                <button id="prev-lesson" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> Anterior</button>
+                <span class="lesson-counter">Carregando...</span>
+                <button id="next-lesson" class="btn btn-primary">Próximo <i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <div class="lesson-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <span class="progress-text">0% concluído</span>
+            </div>
+
+            <div class="lesson-body">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" allowfullscreen></iframe>
                 </div>
 
-                <div class="lesson-navigation">
-                    <button id="prev-lesson" class="nav-btn" disabled>
-                        <i class="fas fa-chevron-left"></i> Anterior
-                    </button>
-                    <span class="lesson-counter">1 de 1</span>
-                    <button id="next-lesson" class="nav-btn" disabled>
-                        Próximo <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
+                <div class="lesson-text">
+                    <h2>90% é Psicológico</h2>
+                    <div class="lesson-content">
+                        <p>A técnica é fácil de aprender. O difícil é executá-la quando há dinheiro real em jogo e o
+                            medo ou a ganância tomam conta.</p>
 
-                <div class="lesson-body">
-                    <div class="video-container" id="video-container">
-                        <iframe src="https://drive.google.com/file/d/1QO1zDCpWO0CYIDY5I1AGmKv9LieE_tOk/preview" width="100%" height="400" allowfullscreen></iframe>
-                    </div>
-
-                    <div class="lesson-text">
-                        <h2>Conteúdo da Aula</h2>
-                        <div class="content-placeholder">
-                            <p><strong>Controle de Emoções no Trading</strong></p>
-                            <p>Nesta aula fundamental, vamos explorar o lado psicológico do trading. Você aprenderá por que 90% dos traders fracassam devido a questões emocionais e como desenvolver o mindset necessário para o sucesso consistente.</p>
-
-                            <h3>O que você aprenderá nesta aula:</h3>
+                        <div class="content-section">
+                            <h3>Os Inimigos do Trader</h3>
                             <ul>
-                                <li>As 3 emoções que destroem traders</li>
-                                <li>Por que a psicologia é mais importante que estratégia</li>
-                                <li>Técnicas para controlar o medo e a ganância</li>
-                                <li>Como desenvolver disciplina de ferro</li>
-                                <li>Estratégias para manter consistência</li>
-                                <li>Mindset de trader profissional</li>
+                                <li><strong>Medo (FOMO):</strong> Medo de ficar de fora, ou medo de perder.</li>
+                                <li><strong>Ganância:</strong> Querer ficar rico rápido, operar alavancado demais.</li>
+                                <li><strong>Vingança:</strong> Tentar recuperar um loss imediatamente operando sem
+                                    critério.</li>
                             </ul>
+                        </div>
 
-                            <h3>A Verdade Cruel Sobre Trading</h3>
-                            <p>"O trading é 80% psicologia e 20% estratégia." - Esta frase não é apenas uma estatística, é uma realidade que todo trader de sucesso conhece. Estratégias podem ser copiadas, mas a psicologia vencedora precisa ser desenvolvida.</p>
+                        <div class="highlight-box">
+                            <i class="fas fa-brain"></i>
+                            <div><strong>Mentalidade:</strong> Aceite o risco antes de cada trade. Se você aceita o
+                                risco, o resultado (lucro ou prejuízo) não te afeta emocionalmente.</div>
+                        </div>
 
-                            <h4>Estatísticas que Provam:</h4>
-                            <ul>
-                                <li><strong>90% dos traders</strong> perdem dinheiro no primeiro ano</li>
-                                <li><strong>95% dos traders</strong> abandonam o trading em 5 anos</li>
-                                <li><strong>Apenas 5%</strong> conseguem consistência a longo prazo</li>
-                                <li><strong>99% das perdas</strong> são por questões emocionais, não técnicas</li>
-                            </ul>
-
-                            <h3>As 3 Emoções Destruidoras</h3>
-                            <h4>1. O Medo</h4>
-                            <p>O medo é o maior sabotador do trader. Ele surge de diferentes formas:</p>
-                            <ul>
-                                <li><strong>Medo de Perder:</strong> Evita entrar em operações perfeitas</li>
-                                <li><strong>Medo de Estar Errado:</strong> Sai cedo demais de trades</li>
-                                <li><strong>Medo do Desconhecido:</strong> Paralisa diante de oportunidades</li>
-                                <li><strong>Medo de Repetir Erros:</strong> Torna conservador demais</li>
-                            </ul>
-
-                            <h4>2. A Ganância</h4>
-                            <p>A ganância é o outro lado da moeda. Ela faz você:</p>
-                            <ul>
-                                <li><strong>Arriscar Demais:</strong> "Apenas mais uma operação..."</li>
-                                <li><strong>Segurar Perdas:</strong> "Vai virar, eu sei!"</li>
-                                <li><strong>Mover Stops:</strong> "Deixa correr mais um pouco"</li>
-                                <li><strong>Quebrar Regras:</strong> "Esta vez é diferente"</li>
-                            </ul>
-
-                            <h4>3. A Esperança</h4>
-                            <p>A esperança é a mais perigosa. Ela faz você acreditar que:</p>
-                            <ul>
-                                <li><strong>O Mercado Lhe Deve:</strong> "Depois de tantas perdas..."</li>
-                                <li><strong>A Sorte Vai Virar:</strong> Ignora probabilidades</li>
-                                <li><strong>Recuperação é Fácil:</strong> Aumenta posições perigosamente</li>
-                                <li><strong>Regras Não Se Aplicam:</strong> "Para mim será diferente"</li>
-                            </ul>
-
-                            <h3>O Ciclo Vicioso Emocional</h3>
-                            <ol>
-                                <li><strong>Entrada com Esperança:</strong> "Esta vai dar certo!"</li>
-                                <li><strong>Primeira Perda:</strong> Pequena, ignorada</li>
-                                <li><strong>Segunda Perda:</strong> Já dói, mas ainda há esperança</li>
-                                <li><strong>Terceira Perda:</strong> Pânico começa</li>
-                                <li><strong>Quarta Perda:</strong> Desespero total</li>
-                                <li><strong>Operação Desesperada:</strong> Arriscando tudo para recuperar</li>
-                                <li><strong>Perda Total:</strong> Quebra da conta</li>
-                                <li><strong>Pausa Temporária:</strong> "Vou aprender mais"</li>
-                                <li><strong>Retorno com Vingança:</strong> Ciclo recomeça</li>
-                            </ol>
-
-                            <h3>Como Desenvolver Controle Emocional</h3>
-                            <h4>1. Aceite que Perdas São Normais</h4>
-                            <p>Todo trader profissional perde. A diferença é que eles perdem pequeno e consistente, enquanto amadores perdem grande e irregularmente.</p>
-
-                            <h4>2. Tenha um Plano Pré-Definido</h4>
-                            <ul>
-                                <li><strong>Plano de Entrada:</strong> Quando e como entrar</li>
-                                <li><strong>Plano de Saída:</strong> Stop Loss e Take Profit claros</li>
-                                <li><strong>Plano de Gestão:</strong> Quanto arriscar por trade</li>
-                                <li><strong>Plano de Análise:</strong> Quando analisar resultados</li>
-                            </ul>
-
-                            <h4>3. Desenvolva Rotina de Trading</h4>
-                            <ul>
-                                <li><strong>Horário Fixo:</strong> Mesmo horário todos os dias</li>
-                                <li><strong>Preparação Mental:</strong> 15 minutos de meditação</li>
-                                <li><strong>Revisão Sistemática:</strong> Análise pós-trading</li>
-                                <li><strong>Descanso Adequado:</strong> Trading exige mente fresca</li>
-                            </ul>
-
-                            <h4>4. Pratique Mindfulness no Trading</h4>
-                            <ul>
-                                <li><strong>Esteja Presente:</strong> Foco total na operação atual</li>
-                                <li><strong>Observe Emoções:</strong> "Estou sentindo medo, isso é normal"</li>
-                                <li><strong>Não Julgue:</strong> Aceite sem criticar</li>
-                                <li><strong>Respire Profundamente:</strong> 4 segundos inspirar, 4 segurar, 4 expirar</li>
-                            </ul>
-
-                            <h3>Técnicas Práticas de Controle</h3>
-                            <h4>Técnica 1: O Diário de Trading</h4>
-                            <p>Registre TUDO sobre cada operação:</p>
-                            <ul>
-                                <li>Por que entrou na operação</li>
-                                <li>O que sentiu durante a operação</li>
-                                <li>Se seguiu o plano ou quebrou regras</li>
-                                <li>O que aprenderia se pudesse refazer</li>
-                            </ul>
-
-                            <h4>Técnica 2: Money Management Automático</h4>
-                            <ul>
-                                <li><strong>Stop Loss Obrigatório:</strong> Nunca entre sem proteção</li>
-                                <li><strong>Take Profit Automático:</strong> Deixe o lucro correr sozinho</li>
-                                <li><strong>Limite Diário:</strong> Máximo de perdas por dia</li>
-                                <li><strong>Break Even Rule:</strong> Mova stop para entrada após alvo parcial</li>
-                            </ul>
-
-                            <h4>Técnica 3: A Regra das 3 Perguntas</h4>
-                            <p>Antes de cada operação, pergunte:</p>
-                            <ol>
-                                <li><strong>Por que estou entrando?</strong> (Setup claro?)</li>
-                                <li><strong>Onde está meu stop?</strong> (Risco definido?)</li>
-                                <li><strong>Qual meu alvo?</strong> (Recompensa > risco?)</li>
-                            </ol>
-                            <p>Se não souber responder claramente, NÃO OPERE!</p>
-
-                            <h3>O Mindset do Trader Vencedor</h3>
-                            <h4>Características Mentais Essenciais:</h4>
-                            <ul>
-                                <li><strong>Paciência:</strong> Esperar pelo setup perfeito</li>
-                                <li><strong>Disciplina:</strong> Seguir regras religiosamente</li>
-                                <li><strong>Humildade:</strong> Aprender com cada erro</li>
-                                <li><strong>Consistência:</strong> Mesmo resultado dia após dia</li>
-                                <li><strong>Responsabilidade:</strong> Sucesso ou fracasso é seu</li>
-                                <li><strong>Long-term Vision:</strong> Foco no resultado mensal/anual</li>
-                            </ul>
-
-                            <h3>Exercícios Práticos para Desenvolvimento</h3>
-                            <h4>Exercício 1: Simulação Emocional</h4>
-                            <p>Por 1 semana, simule operações sem dinheiro real. Foque apenas em seguir regras e controlar emoções.</p>
-
-                            <h4>Exercício 2: Análise de Trades Passados</h4>
-                            <p>Revise suas últimas 20 operações. Identifique onde emoções influenciaram decisões ruins.</p>
-
-                            <h4>Exercício 3: Meditação Diária</h4>
-                            <p>10 minutos diários focando na respiração. Pratique estar presente e aceitar emoções sem julgá-las.</p>
-
-                            <h4>Exercício 4: Visualização</h4>
-                            <p>Antes de operar, visualize: entrada disciplinada → saída planejada → análise objetiva.</p>
-
-                            <h3>Conclusão: A Verdade Sobre Sucesso no Trading</h3>
-                            <p>O trading não é sobre ser "certo" o tempo todo. É sobre gerenciar riscos consistentemente e controlar emoções quando estiver errado. Traders ricos não têm menos perdas - eles têm perdas menores e controladas.</p>
-
-                            <p><strong>Lembre-se:</strong> Todo campeão foi derrotado muitas vezes. O que os diferencia é que eles nunca desistiram e sempre aprenderam com cada derrota.</p>
-
-                            <div class="lesson-actions">
-                                <button class="btn-primary" onclick="markAsCompleted()">
-                                    <i class="fas fa-check"></i> Marcar como Concluída
-                                </button>
-                                </button>
-                            </div>
+                        <div class="lesson-actions">
+                            <button class="btn btn-primary" onclick="markAsCompleted()"><i class="fas fa-check"></i>
+                                Marcar como Concluída</button>
                         </div>
                     </div>
                 </div>
@@ -227,70 +88,14 @@
         </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Velociclos. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-            <script src="../../js/auth.js" defer></script>
+    <div id="toast-container" class="toast-container"></div>
+    <script src="../../js/toast.js"></script>
+    <script src="../../js/auth.js"></script>
     <script src="../../js/theme-toggle.js"></script>
-    <script src="../../js/course-functions.js" defer></script>
-    <script src="../../js/lesson-navigation.js" defer></script>
+    <script src="../../js/lesson.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            window.initializeLessonNavigation('pt1-1', 'pscicologia-trader');
-        });
+        document.addEventListener('DOMContentLoaded', () => initializeLesson('pt1-1', 'pscicologia-trader'));
     </script>
-    <script src="../../js/course-functions.js" defer></script>
-    <script src="../../js/lesson-navigation.js" defer></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            window.initializeLessonNavigation('pt1-1', 'pscicologia-trader');
-        });
-    </script>
-    <script src="../../js/course-functions.js" defer></script>
-    <script>
-        // Dados da lição atual
-        const lessonData = {
-            id: 'pt1-1',
-            courseId: 'psicologia-trader',
-            title: 'Controle de Emoções no Trading',
-            duration: '20 min',
-            type: 'Vídeo',
-            currentLesson: parseInt('1'),
-            totalLessons: parseInt('1')
-        };
-
-        // Função para marcar aula como concluída
-        function markAsCompleted() {
-            alert('Parabéns! Você deu o primeiro passo para controlar suas emoções no trading. Lembre-se: a psicologia é 80% do sucesso!');
-            // Aqui seria implementada a lógica para salvar o progresso
-        }
-
-        // Função para fazer quiz
-            // Aqui seria implementada a navegação para o quiz
-        }
-
-        // Navegação entre aulas
-        document.getElementById('prev-lesson').addEventListener('click', function() {
-            // Lógica para aula anterior
-            alert('Esta é a primeira aula do curso!');
-        });
-
-        document.getElementById('next-lesson').addEventListener('click', function() {
-            // Lógica para próxima aula
-            alert('Esta é a última aula deste módulo!');
-        });
-
-        
-        });
-    </script>
-        <nav class="navigation lesson-nav">
-            <a class="nav-button prev" href="#" aria-label="Anterior">← Anterior</a>
-            <a class="nav-button next" href="#" aria-label="Próximo">Próximo →</a>
-        </nav>
-    <script src="../../js/aula-nav.js" defer></script>
 </body>
-</html>
 
+</html>

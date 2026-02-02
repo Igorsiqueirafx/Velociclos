@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Como Instalar o EA Velociclos - Expert Advisor Velociclos</title>
-    <meta name="description" content="Guia completo para instalar o Expert Advisor Velociclos. Robô de trading automatizado com IA para Forex. Passo a passo detalhado.">
+    <title>EA Velociclos - Instalação</title>
+    <meta name="description" content="Aula 1: Instalação e Configuração do Robô Velociclos no MT5.">
     <meta name="author" content="Velociclos">
-    <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="../../CSS/styles.css">
-    <link rel="stylesheet" href="curso.css">
+    <link rel="stylesheet" href="../../CSS/lesson.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link rel="icon" type="image/png" href="../../public/favicon.png">
 </head>
-<body>
 
+<body>
     <header>
         <div class="container header-container">
             <nav class="nav-menu">
@@ -22,261 +22,66 @@
                 <a href="../../cursos.html" class="nav-link">Cursos</a>
                 <a href="../../conquistas.html" class="nav-link active">EA Velociclos</a>
             </nav>
-
-            <div class="user-info" id="user-info" style="display: none;">
-                <img id="user-avatar" class="user-avatar" src="" alt="Avatar do Usuário" style="display: none;">
-                <span id="user-name" class="user-name"></span>
-                <button id="logout-btn" class="logout-btn" title="Sair">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
             <div class="theme-switch-wrapper" id="theme-toggle">
-                <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon" style="display: none;"></i>
+                <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon"></i>
             </div>
         </div>
     </header>
 
     <main>
-        <div class="container main-container">
-            <div class="lesson-content">
-                <div class="lesson-header">
-                    <h1>Como Instalar o EA Velociclos</h1>
-                    <div class="lesson-meta">
-                        <span class="duration"><i class="fas fa-clock"></i> 5 min</span>
-                        <span class="type"><i class="fas fa-play-circle"></i> Vídeo</span>
-                    </div>
+        <div class="lesson-container">
+            <div class="lesson-header">
+                <h1>Instalando seu Robô</h1>
+                <div class="lesson-meta">
+                    <span class="duration"><i class="fas fa-clock"></i> 8 min</span>
+                    <span class="type"><i class="fas fa-robot"></i> Tutorial Técnico</span>
+                </div>
+            </div>
+
+            <div class="lesson-navigation">
+                <button id="prev-lesson" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> Anterior</button>
+                <span class="lesson-counter">Carregando...</span>
+                <button id="next-lesson" class="btn btn-primary">Próximo <i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <div class="lesson-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <span class="progress-text">0% concluído</span>
+            </div>
+
+            <div class="lesson-body">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" allowfullscreen></iframe>
                 </div>
 
-                <div class="lesson-navigation">
-                    <button id="prev-lesson" class="nav-btn" disabled>
-                        <i class="fas fa-chevron-left"></i> Anterior
-                    </button>
-                    <span class="lesson-counter">1 de 1</span>
-                    <button id="next-lesson" class="nav-btn" disabled>
-                        Próximo <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
+                <div class="lesson-text">
+                    <h2>Passo a Passo no MetaTrader 5</h2>
+                    <div class="lesson-content">
+                        <p>O EA Velociclos funciona exclusivamente na plataforma MetaTrader 5 (MT5). Siga os passos
+                            abaixo para instalar:</p>
 
-                <div class="lesson-body">
-                    <div class="video-container" id="video-container">
-                        <iframe src="https://drive.google.com/file/d/1QO1zDCpWO0CYIDY5I1AGmKv9LieE_tOk/preview" width="100%" height="400" allowfullscreen></iframe>
-                    </div>
-
-                    <div class="lesson-text">
-                        <h2>Guia de Instalação Completo</h2>
-                        <div class="content-placeholder">
-                            <p><strong>Expert Advisor Velociclos - Instalação Passo a Passo</strong></p>
-                            <p>Parabéns por adquirir o EA Velociclos! Este guia irá ajudá-lo a instalar e configurar seu robô de trading automatizado em poucos minutos. O processo é simples, mas siga cada passo com atenção para garantir que tudo funcione perfeitamente.</p>
-
-                            <h3>Pré-requisitos para Instalação</h3>
-                            <h4>1. Conta de Trading</h4>
-                            <ul>
-                                <li><strong>Corretora Recomendada:</strong> IC Markets, Pepperstone ou similar</li>
-                                <li><strong>Tipo de Conta:</strong> ECN ou Raw Spread (spread baixo)</li>
-                                <li><strong>Plataforma:</strong> MetaTrader 4 (MT4) ou MetaTrader 5 (MT5)</li>
-                                <li><strong>Depósito Mínimo:</strong> $500 (recomendado $1.000+)</li>
-                            </ul>
-
-                            <h4>2. Computador/VPS</h4>
-                            <ul>
-                                <li><strong>Sistema Operacional:</strong> Windows 7+ ou VPS Windows</li>
-                                <li><strong>Conexão:</strong> Internet estável 24/7</li>
-                                <li><strong>Recomendação:</strong> VPS para operação contínua</li>
-                            </ul>
-
-                            <h3>Passo 1: Download dos Arquivos</h3>
-                            <div class="installation-step">
-                                <h4>📁 Baixe os Arquivos Necessários</h4>
-                                <p>Após a confirmação do pagamento, você receberá por email:</p>
-                                <ul>
-                                    <li><strong>EA Velociclos.ex4/.ex5:</strong> Arquivo principal do robô</li>
-                                    <li><strong>Manual de Instalação:</strong> Este guia detalhado</li>
-                                    <li><strong>Configurações Padrão:</strong> Arquivo .set com parâmetros otimizados</li>
-                                    <li><strong>Indicadores Auxiliares:</strong> Arquivos necessários para o funcionamento</li>
-                                </ul>
-                                <div class="alert alert-info">
-                                    <i class="fas fa-info-circle"></i>
-                                    <strong>Importante:</strong> Os arquivos são enviados apenas após confirmação do pagamento via email seguro.
-                                </div>
-                            </div>
-
-                            <h3>Passo 2: Instalação do MetaTrader</h3>
-                            <div class="installation-step">
-                                <h4>🖥️ Instale a Plataforma MetaTrader</h4>
-                                <ol>
-                                    <li>Acesse o site da sua corretora</li>
-                                    <li>Faça download do MT4/MT5</li>
-                                    <li>Instale o programa em seu computador</li>
-                                    <li>Abra a plataforma e faça login em sua conta demo/real</li>
-                                </ol>
-                                <div class="alert alert-tip">
-                                    <i class="fas fa-lightbulb"></i>
-                                    <strong>Dica:</strong> Teste primeiro na conta demo para se familiarizar com a plataforma.
-                                </div>
-                            </div>
-
-                            <h3>Passo 3: Instalação do EA</h3>
-                            <div class="installation-step">
-                                <h4>🤖 Instale o Expert Advisor</h4>
-                                <ol>
-                                    <li><strong>Localize a pasta MQL4/5:</strong>
-                                        <ul>
-                                            <li>MT4: C:\Users\[SeuUsuario]\AppData\Roaming\MetaQuotes\Terminal\[ID]\MQL4</li>
-                                            <li>MT5: C:\Users\[SeuUsuario]\AppData\Roaming\MetaQuotes\Terminal\[ID]\MQL5</li>
-                                        </ul>
-                                    </li>
-                                    <li><strong>Copie os arquivos:</strong>
-                                        <ul>
-                                            <li>EA Velociclos.ex4 → pasta Experts</li>
-                                            <li>Indicadores auxiliares → pasta Indicators</li>
-                                        </ul>
-                                    </li>
-                                    <li><strong>Reinicie o MetaTrader</strong></li>
-                                </ol>
-                            </div>
-
-                            <h3>Passo 4: Configuração Inicial</h3>
-                            <div class="installation-step">
-                                <h4>⚙️ Configure o Robô</h4>
-                                <ol>
-                                    <li><strong>Abra o gráfico EUR/USD H1</strong></li>
-                                    <li><strong>Arraste o EA para o gráfico</strong></li>
-                                    <li><strong>Carregue as configurações padrão:</strong>
-                                        <ul>
-                                            <li>Clique em "Load" no menu do EA</li>
-                                            <li>Selecione o arquivo .set fornecido</li>
-                                        </ul>
-                                    </li>
-                                    <li><strong>Ative o AutoTrading:</strong>
-                                        <ul>
-                                            <li>Clique no botão "Algo Trading" na barra superior</li>
-                                            <li>Certifique-se de que está verde</li>
-                                        </ul>
-                                    </li>
-                                </ol>
-                            </div>
-
-                            <h3>Passo 5: Teste e Ativação</h3>
-                            <div class="installation-step">
-                                <h4>✅ Teste Antes de Ativar</h4>
-                                <ol>
-                                    <li><strong>Teste em conta demo:</strong>
-                                        <ul>
-                                            <li>Execute por 1-2 dias</li>
-                                            <li>Verifique se abre/fecham posições</li>
-                                            <li>Confirme que não há erros</li>
-                                        </ul>
-                                    </li>
-                                    <li><strong>Migre para conta real:</strong>
-                                        <ul>
-                                            <li>Repita os passos 1-4 na conta real</li>
-                                            <li>Comece com lote mínimo (0.01)</li>
-                                            <li>Acompanhe as primeiras operações</li>
-                                        </ul>
-                                    </li>
-                                </ol>
-                            </div>
-
-                            <h3>Configurações Principais do EA</h3>
-                            <table class="settings-table">
-                                <thead>
-                                    <tr>
-                                        <th>Parâmetro</th>
-                                        <th>Valor Padrão</th>
-                                        <th>Descrição</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>LotSize</td>
-                                        <td>0.01</td>
-                                        <td>Tamanho do lote por operação</td>
-                                    </tr>
-                                    <tr>
-                                        <td>MaxOrders</td>
-                                        <td>3</td>
-                                        <td>Máximo de posições simultâneas</td>
-                                    </tr>
-                                    <tr>
-                                        <td>StopLoss</td>
-                                        <td>50</td>
-                                        <td>Stop Loss em pips</td>
-                                    </tr>
-                                    <tr>
-                                        <td>TakeProfit</td>
-                                        <td>100</td>
-                                        <td>Take Profit em pips</td>
-                                    </tr>
-                                    <tr>
-                                        <td>MagicNumber</td>
-                                        <td>12345</td>
-                                        <td>Identificador único do EA</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <h3>Monitoramento e Manutenção</h3>
-                            <h4>Diariamente:</h4>
-                            <ul>
-                                <li>Verifique se o computador/VPS está ligado</li>
-                                <li>Confirme conexão com a corretora</li>
-                                <li>Observe relatório de operações</li>
-                            </ul>
-
-                            <h4>Semanalmente:</h4>
-                            <ul>
-                                <li>Análise de performance</li>
-                                <li>Ajuste de lotes conforme saldo</li>
-                                <li>Backup dos arquivos de configuração</li>
-                            </ul>
-
-                            <h3>Solução de Problemas Comuns</h3>
-                            <div class="troubleshooting">
-                                <h4>❌ EA não aparece no MT4/MT5</h4>
-                                <p><strong>Solução:</strong> Verifique se os arquivos foram copiados para a pasta correta e reinicie a plataforma.</p>
-
-                                <h4>❌ "Expert Advisors disabled"</h4>
-                                <p><strong>Solução:</strong> Clique no botão "Algo Trading" para ativar. Certifique-se de que não está em conta demo se necessário.</p>
-
-                                <h4>❌ Erro de conexão</h4>
-                                <p><strong>Solução:</strong> Verifique conexão com internet e status da corretora. Reinicie o MT4/MT5.</p>
-
-                                <h4>❌ Nenhuma operação aberta</h4>
-                                <p><strong>Solução:</strong> Verifique horário de mercado (segunda-sexta), condições de entrada e saldo suficiente.</p>
-                            </div>
-
-                            <h3>Suporte e Atualizações</h3>
-                            <p>O EA Velociclos inclui:</p>
-                            <ul>
-                                <li><strong>Suporte Técnico:</strong> Acesse nosso grupo VIP no Telegram</li>
-                                <li><strong>Atualizações Gratuitas:</strong> Melhorias e correções automáticas</li>
-                                <li><strong>Documentação Completa:</strong> Guias avançados de otimização</li>
-                                <li><strong>Garantia de 30 Dias:</strong> Reembolso total se não satisfeito</li>
-                            </ul>
-
-                            <h3>Próximos Passos Após Instalação</h3>
+                        <div class="content-section">
+                            <h3>Instalação</h3>
                             <ol>
-                                <li><strong>Monitore as primeiras operações</strong></li>
-                                <li><strong>Participe do grupo VIP</strong> para acompanhar resultados de outros usuários</li>
-                                <li><strong>Estude os relatórios semanais</strong> enviados por email</li>
-                                <li><strong>Faça ajustes graduais</strong> conforme sua experiência aumenta</li>
-                                <li><strong>Reinvesta lucros</strong> para acelerar crescimento</li>
+                                <li>Abra o MT5 e vá em <strong>Arquivo > Abrir Pasta de Dados</strong>.</li>
+                                <li>Navegue até <strong>MQL5 > Experts</strong>.</li>
+                                <li>Copie o arquivo <code>Velociclos.ex5</code> para esta pasta.</li>
+                                <li>Reinicie o MT5 ou clique com botão direito em "Consultores Experts" no navegador e
+                                    escolha "Atualizar".</li>
                             </ol>
+                        </div>
 
-                            <div class="success-message">
-                                <h3>🎉 Instalação Concluída!</h3>
-                                <p>Seu EA Velociclos está pronto para começar a operar. Lembre-se: consistência e paciência são fundamentais. Os melhores resultados vêm com tempo e acompanhamento adequado.</p>
-                                <p><strong>Boas operações!</strong></p>
-                            </div>
+                        <div class="highlight-box">
+                            <i class="fas fa-cog"></i>
+                            <div><strong>Configuração Essencial:</strong> Certifique-se de ativar o botão "Algo Trading"
+                                (Negociação Automatizada) na barra de ferramentas superior do MT5.</div>
+                        </div>
 
-                            <div class="lesson-actions">
-                                <button class="btn-primary" onclick="markAsCompleted()">
-                                    <i class="fas fa-check"></i> Instalação Concluída
-                                </button>
-                                <button class="btn-secondary" onclick="contactSupport()">
-                                    <i class="fas fa-headset"></i> Contatar Suporte
-                                </button>
-                            </div>
+                        <div class="lesson-actions">
+                            <button class="btn btn-primary" onclick="markAsCompleted()"><i class="fas fa-check"></i>
+                                Marcar como Concluída</button>
                         </div>
                     </div>
                 </div>
@@ -284,72 +89,14 @@
         </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Velociclos. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-            <script src="../../js/auth.js" defer></script>
+    <div id="toast-container" class="toast-container"></div>
+    <script src="../../js/toast.js"></script>
+    <script src="../../js/auth.js"></script>
     <script src="../../js/theme-toggle.js"></script>
-    <script src="../../js/course-functions.js" defer></script>
-    <script src="../../js/lesson-navigation.js" defer></script>
+    <script src="../../js/lesson.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            window.initializeLessonNavigation('ea1-1', 'expert-advisor-velociclos');
-        });
+        document.addEventListener('DOMContentLoaded', () => initializeLesson('ea1-1', 'expert-advisor-velociclos'));
     </script>
-    <script src="../../js/course-functions.js" defer></script>
-    <script src="../../js/lesson-navigation.js" defer></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            window.initializeLessonNavigation('ea1-1', 'expert-advisor-velociclos');
-        });
-    </script>
-    <script src="../../js/course-functions.js" defer></script>
-    <script>
-        // Dados da lição atual
-        const lessonData = {
-            id: 'ea1-1',
-            courseId: 'expert-advisor-velociclos',
-            title: 'Como Instalar o EA Velociclos',
-            duration: '5 min',
-            type: 'Vídeo',
-            currentLesson: parseInt('1'),
-            totalLessons: parseInt('1')
-        };
-
-        // Função para marcar instalação como concluída
-        function markAsCompleted() {
-            alert('Parabéns! Você concluiu a instalação do EA Velociclos. Agora é só acompanhar os resultados e lucrar enquanto dorme!');
-            // Aqui seria implementada a lógica para salvar o progresso
-        }
-
-        // Função para contatar suporte
-        function contactSupport() {
-            alert('Entre em contato conosco através do grupo VIP no Telegram ou pelo email suporte@velociclos.com');
-            // Aqui seria implementada a navegação para suporte
-        }
-
-        // Navegação entre aulas
-        document.getElementById('prev-lesson').addEventListener('click', function() {
-            // Lógica para aula anterior
-            alert('Esta é a primeira aula do curso!');
-        });
-
-        document.getElementById('next-lesson').addEventListener('click', function() {
-            // Lógica para próxima aula
-            alert('Esta é a última aula deste módulo!');
-        });
-
-        
-        });
-    </script>
-        <nav class="navigation lesson-nav">
-            <a class="nav-button prev" href="#" aria-label="Anterior">← Anterior</a>
-            <a class="nav-button next" href="#" aria-label="Próximo">Próximo →</a>
-        </nav>
-    <script src="../../js/aula-nav.js" defer></script>
 </body>
-</html>
 
+</html>
