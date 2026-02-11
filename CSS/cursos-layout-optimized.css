@@ -7,8 +7,7 @@
 .hero-content-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: clamp(32px, 6vw, 64px);
-    align-items: center;
+    gap: clamp(20px, 4vw, 40px); /* Gap reduzido para melhor aproveitamento */    align-items: center;
     min-height: clamp(300px, 40vh, 500px);
 }
 
@@ -168,7 +167,9 @@
 
 /* ===== COURSES SECTION ===== */
 .courses-section {
-    padding: clamp(48px, 10vh, 80px) 0;
+        padding: clamp(20px, 4vh, 40px) 0; /* Reduzido para melhor aproveitamento de tela */
+    max-width: 1400px; /* Largura máxima controlada */
+    margin: 0 auto; /* Centralizado */
     background-color: var(--cor-card-elevado);
 }
 
@@ -848,5 +849,536 @@ body {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== RESPONSIVE BREAKPOINTS - OTIMIZAÇÃO COMPLETA ===== */
+
+/* Extra Large Desktops (1920px+) */
+@media screen and (min-width: 1920px) {
+    .container,
+    .main-container,
+    .content-wrapper {
+        max-width: 1280px; /* Otimizado para melhor aproveitamento */
+        padding: 0 clamp(16px, 3vw, 32px); /* Padding responsivo lateral */        margin: 0 auto;
+    
+    .courses-grid-modern {
+        grid-template-columns: repeat(4, 1fr);
+        gap: clamp(1rem, 2vw, 1.5rem); /* Gap otimizado entre cards */    }
+    
+    .hero-content-grid {
+        grid-template-columns: 1fr 1.2fr;
+        gap: 4rem;
+    }
+}
+
+/* Large Desktops (1440px - 1919px) */
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+    .container,
+    .main-container {
+        max-width: 1320px;
+        padding: 0 2rem;
+    }
+    
+    .courses-grid-modern {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Standard Desktops (1200px - 1439px) */
+@media screen and (min-width: 1200px) and (max-width: 1439px) {
+    .container,
+    .main-container {
+        max-width: 1140px;
+        padding: 0 1.5rem;
+    }
+    
+    .courses-grid-modern {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.6rem, 4.5vw, 2.8rem);
+    }
+}
+
+/* Laptops (992px - 1199px) */
+@media screen and (max-width: 1199px) {
+    .container,
+    .main-container {
+        max-width: 960px;
+        padding: 0 1.5rem;
+    }
+    
+    .courses-grid-modern {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .hero-content-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* Tablets (768px - 991px) */
+@media screen and (max-width: 991px) {
+    .container,
+    .main-container {
+        max-width: 720px;
+        padding: 0 1.25rem;
+    }
+    
+    .courses-grid-modern {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+    
+    .course-card-modern {
+        padding: 1rem;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.5rem, 5vw, 2.2rem);
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    /* Navigation adjustments */
+    .nav-menu {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .courses-filters {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .filter-btn {
+        width: 100%;
+    }
+}
+
+/* Mobile Large (576px - 767px) */
+@media screen and (max-width: 767px) {
+    .container,
+    .main-container {
+        max-width: 540px;
+        padding: 0 1rem;
+    }
+    
+    .courses-grid-modern {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .course-card-modern {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .section-header {
+        padding: 1.5rem 0;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .hero-content-grid {
+        padding: 2rem 1rem;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .hero-stats-compact {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    /* Course metadata adjustments */
+    .course-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .course-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+    
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Mobile Medium (480px - 575px) */
+@media screen and (max-width: 575px) {
+    .container,
+    .main-container {
+        padding: 0 0.875rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.25rem, 6vw, 1.875rem);
+        line-height: 1.3;
+    }
+    
+    .hero-stats-compact {
+        grid-template-columns: 1fr;
+    }
+    
+    .course-card-modern {
+        padding: 0.875rem;
+    }
+    
+    .course-price {
+        font-size: 1.25rem;
+    }
+}
+
+/* Mobile Small (320px - 479px) */
+@media screen and (max-width: 479px) {
+    .container,
+    .main-container {
+        padding: 0 0.75rem;
+    }
+    
+    .section-title {
+        font-size: 1.375rem;
+    }
+    
+    .hero-title {
+        font-size: 1.125rem;
+    }
+    
+    .course-card-modern {
+        padding: 0.75rem;
+    }
+    
+    .course-header img {
+        max-height: 150px;
+        object-fit: cover;
+    }
+    
+    .meta-item {
+        font-size: 0.8rem;
+    }
+}
+
+/* Landscape Mobile */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .hero-content-grid {
+        min-height: auto;
+        padding: 1.5rem 1rem;
+    }
+    
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    
+    .course-card-modern {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .course-header {
+        flex: 0 0 40%;
+    }
+    
+    .course-content {
+        flex: 1;
+    }
+}
+
+/* Container width fixes */
+.content-wrapper {
+    width: 100%;
+    max-width: 100%;
+}
+
+.courses-section {
+    width: 100%;
+    padding: 3rem 0;
+}
+
+/* Ensure proper spacing on all screens */
+@media screen and (max-width: 1199px) {
+    .courses-section {
+        padding: 2rem 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .courses-section {
+        padding: 1.5rem 0;
+    }
+}
+
+/* Fix overflow issues */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Improve touch targets for mobile */
+@media (hover: none) and (pointer: coarse) {
+    button,
+    .btn,
+    a {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 0.75rem 1.5rem;
+    }
+    
+    .filter-btn {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* ===== GARANTIAS DE RESPONSIVIDADE UNIVERSAL ===== */
+/* Criado para funcionar em QUALQUER formato de tela */
+
+/* Base: Reset e garantias universais */
+.courses-section,
+.main-container,
+.content-wrapper {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+}
+
+/* Grid adaptativo universal */
+.courses-grid-modern {
+    width: 100%;
+    display: grid;
+    /* Garante que nunca quebre o layout */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+
+/* Telas Ultra Largas (2560px+) - 4K, 5K */
+@media screen and (min-width: 2560px) {
+    .container,
+    .main-container {
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+    
+    .courses-grid-modern {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Telas Large Desktop (1920px - 2559px) */
+@media screen and (min-width: 1920px) and (max-width: 2559px) {
+    .container,
+    .main-container {
+        max-width: 1400px;
+    }
+    
+    .courses-grid-modern {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.75rem;
+    }
+}
+
+/* Desktop Standard (1440px - 1919px) */
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+    .courses-grid-modern {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Laptop/Desktop Small (1024px - 1439px) */
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+    .container,
+    .main-container {
+        max-width: 1200px;
+        padding: 0 2rem;
+    }
+    
+    .courses-grid-modern {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+}
+
+/* Tablet Landscape (768px - 1023px) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .courses-grid-modern {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+    
+    .course-card-modern {
+        padding: 1rem;
+    }
+}
+
+/* Tablet Portrait (600px - 767px) */
+@media screen and (min-width: 600px) and (max-width: 767px) {
+    .courses-grid-modern {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+/* Mobile Large (480px - 599px) */
+@media screen and (min-width: 480px) and (max-width: 599px) {
+    .courses-grid-modern {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .container,
+    .main-container {
+        padding: 0 1rem;
+    }
+}
+
+/* Mobile Medium (375px - 479px) - iPhone SE, iPhone 12/13/14 Mini */
+@media screen and (min-width: 375px) and (max-width: 479px) {
+    .courses-grid-modern {
+        grid-template-columns: 1fr;
+        gap: 0.875rem;
+    }
+    
+    .course-card-modern {
+        padding: 0.875rem;
+    }
+    
+    .container,
+    .main-container {
+        padding: 0 0.875rem;
+    }
+}
+
+/* Mobile Small (320px - 374px) - iPhone SE 1st gen, Galaxy Fold */
+@media screen and (max-width: 374px) {
+    .courses-grid-modern {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .course-card-modern {
+        padding: 0.75rem;
+    }
+    
+    .container,
+    .main-container {
+        padding: 0 0.75rem;
+    }
+    
+    .section-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* Telas Muito Pequenas (<320px) - Smartwatches, dobráveis fechados */
+@media screen and (max-width: 319px) {
+    .courses-grid-modern {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .course-card-modern {
+        padding: 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .container,
+    .main-container {
+        padding: 0 0.5rem;
+    }
+}
+
+/* Orientação Portrait - Força 1 coluna em telas estreitas */
+@media screen and (orientation: portrait) and (max-width: 768px) {
+    .courses-grid-modern {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Orientação Landscape - Otimiza para telas horizontais */
+@media screen and (orientation: landscape) and (max-height: 600px) {
+    .courses-section {
+        padding: clamp(10px, 2vh, 20px) 0;
+    }
+    
+    .hero-content-grid {
+        min-height: auto;
+        padding: 1rem;
+    }
+}
+
+/* Dispositivos com alta densidade de pixels (Retina) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .course-card-modern {
+        /* Melhora renderização em telas Retina */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Preferência de movimento reduzido (acessibilidade) */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Garantia final: Nunca permita overflow horizontal */
+@media screen {
+    html {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    
+    body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+    
+    * {
+        max-width: 100%;
+    }
+    
+    img,
+    video,
+    iframe {
+        max-width: 100%;
+        height: auto;
     }
 }
