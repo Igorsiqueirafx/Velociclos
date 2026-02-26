@@ -134,6 +134,7 @@ header {
 .stat {
     display: flex;
     flex-direction: column;
+        gap: 0.5rem;
 }
 
 .stat strong {
@@ -277,6 +278,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+        gap: 1rem;
     padding-top: 20px;
     border-top: 1px solid var(--border);
 }
@@ -312,7 +314,8 @@ header {
 @media (max-width: 768px) {
     .hero { padding: 60px 0; }
     .hero-grid { grid-template-columns: 1fr; text-align: center; }
-    .hero-stats { justify-content: center; }
+    .hero-stats { justify-content: center; gap: 1.5rem;
+                }
     .visual-circle { margin: 40px auto 0; }
     .section-header { flex-direction: column; align-items: center; text-align: center; }
     .filters { width: 100%; overflow-x: auto; justify-content: flex-start; }
