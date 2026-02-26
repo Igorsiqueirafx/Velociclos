@@ -8918,6 +8918,11 @@ select:focus {
     align-items: center;
 }
 
+.stat > strong,
+.stat > span {
+    display: block;
+}
+
 /* Card Footer */
 .card-footer {
     gap: 1rem;
