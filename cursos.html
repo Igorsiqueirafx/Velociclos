@@ -7,6 +7,235 @@
     
     <!-- Importação do CSS Externo -->
 	<link rel="stylesheet" href="style.css">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body {
+			font-family: 'Inter', sans-serif;
+			color: #333;
+			background: #f9f9f9;
+		}
+		header {
+			background: white;
+			border-bottom: 1px solid #eee;
+			padding: 1rem 0;
+		}
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 0 20px;
+		}
+		.header-container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.nav-menu {
+			display: flex;
+			gap: 2rem;
+		}
+		.nav-link {
+			text-decoration: none;
+			color: #333;
+			font-weight: 500;
+			transition: color 0.3s;
+		}
+		.nav-link:hover,
+		.nav-link.active {
+			color: #1f63eb;
+		}
+		.theme-switch-wrapper {
+			border: none;
+			background: #f0f0f0;
+			cursor: pointer;
+			padding: 0.5rem;
+			border-radius: 0.25rem;
+			display: flex;
+			gap: 0.25rem;
+		}
+		.theme-icon {
+			display: none;
+		}
+		.theme-icon:first-child {
+			display: inline;
+		}
+		.hero {
+			padding: 3rem 0;
+			text-align: left;
+		}
+		.hero-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 2rem;
+			align-items: center;
+		}
+		.hero h1 {
+			font-size: 2.5rem;
+			line-height: 1.2;
+			margin-bottom: 1rem;
+		}
+		.accent {
+			color: #1f63eb;
+		}
+		.hero > div > div > p {
+			font-size: 1.1rem;
+			color: #666;
+			margin-bottom: 1.5rem;
+		}
+		.hero-stats {
+			display: flex;
+			gap: 3rem;
+			margin-bottom: 1.5rem;
+		}
+		.stat {
+			display: flex;
+			flex-direction: column;
+		}
+		.stat strong {
+			font-size: 1.5rem;
+			color: #1f63eb;
+		}
+		.stat span {
+			color: #999;
+			font-size: 0.9rem;
+		}
+		.visual-circle {
+			width: 200px;
+			height: 200px;
+			border-radius: 50%;
+			background: linear-gradient(135deg, rgba(31, 99, 235, 0.1), rgba(31, 99, 235, 0.05));
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 4rem;
+			color: #1f63eb;
+		}
+		.courses {
+			padding: 3rem 0;
+			background: white;
+		}
+		.section-header {
+			text-align: center;
+			margin-bottom: 2rem;
+		}
+		.section-header h2 {
+			font-size: 2rem;
+			margin-bottom: 1rem;
+		}
+		.filters {
+			display: flex;
+			justify-content: center;
+			gap: 1rem;
+			margin-bottom: 2rem;
+		}
+		.filter-btn {
+			padding: 0.5rem 1.5rem;
+			border: 1px solid #ddd;
+			background: white;
+			cursor: pointer;
+			border-radius: 0.25rem;
+			transition: all 0.3s;
+		}
+		.filter-btn:hover {
+			border-color: #1f63eb;
+			color: #1f63eb;
+		}
+		.filter-btn.active {
+			background: #1f63eb;
+			color: white;
+			border-color: #1f63eb;
+		}
+		.courses-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 2rem;
+		}
+		.course-card {
+			background: white;
+			border: 1px solid #eee;
+			border-radius: 0.5rem;
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			transition: all 0.3s;
+		}
+		.course-card:hover {
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			transform: translateY(-2px);
+		}
+		.card-header {
+			padding: 1.5rem;
+			background: linear-gradient(135deg, #f5f5f5, #fafafa);
+			border-bottom: 1px solid #eee;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.card-header i {
+			font-size: 1.5rem;
+			color: #1f63eb;
+		}
+		.badge {
+			display: inline-block;
+			padding: 0.25rem 0.75rem;
+			background: #e3f2fd;
+			color: #1f63eb;
+			border-radius: 0.25rem;
+			font-size: 0.75rem;
+			font-weight: 600;
+			text-transform: uppercase;
+		}
+		.card-body {
+			padding: 1.5rem;
+			flex: 1;
+		}
+		.card-body h3 {
+			margin-bottom: 0.5rem;
+		}
+		.card-body p {
+			color: #666;
+			font-size: 0.9rem;
+			line-height: 1.5;
+		}
+		.card-footer {
+			padding: 1.5rem;
+			background: #f9f9f9;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border-top: 1px solid #eee;
+		}
+		.price {
+			font-weight: 600;
+			color: #1f63eb;
+		}
+		.btn {
+			padding: 0.5rem 1rem;
+			background: #1f63eb;
+			color: white;
+			border: none;
+			border-radius: 0.25rem;
+			cursor: pointer;
+			transition: background 0.3s;
+		}
+		.btn:hover {
+			background: #1754c4;
+		}
+		@media (max-width: 768px) {
+			.hero-grid {
+				grid-template-columns: 1fr;
+			}
+			.nav-menu {
+				gap: 1rem;
+			}
+			.hero h1 {
+				font-size: 1.8rem;
+			}
+		}
+	</style>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
