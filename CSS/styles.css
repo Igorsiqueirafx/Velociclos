@@ -8902,3 +8902,23 @@ select:focus {
     }
 }
 
+
+
+/* Hero Stats & Stat Classes */
+.hero-stats {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+/* Card Footer */
+.card-footer {
+    gap: 1rem;
+}
