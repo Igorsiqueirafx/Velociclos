@@ -1,454 +1,129 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-PT" data-theme="light">
 <head>
     <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
-    <title>Cursos de Forex - Velociclos | Aprenda Trading do Zero</title>
-    <meta name="description" content="Cursos completos de Forex: Iniciante, Análise Técnica, Gestão de Risco, Estratégias e Psicologia do Trader. Certificação incluída.">
-    <meta name="keywords" content="cursos forex, trading, análise técnica, gestão risco, psicologia trader, mt5, metatrader, cursos online">
-    <meta name="author" content="Velociclos">
-    <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Cursos de Forex - Velociclos">
-    <meta property="og:description" content="Aprenda Forex do zero com cursos profissionais. Análise técnica, gestão de risco e estratégias comprovadas.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://velociclos.com/cursos.html">
-    <link rel="canonical" href="https://velociclos.com/cursos.html">
-    <link rel="stylesheet" href="./CSS/styles.css">
-    <link rel="stylesheet" href="./CSS/cursos-layout-optimized.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos de Forex - Velociclos</title>
+    
+    <!-- Importação do CSS Externo -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Bibliotecas Externas (Ícones) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
-    <link rel="icon" type="image/png" href="./public/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
         <div class="container header-container">
             <nav class="nav-menu">
-                <a href="./index.html" class="nav-link">Home</a>
-                <a href="./cursos.html" class="nav-link active">Cursos</a>
-                <a href="./conquistas.html" class="nav-link">EA Velociclos</a>
+                <a href="#" class="nav-link">Home</a>
+                <a href="#courses-section" class="nav-link active">Cursos</a>
+                <a href="#" class="nav-link">EA Velociclos</a>
             </nav>
 
-            <div class="user-info" id="user-info" style="display: none;">
-                <img id="user-avatar" class="user-avatar" src="" alt="Avatar do Usuário" style="display: none;">
-                <span id="user-name" class="user-name"></span>
-                <button id="logout-btn" class="logout-btn" title="Sair">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
-            <div class="theme-switch-wrapper" id="theme-toggle">
-                <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon"></i>
-            </div>
+            <button class="theme-switch-wrapper" id="theme-toggle">
+                <i class="bx bx-sun theme-icon"></i>
+                <i class="bx bx-moon theme-icon"></i>
+            </button>
         </div>
     </header>
 
-    <main class="main-container">
-        <div class="content-wrapper">
-
-            <!-- Hero Section - Otimizada -->
-            <section class="hero-optimized">
-                <div class="container">
-                    <div class="hero-content-grid">
-                        <div class="hero-text-content">
-                            <h1 class="hero-title">
-                                Domine o <span class="accent-text">Forex</span>
-                                <span class="text-break">do Zero à Lucratividade</span>
-                            </h1>
-                            <p class="hero-subtitle">
-                                Saiba o que realmente te faz ser lucrativo!
-                            </p>
-                            <div class="hero-cta">
-                             
-                                <div class="hero-stats-compact">
-                                    <div class="stat-item">
-                                        <span class="stat-number">Forex</span>
-                                        <span class="stat-label">Descomplicado</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-number">Operar</span>
-                                        <span class="stat-label">Lucrar sempre</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-number">Confiança</span>
-                                        <span class="stat-label">Em si mesmo e em suas operações</span>
-                                    </div>
-                                </div>
-                            </div>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-text">
+                        <h1>Domine o <span class="accent">Forex</span> do Zero</h1>
+                        <p>Aprenda os segredos da consistência no mercado financeiro.</p>
+                        <div class="hero-stats">
+                            <div class="stat"><strong>95%</strong><span>Satisfação</span></div>
+                            <div class="stat"><strong>+1k</strong><span>Alunos</span></div>
                         </div>
-                        <div class="hero-visual">
-                            <div class="hero-chart-modern">
-                                <div class="chart-icon">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
-                                <div class="chart-text">
-                                    <h3>O Mercado se move em Ciclos</h3>
-                                    <p>Adaptar-se a ele é o nosso trabalho</p>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="visual-circle">
+                            <i class="fas fa-chart-line"></i>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Featured Benefits -->
-            <section class="benefits-section">
-                <div class="container">
-                    <div class="benefits-grid">
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h3>Conta Real</h3>
-                            <p>Desenvolvido e refinado com experiências reais do mercado</p>
-                        </div>
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h3>Método Comprovado</h3>
-                            <p>Técnicas testadas e validadas por anos de experiência prática</p>
-                        </div>
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-award"></i>
-                            </div>
-                            <h3>Comprovado e Testado</h3>
-                            <p>Receba em Dólares e conquiste suas metas profissionais</p>
-                        </div>
+        <section class="courses" id="courses-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Nossos Cursos</h2>
+                    <div class="filters">
+                        <button class="filter-btn active" data-filter="all">Todos</button>
+                        <button class="filter-btn" data-filter="iniciante">Iniciantes</button>
+                        <button class="filter-btn" data-filter="avancado">Avançados</button>
                     </div>
                 </div>
-            </section>
 
-            <!-- Courses Section -->
-            <section class="courses-section" id="courses-section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">Nossos Cursos</h2>
-                        <p class="section-subtitle">
-                            Escolha o curso perfeito para seu nível e objetivos
-                        </p>
-                    </div>
-
-                    <!-- Filters -->
-                    <div class="courses-filters">
-                        <div class="filter-group">
-                            <button class="filter-btn active" data-filter="all">Todos</button>
-                            <button class="filter-btn" data-filter="iniciante">Iniciante</button>
-                            <button class="filter-btn" data-filter="intermediario">Intermediário</button>
-                            <button class="filter-btn" data-filter="avancado">Avançado</button>
+                <div class="courses-grid">
+                    <!-- Curso Exemplo -->
+                    <article class="course-card" data-category="iniciante">
+                        <div class="card-header">
+                            <i class="fas fa-seedling"></i>
+                            <span class="badge">Iniciante</span>
                         </div>
-                    </div>
+                        <div class="card-body">
+                            <h3>Introdução ao Forex</h3>
+                            <p>Tudo o que precisa de saber para abrir a sua primeira ordem com segurança.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="price">Grátis</span>
+                            <button class="btn">Aceder</button>
+                        </div>
+                    </article>
 
-                    <!-- Courses Grid -->
-                    <div class="courses-grid-modern" id="courses-grid">
-<!-- Course Card 1 -->
-<a href="https://portalfimathe.com/artigo/5-mitos-sobre-mesas-proprietarias" target="_blank">
-  <div class="course-header">
-    <div class="course-icon">
-      <i class="fas fa-chart-bar"></i>
-    </div>
-    <div class="course-badge intermediario">Fundamentos</div>
-  </div>
-  <div class="course-content">
-    <h3>5 Mitos sobre Mesas Proprietárias no Forex</h3>
-    <p>Existem muitos mitos sobre mesas proprietárias circulando no mercado. Entenda o que é verdade, o que é mentira e como identificar uma prop firm séria.</p>
-    <div class="course-meta">
-      <div class="meta-item">
-        <i class="fas fa-clock"></i>
-        <span>9 min de leitura</span>
-      </div>
-      <div class="meta-item">
-        <i class="fas fa-signal"></i>
-        <span>Básico</span>
-      </div>
-    </div>
-  </div>
-  <div class="course-footer">
-    <div class="course-price">
-      <span class="price-currency">Gratuito</span>
-    </div>
-    <span class="btn btn-primary courses-v-link">Ver Detalhes</span>
-  </div>
-</a>
-
-<!-- Course Card 2 -->
-<a href="https://portalfimathe.com/artigo/m15-ou-m5-qual-timeframe-oferece-mais-assertividade" target="_blank">
-  <div class="course-header">
-    <div class="course-icon">
-      <i class="fas fa-chart-line"></i>
-    </div>
-    <div class="course-badge intermediario">Estratégias</div>
-  </div>
-  <div class="course-content">
-    <h3>M15 ou M5: Qual Timeframe Oferece Mais Assertividade?</h3>
-    <p>Entenda as diferenças entre operar no M5 e no M15, qual oferece mais precisão e qual tem maior poder de recuperação — e como aplicar cada um na prática.</p>
-    <div class="course-meta">
-      <div class="meta-item">
-        <i class="fas fa-clock"></i>
-        <span>8 min de leitura</span>
-      </div>
-      <div class="meta-item">
-        <i class="fas fa-signal"></i>
-        <span>Intermédio</span>
-      </div>
-    </div>
-  </div>
-  <div class="course-footer">
-    <div class="course-price">
-      <span class="price-currency">Gratuito</span>
-    </div>
-    <span class="btn btn-primary courses-v-link">Ver Detalhes</span>
-  </div>
-</a>
-
-<!-- Course Card 3 -->
-<a href="https://portalfimathe.com/artigo/o-que-voce-precisa-saber-antes-de-operar-em-mesa-proprietaria" target="_blank">
-  <div class="course-header">
-    <div class="course-icon">
-      <i class="fas fa-graduation-cap"></i>
-    </div>
-    <div class="course-badge intermediario">Estratégias</div>
-  </div>
-  <div class="course-content">
-    <h3>O Que Você Precisa Saber Antes de Operar em Mesa Proprietária</h3>
-    <p>A maioria dos traders falha em mesas proprietárias por não entender as regras do jogo. Aprenda como proteger seu capital, usar sub-ciclos e evitar os erros que destroem contas.</p>
-    <div class="course-meta">
-      <div class="meta-item">
-        <i class="fas fa-clock"></i>
-        <span>10 min de leitura</span>
-      </div>
-      <div class="meta-item">
-        <i class="fas fa-signal"></i>
-        <span>Intermédio</span>
-      </div>
-    </div>
-  </div>
-  <div class="course-footer">
-    <div class="course-price">
-      <span class="price-currency">Gratuito</span>
-    </div>
-    <span class="btn btn-primary courses-v-link">Ver Detalhes</span>
-  </div>
-</a>
-
-<!-- Course Card 4 -->
-<a href="https://portalfimathe.com/artigo/overtrading-o-vicio-que-destroi-contas" target="_blank">
-  <div class="course-header">
-    <div class="course-icon">
-      <i class="fas fa-brain"></i>
-    </div>
-    <div class="course-badge intermediario">Psicologia</div>
-  </div>
-  <div class="course-content">
-    <h3>Overtrading: O Vício que Destrói Contas de Trading</h3>
-    <p>O overtrading é um dos maiores vilões do trader. Entenda o que é, por que acontece e como aplicar o gerenciamento semanal Fimathe para nunca mais cair nessa armadilha.</p>
-    <div class="course-meta">
-      <div class="meta-item">
-        <i class="fas fa-clock"></i>
-        <span>9 min de leitura</span>
-      </div>
-      <div class="meta-item">
-        <i class="fas fa-signal"></i>
-        <span>Intermédio</span>
-      </div>
-    </div>
-  </div>
-  <div class="course-footer">
-    <div class="course-price">
-      <span class="price-currency">Gratuito</span>
-    </div>
-    <span class="btn btn-primary courses-v-link">Ver Detalhes</span>
-  </div>
-</a>
-
-<!-- Course Card 5 -->
-<a href="https://portalfimathe.com/artigo/quanto-um-trader-consistente-pode-ganhar-em-mesa-proprietaria" target="_blank">
-  <div class="course-header">
-    <div class="course-icon">
-      <i class="fas fa-chart-pie"></i>
-    </div>
-    <div class="course-badge intermediario">Estratégias</div>
-  </div>
-  <div class="course-content">
-    <h3>Quanto um Trader Consistente Pode Ganhar em Mesa Proprietária?</h3>
-    <p>Descubra o potencial real de ganhos operando em mesas proprietárias, com cálculos práticos de lotes, gestão de rebaixamento e exemplos em contas de $10k a $200k.</p>
-    <div class="course-meta">
-      <div class="meta-item">
-        <i class="fas fa-clock"></i>
-        <span>10 min de leitura</span>
-      </div>
-      <div class="meta-item">
-        <i class="fas fa-signal"></i>
-        <span>Avançado</span>
-      </div>
-    </div>
-  </div>
-  <div class="course-footer">
-    <div class="course-price">
-      <span class="price-currency">Gratuito</span>
-    </div>
-    <span class="btn btn-primary courses-v-link">Ver Detalhes</span>
-  </div>
-</a>
-
-<!-- Course Card 6 -->
-<a href="https://portalfimathe.com/artigo/devo-evitar-operar-em-noticias-forex" target="_blank">
-  <div class="course-header">
-    <div class="course-icon">
-      <i class="fas fa-newspaper"></i>
-    </div>
-    <div class="course-badge intermediario">Fundamentos</div>
-  </div>
-  <div class="course-content">
-    <h3>Devo Evitar Operar em Notícias? A Visão Fimathe Sobre Volatilidade</h3>
-    <p>Muitos traders evitam notícias por medo da volatilidade. Descubra por que na metodologia Fimathe as notícias são aliadas — e como usar o calendário econômico de forma inteligente.</p>
-    <div class="course-meta">
-      <div class="meta-item">
-        <i class="fas fa-clock"></i>
-        <span>8 min de leitura</span>
-      </div>
-      <div class="meta-item">
-        <i class="fas fa-signal"></i>
-        <span>Intermédio</span>
-      </div>
-    </div>
-  </div>
-  <div class="course-footer">
-    <div class="course-price">
-      <span class="price-currency">Gratuito</span>
-    </div>
-    <span class="btn btn-primary courses-v-link">Ver Detalhes</span>
-  </div>
-</a>
-                    </div>
+                    <article class="course-card" data-category="avancado">
+                        <div class="card-header">
+                            <i class="fas fa-rocket"></i>
+                            <span class="badge">Avançado</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Estratégias de Scalping</h3>
+                            <p>Maximize lucros em curtos intervalos de tempo com precisão cirúrgica.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="price">Premium</span>
+                            <button class="btn">Saber Mais</button>
+                        </div>
+                    </article>
                 </div>
-            </section>
-
-            <!-- CTA Section -->
-            <section class="cta-section">
-                <div class="container">
-                    <div class="cta-content-modern">
-                        <div class="cta-text">
-                            <h2>Pronto para prosperar de Verdade?</h2>
-                            <p>Invista em seu futuro financeiro hoje mesmo</p>
-                        </div>
-
-                        <div class="cta-features">
-                            <div class="cta-feature">
-                                <i class="fas fa-check-circle text-success"></i>
-                                <span>Resultados que falam por si</span>
-                            </div>
-                            <div class="cta-feature">
-                                <i class="fas fa-users text-accent"></i>
-                                <span>Pessoas de sucesso pagam o preço</span>
-                            </div>
-                            <div class="cta-feature">
-                                <i class="fas fa-headset text-warning"></i>
-                                <span>O que te impede de crescer?</span>
-                            </div>
-                        </div>
-
-                        <div class="cta-pricing">
-                            <div class="price-main">
-                                <span class="currency">U$</span>
-                                <span class="amount">18</span>
-                            </div>
-                            <div class="price-alt">
-                                ou R$ 97
-                            </div>
-                        </div>
-
-                        <div class="cta-actions">
-                            <button class="btn btn-primary btn-large">
-                                <i class="fas fa-shopping-cart"></i>
-                                Comprar Agora
-                            </button>
-                            <button class="btn btn-secondary btn-large" onclick="scrollToCourses()">
-                                <i class="fas fa-arrow-up"></i>
-                                Ver Cursos
-                            </button>
-                        </div>
-
-                        <div class="cta-security">
-                            <i class="fas fa-shield-alt text-success"></i>
-                            <span>Compra 100% segura</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Modal de Detalhes do Curso (removido - agora redireciona para páginas de curso) -->
-
-        </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2025 Velociclos. Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="./js/auth.js" defer></script>
-    <script src="./js/veloacademy.js"></script>
-    <script src="./js/theme-toggle.js"></script>
-
     <script>
-        // Funcionalidades específicas da página de cursos
+        // Lógica simples de filtro e tema
+        const themeBtn = document.getElementById('theme-toggle');
+        themeBtn.addEventListener('click', () => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light');
+        });
 
-        // Filtro de cursos
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const courseCards = document.querySelectorAll('.course-card-modern');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.course-card');
 
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const filter = this.getAttribute('data-filter');
-
-                    // Atualizar botões ativos
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-
-                    // Filtrar cursos
-                    courseCards.forEach(card => {
-                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                            card.style.display = 'flex';
-                            setTimeout(() => {
-                                card.style.opacity = '1';
-                                card.style.transform = 'translateY(0)';
-                            }, 50);
-                        } else {
-                            card.style.opacity = '0';
-                            card.style.transform = 'translateY(20px)';
-                            setTimeout(() => {
-                                card.style.display = 'none';
-                            }, 300);
-                        }
-                    });
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                cards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
                 });
             });
         });
-
-        function scrollToCourses() {
-            document.getElementById('courses-section').scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-
-        // Animação de entrada para os cards
-        function animateCards() {
-            const cards = document.querySelectorAll('.course-card-modern');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        }
-
-        // Executar animação após carregamento
-        window.addEventListener('load', animateCards);
     </script>
 </body>
 </html>
