@@ -1,129 +1,175 @@
-<!DOCTYPE html>
-<html lang="pt-PT" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursos de Forex - Velociclos</title>
-    
-    <!-- Importação do CSS Externo -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Bibliotecas Externas (Ícones) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+/* Variáveis de Design */
+:root {
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #0f172a;
+    --accent: #2563eb;
+    --border: #e2e8f0;
+    --shadow: rgba(0,0,0,0.1);
+}
 
-    <header>
-        <div class="container header-container">
-            <nav class="nav-menu">
-                <a href="#" class="nav-link">Home</a>
-                <a href="#courses-section" class="nav-link active">Cursos</a>
-                <a href="#" class="nav-link">EA Velociclos</a>
-            </nav>
+[data-theme="dark"] {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #f8fafc;
+    --border: #334155;
+}
 
-            <button class="theme-switch-wrapper" id="theme-toggle">
-                <i class="bx bx-sun theme-icon"></i>
-                <i class="bx bx-moon theme-icon"></i>
-            </button>
-        </div>
-    </header>
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero-grid">
-                    <div class="hero-text">
-                        <h1>Domine o <span class="accent">Forex</span> do Zero</h1>
-                        <p>Aprenda os segredos da consistência no mercado financeiro.</p>
-                        <div class="hero-stats">
-                            <div class="stat"><strong>95%</strong><span>Satisfação</span></div>
-                            <div class="stat"><strong>+1k</strong><span>Alunos</span></div>
-                        </div>
-                    </div>
-                    <div class="hero-visual">
-                        <div class="visual-circle">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    transition: 0.3s;
+}
 
-        <section class="courses" id="courses-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Nossos Cursos</h2>
-                    <div class="filters">
-                        <button class="filter-btn active" data-filter="all">Todos</button>
-                        <button class="filter-btn" data-filter="iniciante">Iniciantes</button>
-                        <button class="filter-btn" data-filter="avancado">Avançados</button>
-                    </div>
-                </div>
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-                <div class="courses-grid">
-                    <!-- Curso Exemplo -->
-                    <article class="course-card" data-category="iniciante">
-                        <div class="card-header">
-                            <i class="fas fa-seedling"></i>
-                            <span class="badge">Iniciante</span>
-                        </div>
-                        <div class="card-body">
-                            <h3>Introdução ao Forex</h3>
-                            <p>Tudo o que precisa de saber para abrir a sua primeira ordem com segurança.</p>
-                        </div>
-                        <div class="card-footer">
-                            <span class="price">Grátis</span>
-                            <button class="btn">Aceder</button>
-                        </div>
-                    </article>
+/* Header */
+header {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
 
-                    <article class="course-card" data-category="avancado">
-                        <div class="card-header">
-                            <i class="fas fa-rocket"></i>
-                            <span class="badge">Avançado</span>
-                        </div>
-                        <div class="card-body">
-                            <h3>Estratégias de Scalping</h3>
-                            <p>Maximize lucros em curtos intervalos de tempo com precisão cirúrgica.</p>
-                        </div>
-                        <div class="card-footer">
-                            <span class="price">Premium</span>
-                            <button class="btn">Saber Mais</button>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-    </main>
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    <script>
-        // Lógica simples de filtro e tema
-        const themeBtn = document.getElementById('theme-toggle');
-        themeBtn.addEventListener('click', () => {
-            const theme = document.documentElement.getAttribute('data-theme');
-            document.documentElement.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light');
-        });
+.nav-link {
+    text-decoration: none;
+    color: inherit;
+    margin-right: 20px;
+    font-weight: 500;
+}
 
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const cards = document.querySelectorAll('.course-card');
+.nav-link.active { color: var(--accent); }
 
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                const filter = btn.dataset.filter;
-                cards.forEach(card => {
-                    if (filter === 'all' || card.dataset.category === filter) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+.theme-switch-wrapper {
+    background: none;
+    border: 1px solid var(--border);
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text);
+}
+
+/* Hero Section */
+.hero { padding: 80px 0; }
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-text h1 { font-size: 3rem; margin-bottom: 20px; }
+.accent { color: var(--accent); }
+
+.visual-circle {
+    width: 300px;
+    height: 300px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: white;
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
+}
+
+/* Cursos */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.course-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: transform 0.3s;
+}
+
+.course-card:hover { transform: translateY(-5px); }
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+.badge {
+    font-size: 0.7rem;
+    background: rgba(37, 99, 235, 0.1);
+    padding: 4px 10px;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+
+.btn {
+    padding: 10px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
+    .visual-circle { margin: 0 auto; width: 200px; height: 200px; font-size: 3rem; }
+    .section-header { flex-direction: column; gap: 20px; }
+}
