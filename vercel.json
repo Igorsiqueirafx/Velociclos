@@ -1,6 +1,5 @@
 {
   "buildCommand": "echo 'No build needed'",
   "outputDirectory": ".",
-  "cleanUrls": true,
-  "rebuildTrigger": "2025-02-26-23-15"
+  "cleanUrls": true
 }
