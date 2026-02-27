@@ -1964,11 +1964,7 @@ header {
 }
 
 .nav-link.active {
-    color: white;
-    background-color: var(--blue-medium);
-    box-shadow: 0 2px 8px rgba(22, 52, 255, 0.3);
-}
-
+   color: var(--blue-medium);
 /* Theme Toggle */
 .theme-switch-wrapper {
     cursor: pointer;
