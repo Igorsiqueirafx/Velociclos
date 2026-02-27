@@ -1341,6 +1341,7 @@ html {
     /* Header completamente vertical e acessível */
     header {
         min-height: clamp(200px, 40vh, 350px);
+/* Otimização responsiva aplicada */
         padding: clamp(20px, 4vh, 30px) 0;
     }
 
