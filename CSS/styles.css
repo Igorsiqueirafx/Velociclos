@@ -8927,3 +8927,67 @@ select:focus {
 .card-footer {
     gap: 1rem;
 }
+
+
+/* ===== RESPONSIVIDADE - MEDIA QUERIES ===== */
+
+/* Mobile First - Smartphones (até 768px) */
+@media (max-width: 768px) {
+  /* Navbar responsiva */
+  .header-container {
+    padding: 1rem;
+  }
+  
+  .nav-menu {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Hero section */
+  .hero-title {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+  
+  /* Containers */
+  .container {
+    padding: 1rem;
+    max-width: 100%;
+  }
+  
+  /* Cards */
+  .card {
+    margin: 0.5rem;
+  }
+  
+  /* Buttons */
+  button, .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Tablets (769px a 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .nav-menu {
+    gap: 1rem;
+  }
+  
+  .container {
+    padding: 1.5rem;
+    max-width: 95%;
+  }
+}
+
+/* Desktop (acima de 1025px) */
+@media (min-width: 1025px) {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
