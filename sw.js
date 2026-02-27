@@ -4,7 +4,7 @@
  * Suporte a PWA, Background Sync e Cache personalizado
  */
 
-const CACHE_NAME = 'velociclos-v3.0.0-mobile-optimized';
+const CACHE_NAME = 'velociclos-v3.0.1-mobile-optimized';
 const DATA_CACHE_NAME = 'velociclos-data-v1';
 
 // Cache crítico para funcionamento offline
