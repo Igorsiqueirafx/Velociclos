@@ -1,454 +1,979 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-PT" data-theme="light">
 <head>
     <meta charset="UTF-8">
+    <!-- Viewport otimizado para dispositivos móveis -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cursos de Forex - Velociclos | Aprenda Trading do Zero</title>
     <meta name="description" content="Cursos completos de Forex: Iniciante, Análise Técnica, Gestão de Risco, Estratégias e Psicologia do Trader. Certificação incluída.">
-    <meta name="keywords" content="cursos forex, trading, análise técnica, gestão risco, psicologia trader, mt5, metatrader, cursos online">
-    <meta name="author" content="Velociclos">
-    <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Cursos de Forex - Velociclos">
-    <meta property="og:description" content="Aprenda Forex do zero com cursos profissionais. Análise técnica, gestão de risco e estratégias comprovadas.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://velociclos.com/cursos.html">
-    <link rel="canonical" href="https://velociclos.com/cursos.html">
-    <link rel="stylesheet" href="./CSS/styles.css">
-    <link rel="stylesheet" href="./CSS/cursos-layout-optimized.css">
+    
+    <!-- Ícones e Fontes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
-    <link rel="icon" type="image/png" href="./public/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== VARIÁVEIS GLOBAIS (CORES E ESPAÇAMENTOS) ===== */
+        :root {
+            --cor-fundo: #f8fafc;
+            --cor-card: #ffffff;
+            --cor-card-elevado: #f1f5f9;
+            --cor-texto-principal: #0f172a;
+            --cor-texto-secundario: #475569;
+            --cor-texto-terciario: #64748b;
+            --cor-borda-leve: #e2e8f0;
+            
+            --cor-accent: #2563eb;
+            --cor-accent-light: #3b82f6;
+            --cor-accent-hover: #1d4ed8;
+            --cor-sombra: rgba(0, 0, 0, 0.1);
+            --cor-sombra-leve: rgba(0, 0, 0, 0.05);
+            --cor-sombra-colorida: rgba(37, 99, 235, 0.2);
+            
+            --green: #10b981;
+            --yellow: #f59e0b;
+            --cor-error: #ef4444;
+            --gray-900: #111827;
+            --borda-raio: 16px;
+
+            /* Espaçamentos Fluidos */
+            --space-fluid-xs: 0.5rem;
+            --space-fluid-sm: 0.75rem;
+            --space-fluid-md: 1rem;
+            --space-fluid-lg: 1.5rem;
+            --space-fluid-xl: 2rem;
+            --space-fluid-2xl: 3rem;
+
+            /* Tipografia Fluida */
+            --font-size-fluid-xs: 0.75rem;
+            --font-size-fluid-sm: 0.875rem;
+            --font-size-fluid-md: 1rem;
+            --font-size-fluid-lg: 1.125rem;
+            --font-size-fluid-xl: 1.25rem;
+            --font-size-fluid-2xl: 1.5rem;
+        }
+
+        /* Tema Escuro Opcional */
+        [data-theme="dark"] {
+            --cor-fundo: #0f172a;
+            --cor-card: #1e293b;
+            --cor-card-elevado: #0b1120;
+            --cor-texto-principal: #f8fafc;
+            --cor-texto-secundario: #cbd5e1;
+            --cor-texto-terciario: #94a3b8;
+            --cor-borda-leve: #334155;
+            --cor-sombra: rgba(0, 0, 0, 0.4);
+            --cor-sombra-colorida: rgba(37, 99, 235, 0.15);
+        }
+
+        /* ===== RESET BÁSICO ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto-principal);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-fluid-lg);
+        }
+
+        /* ===== CABEÇALHO ===== */
+        header {
+            background-color: var(--cor-card);
+            border-bottom: 1px solid var(--cor-borda-leve);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: var(--space-fluid-md) 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: var(--space-fluid-lg);
+        }
+
+        .nav-link {
+            color: var(--cor-texto-secundario);
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--cor-accent);
+        }
+
+        .theme-switch-wrapper {
+            background: none;
+            border: 1px solid var(--cor-borda-leve);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            color: var(--cor-texto-principal);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-switch-wrapper:hover {
+            background-color: var(--cor-card-elevado);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-optimized {
+            padding: var(--space-fluid-2xl) 0;
+        }
+
+        .hero-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(20px, 4vw, 40px);
+            align-items: center;
+            min-height: clamp(300px, 40vh, 500px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-stats-compact { justify-content: center; }
+        }
+
+        .hero-text-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-fluid-lg);
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--cor-texto-principal);
+            margin: 0;
+        }
+
+        .text-break { display: block; }
+        .accent-text { color: var(--cor-accent); }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--cor-texto-secundario);
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-fluid-lg);
+        }
+
+        .hero-stats-compact {
+            display: flex;
+            gap: var(--space-fluid-xl);
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-size: var(--font-size-fluid-xl);
+            font-weight: 700;
+            color: var(--cor-accent);
+        }
+
+        .stat-label {
+            font-size: var(--font-size-fluid-sm);
+            color: var(--cor-texto-terciario);
+            max-width: 120px;
+        }
+
+        .hero-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-chart-modern {
+            width: 100%;
+            max-width: 350px;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(22, 52, 255, 0.05));
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 1px solid var(--cor-borda-leve);
+            box-shadow: 0 10px 40px var(--cor-sombra-colorida);
+            transition: transform 0.4s ease;
+            padding: var(--space-fluid-xl);
+        }
+
+        .hero-chart-modern:hover { transform: translateY(-10px) scale(1.02); }
+
+        .chart-icon {
+            font-size: 3.5rem;
+            color: var(--cor-accent);
+            margin-bottom: var(--space-fluid-md);
+        }
+
+        .chart-text h3 {
+            font-size: var(--font-size-fluid-lg);
+            margin-bottom: var(--space-fluid-xs);
+        }
+
+        .chart-text p {
+            font-size: var(--font-size-fluid-sm);
+            color: var(--cor-texto-secundario);
+        }
+
+        /* ===== SECÇÃO BENEFÍCIOS ===== */
+        .benefits-section {
+            padding: clamp(48px, 8vh, 80px) 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-fluid-xl);
+        }
+
+        .benefit-card {
+            background-color: var(--cor-card);
+            padding: var(--space-fluid-xl);
+            border-radius: var(--borda-raio);
+            border: 1px solid var(--cor-borda-leve);
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px var(--cor-sombra-leve);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px var(--cor-sombra);
+            border-color: var(--cor-accent);
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--cor-accent), var(--cor-accent-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            margin: 0 auto var(--space-fluid-md);
+        }
+
+        .benefit-card h3 {
+            font-size: var(--font-size-fluid-xl);
+            margin-bottom: var(--space-fluid-sm);
+        }
+
+        .benefit-card p {
+            color: var(--cor-texto-secundario);
+            font-size: var(--font-size-fluid-sm);
+        }
+
+        /* ===== SECÇÃO CURSOS ===== */
+        .courses-section {
+            padding: clamp(40px, 6vh, 80px) 0;
+            background-color: var(--cor-card-elevado);
+            border-top: 1px solid var(--cor-borda-leve);
+            border-bottom: 1px solid var(--cor-borda-leve);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-fluid-2xl);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: var(--space-fluid-sm);
+        }
+
+        .section-subtitle {
+            color: var(--cor-texto-secundario);
+        }
+
+        /* Filtros */
+        .courses-filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: var(--space-fluid-2xl);
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-fluid-sm);
+            background-color: var(--cor-card);
+            padding: var(--space-fluid-xs);
+            border-radius: 30px;
+            border: 1px solid var(--cor-borda-leve);
+            box-shadow: 0 2px 10px var(--cor-sombra-leve);
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            border: none;
+            background: transparent;
+            color: var(--cor-texto-secundario);
+            font-weight: 600;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            color: var(--cor-accent);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .filter-btn.active {
+            background-color: var(--cor-accent);
+            color: white;
+            box-shadow: 0 4px 12px var(--cor-sombra-colorida);
+        }
+
+        /* Grid de Cursos */
+        .courses-grid-modern {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-fluid-xl);
+        }
+
+        .course-card-modern {
+            background-color: var(--cor-card);
+            border: 1px solid var(--cor-borda-leve);
+            border-radius: var(--borda-raio);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Classe de Animação Controlada via JS */
+        .course-card-modern.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .course-card-modern:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px var(--cor-sombra);
+            border-color: var(--cor-accent-light);
+        }
+
+        .course-header {
+            padding: var(--space-fluid-lg);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, transparent 100%);
+            border-bottom: 1px solid var(--cor-borda-leve);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .course-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--cor-accent), var(--cor-accent-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .course-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .course-badge.iniciante { background-color: var(--green); color: white; }
+        .course-badge.intermediario { background-color: var(--yellow); color: var(--gray-900); }
+        .course-badge.avancado { background-color: var(--cor-error); color: white; }
+
+        .course-content {
+            padding: var(--space-fluid-xl) var(--space-fluid-lg);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-fluid-md);
+        }
+
+        .course-content h3 {
+            font-size: var(--font-size-fluid-xl);
+            line-height: 1.3;
+        }
+
+        .course-content p {
+            color: var(--cor-texto-secundario);
+            font-size: var(--font-size-fluid-sm);
+            flex: 1;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: var(--space-fluid-lg);
+            border-top: 1px solid var(--cor-borda-leve);
+            padding-top: var(--space-fluid-md);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--cor-texto-terciario);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .meta-item i { color: var(--cor-accent); }
+
+        .course-footer {
+            padding: var(--space-fluid-md) var(--space-fluid-lg);
+            background-color: var(--cor-fundo);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--cor-borda-leve);
+        }
+
+        .price-currency {
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--cor-accent);
+            color: white;
+        }
+        .btn-primary:hover { background-color: var(--cor-accent-hover); }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--cor-texto-principal);
+            border: 1px solid var(--cor-borda-leve);
+        }
+        .btn-secondary:hover { background-color: var(--cor-borda-leve); }
+
+        .btn-large { padding: 14px 28px; font-size: 1.1rem; }
+
+        /* ===== SECÇÃO CTA (COMPLETADA) ===== */
+        .cta-section {
+            padding: clamp(60px, 10vh, 100px) 0;
+            background: linear-gradient(135deg, var(--cor-accent-hover) 0%, var(--cor-accent) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content-modern {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-fluid-xl);
+            align-items: center;
+        }
+
+        .cta-text h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: var(--space-fluid-sm);
+        }
+        .cta-text p {
+            font-size: var(--font-size-fluid-lg);
+            opacity: 0.9;
+        }
+
+        .cta-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-fluid-lg);
+            background: rgba(255, 255, 255, 0.1);
+            padding: var(--space-fluid-lg);
+            border-radius: var(--borda-raio);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+        .text-success { color: #34d399; }
+        .text-warning { color: #fbbf24; }
+        .text-accent { color: #93c5fd; }
+
+        .cta-pricing {
+            margin: var(--space-fluid-md) 0;
+        }
+
+        .price-main {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 4px;
+        }
+        .price-main .currency {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        .price-main .amount {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .price-alt {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .cta-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-fluid-md);
+            justify-content: center;
+        }
+
+        .cta-actions .btn-primary {
+            background-color: white;
+            color: var(--cor-accent);
+        }
+        .cta-actions .btn-primary:hover {
+            background-color: #f1f5f9;
+            transform: translateY(-2px);
+        }
+        .cta-actions .btn-secondary {
+            border-color: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+        .cta-actions .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-security {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: var(--space-fluid-sm);
+        }
+
+        /* ===== RODAPÉ ===== */
+        .footer {
+            background-color: var(--cor-card);
+            padding: var(--space-fluid-xl) 0;
+            text-align: center;
+            border-top: 1px solid var(--cor-borda-leve);
+            color: var(--cor-texto-secundario);
+        }
+    </style>
 </head>
 <body>
 
+    <!-- CABEÇALHO -->
     <header>
         <div class="container header-container">
             <nav class="nav-menu">
-                <a href="./index.html" class="nav-link">Home</a>
-                <a href="./cursos.html" class="nav-link active">Cursos</a>
-                <a href="./conquistas.html" class="nav-link">EA Velociclos</a>
+                <a href="#" class="nav-link">Home</a>
+                <a href="#courses-section" class="nav-link active">Cursos</a>
+                <a href="#" class="nav-link">EA Velociclos</a>
             </nav>
 
-            <div class="user-info" id="user-info" style="display: none;">
-                <img id="user-avatar" class="user-avatar" src="" alt="Avatar do Usuário" style="display: none;">
-                <span id="user-name" class="user-name"></span>
-                <button id="logout-btn" class="logout-btn" title="Sair">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
-            <div class="theme-switch-wrapper" id="theme-toggle">
-                <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon"></i>
-            </div>
+            <!-- Botão de Tema Acessível -->
+            <button class="theme-switch-wrapper" id="theme-toggle" aria-label="Alternar Tema Claro/Escuro">
+                <i class="bx bx-sun theme-icon" aria-hidden="true"></i>
+                <i class="bx bx-moon theme-icon" aria-hidden="true"></i>
+            </button>
         </div>
     </header>
 
     <main class="main-container">
-        <div class="content-wrapper">
-
-            <!-- Hero Section - Otimizada -->
-            <section class="hero-optimized">
-                <div class="container">
-                    <div class="hero-content-grid">
-                        <div class="hero-text-content">
-                            <h1 class="hero-title">
-                                Domine o <span class="accent-text">Forex</span>
-                                <span class="text-break">do Zero à Lucratividade</span>
-                            </h1>
-                            <p class="hero-subtitle">
-                                Saiba o que realmente te faz ser lucrativo!
-                            </p>
-                            <div class="hero-cta">
-                             
-                                <div class="hero-stats-compact">
-                                    <div class="stat-item">
-                                        <span class="stat-number">Forex</span>
-                                        <span class="stat-label">Descomplicado</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-number">Operar</span>
-                                        <span class="stat-label">Lucrar sempre</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-number">Confiança</span>
-                                        <span class="stat-label">Em si mesmo e em suas operações</span>
-                                    </div>
+        
+        <!-- SECÇÃO HERO -->
+        <section class="hero-optimized">
+            <div class="container">
+                <div class="hero-content-grid">
+                    <div class="hero-text-content">
+                        <h1 class="hero-title">
+                            Domine o <span class="accent-text">Forex</span>
+                            <span class="text-break">do Zero à Lucratividade</span>
+                        </h1>
+                        <p class="hero-subtitle">
+                            Descubra os pilares da análise técnica e a gestão que realmente constrói consistência.
+                        </p>
+                        <div class="hero-cta">
+                            <div class="hero-stats-compact">
+                                <div class="stat-item">
+                                    <span class="stat-number">Forex</span>
+                                    <span class="stat-label">Descomplicado</span>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="hero-visual">
-                            <div class="hero-chart-modern">
-                                <div class="chart-icon">
-                                    <i class="fas fa-chart-line"></i>
+                                <div class="stat-item">
+                                    <span class="stat-number">Operar</span>
+                                    <span class="stat-label">Lucrar sempre</span>
                                 </div>
-                                <div class="chart-text">
-                                    <h3>O Mercado se move em Ciclos</h3>
-                                    <p>Adaptar-se a ele é o nosso trabalho</p>
+                                <div class="stat-item">
+                                    <span class="stat-number">Confiança</span>
+                                    <span class="stat-label">Controlo Emocional</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <!-- Featured Benefits -->
-            <section class="benefits-section">
-                <div class="container">
-                    <div class="benefits-grid">
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h3>Conta Real</h3>
-                            <p>Desenvolvido e refinado com experiências reais do mercado</p>
-                        </div>
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
+                    <div class="hero-visual">
+                        <div class="hero-chart-modern">
+                            <div class="chart-icon">
                                 <i class="fas fa-chart-line"></i>
                             </div>
-                            <h3>Método Comprovado</h3>
-                            <p>Técnicas testadas e validadas por anos de experiência prática</p>
-                        </div>
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-award"></i>
+                            <div class="chart-text">
+                                <h3>O Mercado tem Ciclos</h3>
+                                <p>Adaptar-se a ele é o nosso trabalho</p>
                             </div>
-                            <h3>Comprovado e Testado</h3>
-                            <p>Receba em Dólares e conquiste suas metas profissionais</p>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Courses Section -->
-            <section class="courses-section" id="courses-section">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">Nossos Cursos</h2>
-                        <p class="section-subtitle">
-                            Escolha o curso perfeito para seu nível e objetivos
-                        </p>
+        <!-- SECÇÃO BENEFÍCIOS -->
+        <section class="benefits-section">
+            <div class="container">
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-users"></i></div>
+                        <h3>Conta Real</h3>
+                        <p>Desenvolvido e refinado com experiências de operações reais do mercado financeiro.</p>
                     </div>
-
-                    <!-- Filters -->
-                    <div class="courses-filters">
-                        <div class="filter-group">
-                            <button class="filter-btn active" data-filter="all">Todos</button>
-                            <button class="filter-btn" data-filter="iniciante">Iniciante</button>
-                            <button class="filter-btn" data-filter="intermediario">Intermediário</button>
-                            <button class="filter-btn" data-filter="avancado">Avançado</button>
-                        </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Método Comprovado</h3>
+                        <p>Técnicas testadas e validadas através de anos de experiência prática e resultados.</p>
                     </div>
-
-                    <!-- Courses Grid -->
-                    <div class="courses-grid-modern" id="courses-grid">
-<!-- Course Card 1 -->
-<a href="https://portalfimathe.com/artigo/5-mitos-sobre-mesas-proprietarias" target="_blank">
-  <div class="course-header">
-    <div class="course-icon">
-      <i class="fas fa-chart-bar"></i>
-    </div>
-    <div class="course-badge intermediario">Fundamentos</div>
-  </div>
-  <div class="course-content">
-    <h3>5 Mitos sobre Mesas Proprietárias no Forex</h3>
-    <p>Existem muitos mitos sobre mesas proprietárias circulando no mercado. Entenda o que é verdade, o que é mentira e como identificar uma prop firm séria.</p>
-    <div class="course-meta">
-      <div class="meta-item">
-        <i class="fas fa-clock"></i>
-        <span>9 min de leitura</span>
-      </div>
-      <div class="meta-item">
-        <i class="fas fa-signal"></i>
-        <span>Básico</span>
-      </div>
-    </div>
-  </div>
-  <div class="course-footer">
-    <div class="course-price">
-      <span class="price-currency">Gratuito</span>
-    </div>
-    <span class="btn btn-primary courses-v-link">Ver Detalhes</span>
-  </div>
-</a>
-
-<!-- Course Card 2 -->
-<a href="https://portalfimathe.com/artigo/m15-ou-m5-qual-timeframe-oferece-mais-assertividade" target="_blank">
-  <div class="course-header">
-    <div class="course-icon">
-      <i class="fas fa-chart-line"></i>
-    </div>
-    <div class="course-badge intermediario">Estratégias</div>
-  </div>
-  <div class="course-content">
-    <h3>M15 ou M5: Qual Timeframe Oferece Mais Assertividade?</h3>
-    <p>Entenda as diferenças entre operar no M5 e no M15, qual oferece mais precisão e qual tem maior poder de recuperação — e como aplicar cada um na prática.</p>
-    <div class="course-meta">
-      <div class="meta-item">
-        <i class="fas fa-clock"></i>
-        <span>8 min de leitura</span>
-      </div>
-      <div class="meta-item">
-        <i class="fas fa-signal"></i>
-        <span>Intermédio</span>
-      </div>
-    </div>
-  </div>
-  <div class="course-footer">
-    <div class="course-price">
-      <span class="price-currency">Gratuito</span>
-    </div>
-    <span class="btn btn-primary courses-v-link">Ver Detalhes</span>
-  </div>
-</a>
-
-<!-- Course Card 3 -->
-<a href="https://portalfimathe.com/artigo/o-que-voce-precisa-saber-antes-de-operar-em-mesa-proprietaria" target="_blank">
-  <div class="course-header">
-    <div class="course-icon">
-      <i class="fas fa-graduation-cap"></i>
-    </div>
-    <div class="course-badge intermediario">Estratégias</div>
-  </div>
-  <div class="course-content">
-    <h3>O Que Você Precisa Saber Antes de Operar em Mesa Proprietária</h3>
-    <p>A maioria dos traders falha em mesas proprietárias por não entender as regras do jogo. Aprenda como proteger seu capital, usar sub-ciclos e evitar os erros que destroem contas.</p>
-    <div class="course-meta">
-      <div class="meta-item">
-        <i class="fas fa-clock"></i>
-        <span>10 min de leitura</span>
-      </div>
-      <div class="meta-item">
-        <i class="fas fa-signal"></i>
-        <span>Intermédio</span>
-      </div>
-    </div>
-  </div>
-  <div class="course-footer">
-    <div class="course-price">
-      <span class="price-currency">Gratuito</span>
-    </div>
-    <span class="btn btn-primary courses-v-link">Ver Detalhes</span>
-  </div>
-</a>
-
-<!-- Course Card 4 -->
-<a href="https://portalfimathe.com/artigo/overtrading-o-vicio-que-destroi-contas" target="_blank">
-  <div class="course-header">
-    <div class="course-icon">
-      <i class="fas fa-brain"></i>
-    </div>
-    <div class="course-badge intermediario">Psicologia</div>
-  </div>
-  <div class="course-content">
-    <h3>Overtrading: O Vício que Destrói Contas de Trading</h3>
-    <p>O overtrading é um dos maiores vilões do trader. Entenda o que é, por que acontece e como aplicar o gerenciamento semanal Fimathe para nunca mais cair nessa armadilha.</p>
-    <div class="course-meta">
-      <div class="meta-item">
-        <i class="fas fa-clock"></i>
-        <span>9 min de leitura</span>
-      </div>
-      <div class="meta-item">
-        <i class="fas fa-signal"></i>
-        <span>Intermédio</span>
-      </div>
-    </div>
-  </div>
-  <div class="course-footer">
-    <div class="course-price">
-      <span class="price-currency">Gratuito</span>
-    </div>
-    <span class="btn btn-primary courses-v-link">Ver Detalhes</span>
-  </div>
-</a>
-
-<!-- Course Card 5 -->
-<a href="https://portalfimathe.com/artigo/quanto-um-trader-consistente-pode-ganhar-em-mesa-proprietaria" target="_blank">
-  <div class="course-header">
-    <div class="course-icon">
-      <i class="fas fa-chart-pie"></i>
-    </div>
-    <div class="course-badge intermediario">Estratégias</div>
-  </div>
-  <div class="course-content">
-    <h3>Quanto um Trader Consistente Pode Ganhar em Mesa Proprietária?</h3>
-    <p>Descubra o potencial real de ganhos operando em mesas proprietárias, com cálculos práticos de lotes, gestão de rebaixamento e exemplos em contas de $10k a $200k.</p>
-    <div class="course-meta">
-      <div class="meta-item">
-        <i class="fas fa-clock"></i>
-        <span>10 min de leitura</span>
-      </div>
-      <div class="meta-item">
-        <i class="fas fa-signal"></i>
-        <span>Avançado</span>
-      </div>
-    </div>
-  </div>
-  <div class="course-footer">
-    <div class="course-price">
-      <span class="price-currency">Gratuito</span>
-    </div>
-    <span class="btn btn-primary courses-v-link">Ver Detalhes</span>
-  </div>
-</a>
-
-<!-- Course Card 6 -->
-<a href="https://portalfimathe.com/artigo/devo-evitar-operar-em-noticias-forex" target="_blank">
-  <div class="course-header">
-    <div class="course-icon">
-      <i class="fas fa-newspaper"></i>
-    </div>
-    <div class="course-badge intermediario">Fundamentos</div>
-  </div>
-  <div class="course-content">
-    <h3>Devo Evitar Operar em Notícias? A Visão Fimathe Sobre Volatilidade</h3>
-    <p>Muitos traders evitam notícias por medo da volatilidade. Descubra por que na metodologia Fimathe as notícias são aliadas — e como usar o calendário econômico de forma inteligente.</p>
-    <div class="course-meta">
-      <div class="meta-item">
-        <i class="fas fa-clock"></i>
-        <span>8 min de leitura</span>
-      </div>
-      <div class="meta-item">
-        <i class="fas fa-signal"></i>
-        <span>Intermédio</span>
-      </div>
-    </div>
-  </div>
-  <div class="course-footer">
-    <div class="course-price">
-      <span class="price-currency">Gratuito</span>
-    </div>
-    <span class="btn btn-primary courses-v-link">Ver Detalhes</span>
-  </div>
-</a>
+                    <div class="benefit-card">
+                        <div class="benefit-icon"><i class="fas fa-award"></i></div>
+                        <h3>Receba em Dólares</h3>
+                        <p>Aprenda a escalar o seu capital em mesas proprietárias e alcance as suas metas profissionais.</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- CTA Section -->
-            <section class="cta-section">
-                <div class="container">
-                    <div class="cta-content-modern">
-                        <div class="cta-text">
-                            <h2>Pronto para prosperar de Verdade?</h2>
-                            <p>Invista em seu futuro financeiro hoje mesmo</p>
-                        </div>
+        <!-- SECÇÃO DE CURSOS -->
+        <section class="courses-section" id="courses-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Nossos Cursos</h2>
+                    <p class="section-subtitle">Escolha o material perfeito para o seu nível e objetivos e acelere a sua evolução no mercado.</p>
+                </div>
 
-                        <div class="cta-features">
-                            <div class="cta-feature">
-                                <i class="fas fa-check-circle text-success"></i>
-                                <span>Resultados que falam por si</span>
-                            </div>
-                            <div class="cta-feature">
-                                <i class="fas fa-users text-accent"></i>
-                                <span>Pessoas de sucesso pagam o preço</span>
-                            </div>
-                            <div class="cta-feature">
-                                <i class="fas fa-headset text-warning"></i>
-                                <span>O que te impede de crescer?</span>
-                            </div>
-                        </div>
-
-                        <div class="cta-pricing">
-                            <div class="price-main">
-                                <span class="currency">U$</span>
-                                <span class="amount">18</span>
-                            </div>
-                            <div class="price-alt">
-                                ou R$ 97
-                            </div>
-                        </div>
-
-                        <div class="cta-actions">
-                            <button class="btn btn-primary btn-large">
-                                <i class="fas fa-shopping-cart"></i>
-                                Comprar Agora
-                            </button>
-                            <button class="btn btn-secondary btn-large" onclick="scrollToCourses()">
-                                <i class="fas fa-arrow-up"></i>
-                                Ver Cursos
-                            </button>
-                        </div>
-
-                        <div class="cta-security">
-                            <i class="fas fa-shield-alt text-success"></i>
-                            <span>Compra 100% segura</span>
-                        </div>
+                <!-- Filtros -->
+                <div class="courses-filters">
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-filter="all">Todos</button>
+                        <button class="filter-btn" data-filter="iniciante">Iniciantes</button>
+                        <button class="filter-btn" data-filter="intermediario">Intermédio</button>
+                        <button class="filter-btn" data-filter="avancado">Avançado</button>
                     </div>
                 </div>
-            </section>
 
-            <!-- Modal de Detalhes do Curso (removido - agora redireciona para páginas de curso) -->
+                <!-- Grelha de Cursos (Atributos Corrigidos) -->
+                <div class="courses-grid-modern" id="courses-grid">
+                    
+                    <!-- Curso 1 -->
+                    <!-- NOTA: Adicionadas as tags class="course-card-modern" e data-category="..." na tag <a> -->
+                    <a href="#" class="course-card-modern" data-category="iniciante">
+                        <div class="course-header">
+                            <div class="course-icon"><i class="fas fa-chart-bar"></i></div>
+                            <div class="course-badge iniciante">Fundamentos</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>5 Mitos sobre Mesas Proprietárias no Forex</h3>
+                            <p>Existem muitos mitos sobre mesas proprietárias circulando no mercado. Entenda o que é verdade, o que é mentira e como identificar uma empresa séria.</p>
+                            <div class="course-meta">
+                                <div class="meta-item"><i class="fas fa-clock"></i> <span>9 min de leitura</span></div>
+                                <div class="meta-item"><i class="fas fa-signal"></i> <span>Básico</span></div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price"><span class="price-currency">Gratuito</span></div>
+                            <span class="btn btn-primary">Ler Artigo</span>
+                        </div>
+                    </a>
 
-        </div>
+                    <!-- Curso 2 -->
+                    <a href="#" class="course-card-modern" data-category="intermediario">
+                        <div class="course-header">
+                            <div class="course-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="course-badge intermediario">Estratégias</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>M15 ou M5: Qual Timeframe Oferece Mais Assertividade?</h3>
+                            <p>Entenda as diferenças entre operar no M5 e no M15, qual oferece mais precisão e qual tem maior poder de recuperação.</p>
+                            <div class="course-meta">
+                                <div class="meta-item"><i class="fas fa-clock"></i> <span>8 min de leitura</span></div>
+                                <div class="meta-item"><i class="fas fa-signal"></i> <span>Intermédio</span></div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price"><span class="price-currency">Gratuito</span></div>
+                            <span class="btn btn-primary">Ler Artigo</span>
+                        </div>
+                    </a>
+
+                    <!-- Curso 3 -->
+                    <a href="#" class="course-card-modern" data-category="intermediario">
+                        <div class="course-header">
+                            <div class="course-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="course-badge intermediario">Estratégias</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>O Que Precisa de Saber Antes de Operar em Mesa Proprietária</h3>
+                            <p>A maioria falha por não entender as regras do jogo. Aprenda a proteger o seu capital, usar sub-ciclos e evitar erros que destroem contas.</p>
+                            <div class="course-meta">
+                                <div class="meta-item"><i class="fas fa-clock"></i> <span>10 min de leitura</span></div>
+                                <div class="meta-item"><i class="fas fa-signal"></i> <span>Intermédio</span></div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price"><span class="price-currency">Gratuito</span></div>
+                            <span class="btn btn-primary">Ler Artigo</span>
+                        </div>
+                    </a>
+
+                    <!-- Curso 4 -->
+                    <a href="#" class="course-card-modern" data-category="intermediario">
+                        <div class="course-header">
+                            <div class="course-icon"><i class="fas fa-brain"></i></div>
+                            <div class="course-badge intermediario">Psicologia</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>Overtrading: O Vício que Destrói Contas de Trading</h3>
+                            <p>O overtrading é um dos maiores vilões. Entenda por que acontece e como aplicar um gerenciamento rigoroso para nunca mais cair nesta armadilha.</p>
+                            <div class="course-meta">
+                                <div class="meta-item"><i class="fas fa-clock"></i> <span>9 min de leitura</span></div>
+                                <div class="meta-item"><i class="fas fa-signal"></i> <span>Intermédio</span></div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price"><span class="price-currency">Gratuito</span></div>
+                            <span class="btn btn-primary">Ler Artigo</span>
+                        </div>
+                    </a>
+
+                    <!-- Curso 5 -->
+                    <a href="#" class="course-card-modern" data-category="avancado">
+                        <div class="course-header">
+                            <div class="course-icon"><i class="fas fa-chart-pie"></i></div>
+                            <div class="course-badge avancado">Estratégias Avançadas</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>Quanto Pode Ganhar um Trader numa Mesa Proprietária?</h3>
+                            <p>Descubra o potencial real de ganhos, com cálculos práticos de lotes, gestão de drawdown e exemplos em contas de $10k a $200k.</p>
+                            <div class="course-meta">
+                                <div class="meta-item"><i class="fas fa-clock"></i> <span>10 min de leitura</span></div>
+                                <div class="meta-item"><i class="fas fa-signal"></i> <span>Avançado</span></div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price"><span class="price-currency">Gratuito</span></div>
+                            <span class="btn btn-primary">Ler Artigo</span>
+                        </div>
+                    </a>
+
+                    <!-- Curso 6 -->
+                    <a href="#" class="course-card-modern" data-category="intermediario">
+                        <div class="course-header">
+                            <div class="course-icon"><i class="fas fa-newspaper"></i></div>
+                            <div class="course-badge intermediario">Fundamentos</div>
+                        </div>
+                        <div class="course-content">
+                            <h3>Devo Evitar Operar em Notícias? A Visão da Volatilidade</h3>
+                            <p>Muitos evitam notícias por medo. Descubra por que a volatilidade é sua aliada e como usar o calendário económico de forma inteligente.</p>
+                            <div class="course-meta">
+                                <div class="meta-item"><i class="fas fa-clock"></i> <span>8 min de leitura</span></div>
+                                <div class="meta-item"><i class="fas fa-signal"></i> <span>Intermédio</span></div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price"><span class="price-currency">Gratuito</span></div>
+                            <span class="btn btn-primary">Ler Artigo</span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECÇÃO CTA (CHAMADA À AÇÃO) -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content-modern">
+                    <div class="cta-text">
+                        <h2>Pronto para prosperar de Verdade?</h2>
+                        <p>Acelere os seus resultados e invista no seu futuro financeiro hoje mesmo.</p>
+                    </div>
+
+                    <div class="cta-features">
+                        <div class="cta-feature">
+                            <i class="fas fa-check-circle text-success"></i>
+                            <span>Resultados que falam por si</span>
+                        </div>
+                        <div class="cta-feature">
+                            <i class="fas fa-users text-accent"></i>
+                            <span>Acompanhamento especializado</span>
+                        </div>
+                        <div class="cta-feature">
+                            <i class="fas fa-headset text-warning"></i>
+                            <span>O que o impede de crescer?</span>
+                        </div>
+                    </div>
+
+                    <div class="cta-pricing">
+                        <div class="price-main">
+                            <span class="currency">U$</span>
+                            <span class="amount">18</span>
+                        </div>
+                        <div class="price-alt">
+                            ou R$ 97
+                        </div>
+                    </div>
+
+                    <div class="cta-actions">
+                        <button class="btn btn-primary btn-large">
+                            <i class="fas fa-shopping-cart"></i> Comprar Agora
+                        </button>
+                        <button class="btn btn-secondary btn-large" onclick="document.getElementById('courses-section').scrollIntoView({behavior: 'smooth'})">
+                            <i class="fas fa-arrow-up"></i> Ver Cursos
+                        </button>
+                    </div>
+
+                    <div class="cta-security">
+                        <i class="fas fa-shield-alt text-success"></i>
+                        <span>Compra 100% segura e garantida</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2025 Velociclos. Todos os direitos reservados.</p>
-            </div>
+            <p>&copy; 2025 Velociclos. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <script src="./js/auth.js" defer></script>
-    <script src="./js/veloacademy.js"></script>
-    <script src="./js/theme-toggle.js"></script>
-
+    <!-- ===== JAVASCRIPT OTIMIZADO ===== -->
     <script>
-        // Funcionalidades específicas da página de cursos
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. ALTERNAR TEMA CLARO/ESCURO
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
 
-        // Filtro de cursos
-        document.addEventListener('DOMContentLoaded', function() {
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                htmlElement.setAttribute('data-theme', newTheme);
+            });
+
+            // 2. LÓGICA DO FILTRO DE CURSOS E ANIMAÇÕES
             const filterButtons = document.querySelectorAll('.filter-btn');
             const courseCards = document.querySelectorAll('.course-card-modern');
 
+            // Função para animar a entrada inicial dos cartões
+            const animateCardsIn = () => {
+                courseCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('show');
+                    }, index * 100);
+                });
+            };
+
+            // Iniciar animação quando a página carregar
+            animateCardsIn();
+
+            // Adicionar evento de clique aos botões de filtro
             filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const filter = this.getAttribute('data-filter');
+                button.addEventListener('click', () => {
+                    const filterValue = button.getAttribute('data-filter');
 
-                    // Atualizar botões ativos
+                    // Atualizar estado ativo do botão
                     filterButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
+                    button.classList.add('active');
 
-                    // Filtrar cursos
+                    // Aplicar filtro nos cartões
                     courseCards.forEach(card => {
-                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                            card.style.display = 'flex';
-                            setTimeout(() => {
-                                card.style.opacity = '1';
-                                card.style.transform = 'translateY(0)';
-                            }, 50);
-                        } else {
-                            card.style.opacity = '0';
-                            card.style.transform = 'translateY(20px)';
-                            setTimeout(() => {
-                                card.style.display = 'none';
-                            }, 300);
-                        }
+                        // Remove a classe "show" para fazer a animação de saída
+                        card.classList.remove('show');
+
+                        // Aguarda a transição CSS de opacidade terminar antes de esconder (display:none)
+                        setTimeout(() => {
+                            const cardCategory = card.getAttribute('data-category');
+                            
+                            // Verifica se o cartão pertence à categoria clicada
+                            if (filterValue === 'all' || cardCategory === filterValue) {
+                                card.style.display = 'flex'; // Torna visível na árvore de renderização
+                                // Pequeno delay para garantir que o display:flex foi aplicado antes da animação
+                                setTimeout(() => card.classList.add('show'), 20); 
+                            } else {
+                                card.style.display = 'none'; // Esconde completamente
+                            }
+                        }, 400); // 400ms é o tempo de transição definido no CSS
                     });
                 });
             });
         });
-
-        function scrollToCourses() {
-            document.getElementById('courses-section').scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-
-        // Animação de entrada para os cards
-        function animateCards() {
-            const cards = document.querySelectorAll('.course-card-modern');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        }
-
-        // Executar animação após carregamento
-        window.addEventListener('load', animateCards);
     </script>
 </body>
 </html>
