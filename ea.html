@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="light">
 <head>
@@ -24,18 +25,27 @@
 <body>
 
     <header>
-                <div class="header-container">
+        <div class="container header-container">
             <nav class="nav-menu">
                 <a href="./index.html" class="nav-link">Home</a>
                 <a href="./cursos.html" class="nav-link">Cursos</a>
                 <a href="./conquistas.html" class="nav-link active">EA Velociclos</a>
             </nav>
 
+            <div class="user-info" id="user-info" style="display: none;">
+                <img id="user-avatar" class="user-avatar" src="" alt="Avatar do Usuário" style="display: none;">
+                <span id="user-name" class="user-name"></span>
+                <button id="logout-btn" class="logout-btn" title="Sair">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+
             <div class="theme-switch-wrapper" id="theme-toggle">
                 <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon"></i>
             </div>
         </div>
     </header>
+
     <main>
         <div class="container main-container">
             <!-- Hero Section EA -->
