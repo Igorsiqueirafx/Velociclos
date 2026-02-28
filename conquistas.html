@@ -1,981 +1,417 @@
 
 <!DOCTYPE html>
-<html lang="pt-PT" data-theme="light">
+<html lang="pt-BR" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <!-- Viewport otimizado para dispositivos móveis -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursos de Forex - Velociclos | Aprenda Trading do Zero</title>
-    <meta name="description" content="Cursos completos de Forex: Iniciante, Análise Técnica, Gestão de Risco, Estratégias e Psicologia do Trader. Certificação incluída.">
-    
-    <!-- Ícones e Fontes -->
+    <title>Expert Advisor Velociclos - Robô de Trading Automatizado | 98% Taxa de Acerto</title>
+    <meta name="description" content="EA Velociclos: Robô de trading automatizado com 98% de taxa de acerto, Profit Factor 2.4 e drawdown máximo de 12%. Lucro enquanto dorme no Forex.">
+    <meta name="keywords" content="expert advisor, robo trading, forex automatizado, ea velociclos, trading automatizado, mt5, metatrader, lucro passivo, investimento forex">
+    <meta name="author" content="Velociclos">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="EA Velociclos - Robô de Trading com 98% de Taxa de Acerto">
+    <meta property="og:description" content="Robô automatizado que opera 24/7 no Forex. 78% win rate, Profit Factor 2.4. Comece a lucrar enquanto dorme.">
+    <meta property="og:type" content="product">
+    <meta property="og:url" content="https://velociclos.com/conquistas.html">
+    <meta property="og:image" content="https://velociclos.com/public/ea-velociclos-og.jpg">
+    <meta property="product:price:amount" content="2997.00">
+    <meta property="product:price:currency" content="BRL">
+    <link rel="canonical" href="https://velociclos.com/conquistas.html">
+    <link rel="stylesheet" href="./CSS/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* ===== VARIÁVEIS GLOBAIS (CORES E ESPAÇAMENTOS) ===== */
-        :root {
-            --cor-fundo: #f8fafc;
-            --cor-card: #ffffff;
-            --cor-card-elevado: #f1f5f9;
-            --cor-texto-principal: #0f172a;
-            --cor-texto-secundario: #475569;
-            --cor-texto-terciario: #64748b;
-            --cor-borda-leve: #e2e8f0;
-            
-            --cor-accent: #2563eb;
-            --cor-accent-light: #3b82f6;
-            --cor-accent-hover: #1d4ed8;
-            --cor-sombra: rgba(0, 0, 0, 0.1);
-            --cor-sombra-leve: rgba(0, 0, 0, 0.05);
-            --cor-sombra-colorida: rgba(37, 99, 235, 0.2);
-            
-            --green: #10b981;
-            --yellow: #f59e0b;
-            --cor-error: #ef4444;
-            --gray-900: #111827;
-            --borda-raio: 16px;
-
-            /* Espaçamentos Fluidos */
-            --space-fluid-xs: 0.5rem;
-            --space-fluid-sm: 0.75rem;
-            --space-fluid-md: 1rem;
-            --space-fluid-lg: 1.5rem;
-            --space-fluid-xl: 2rem;
-            --space-fluid-2xl: 3rem;
-
-            /* Tipografia Fluida */
-            --font-size-fluid-xs: 0.75rem;
-            --font-size-fluid-sm: 0.875rem;
-            --font-size-fluid-md: 1rem;
-            --font-size-fluid-lg: 1.125rem;
-            --font-size-fluid-xl: 1.25rem;
-            --font-size-fluid-2xl: 1.5rem;
-        }
-
-        /* Tema Escuro Opcional */
-        [data-theme="dark"] {
-            --cor-fundo: #0f172a;
-            --cor-card: #1e293b;
-            --cor-card-elevado: #0b1120;
-            --cor-texto-principal: #f8fafc;
-            --cor-texto-secundario: #cbd5e1;
-            --cor-texto-terciario: #94a3b8;
-            --cor-borda-leve: #334155;
-            --cor-sombra: rgba(0, 0, 0, 0.4);
-            --cor-sombra-colorida: rgba(37, 99, 235, 0.15);
-        }
-
-        /* ===== RESET BÁSICO ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        body {
-            background-color: var(--cor-fundo);
-            color: var(--cor-texto-principal);
-            line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--space-fluid-lg);
-        }
-
-        /* ===== CABEÇALHO ===== */
-        header {
-            background-color: var(--cor-card);
-            border-bottom: 1px solid var(--cor-borda-leve);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: var(--space-fluid-md) 0;
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: var(--space-fluid-lg);
-        }
-
-        .nav-link {
-            color: var(--cor-texto-secundario);
-            font-weight: 500;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--cor-accent);
-        }
-
-        .theme-switch-wrapper {
-            background: none;
-            border: 1px solid var(--cor-borda-leve);
-            padding: 8px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            color: var(--cor-texto-principal);
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        
-        .theme-switch-wrapper:hover {
-            background-color: var(--cor-card-elevado);
-        }
-
-        /* ===== HERO SECTION ===== */
-        .hero-optimized {
-            padding: var(--space-fluid-2xl) 0;
-        }
-
-        .hero-content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: clamp(20px, 4vw, 40px);
-            align-items: center;
-            min-height: clamp(300px, 40vh, 500px);
-        }
-
-        @media (max-width: 768px) {
-            .hero-content-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero-stats-compact { justify-content: center; }
-        }
-
-        .hero-text-content {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-fluid-lg);
-        }
-
-        .hero-title {
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            color: var(--cor-texto-principal);
-            margin: 0;
-        }
-
-        .text-break { display: block; }
-        .accent-text { color: var(--cor-accent); }
-
-        .hero-subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
-            color: var(--cor-texto-secundario);
-        }
-
-        .hero-cta {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-fluid-lg);
-        }
-
-        .hero-stats-compact {
-            display: flex;
-            gap: var(--space-fluid-xl);
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stat-number {
-            font-size: var(--font-size-fluid-xl);
-            font-weight: 700;
-            color: var(--cor-accent);
-        }
-
-        .stat-label {
-            font-size: var(--font-size-fluid-sm);
-            color: var(--cor-texto-terciario);
-            max-width: 120px;
-        }
-
-        .hero-visual {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-chart-modern {
-            width: 100%;
-            max-width: 350px;
-            aspect-ratio: 1;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(22, 52, 255, 0.05));
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            border: 1px solid var(--cor-borda-leve);
-            box-shadow: 0 10px 40px var(--cor-sombra-colorida);
-            transition: transform 0.4s ease;
-            padding: var(--space-fluid-xl);
-        }
-
-        .hero-chart-modern:hover { transform: translateY(-10px) scale(1.02); }
-
-        .chart-icon {
-            font-size: 3.5rem;
-            color: var(--cor-accent);
-            margin-bottom: var(--space-fluid-md);
-        }
-
-        .chart-text h3 {
-            font-size: var(--font-size-fluid-lg);
-            margin-bottom: var(--space-fluid-xs);
-        }
-
-        .chart-text p {
-            font-size: var(--font-size-fluid-sm);
-            color: var(--cor-texto-secundario);
-        }
-
-        /* ===== SECÇÃO BENEFÍCIOS ===== */
-        .benefits-section {
-            padding: clamp(48px, 8vh, 80px) 0;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-fluid-xl);
-        }
-
-        .benefit-card {
-            background-color: var(--cor-card);
-            padding: var(--space-fluid-xl);
-            border-radius: var(--borda-raio);
-            border: 1px solid var(--cor-borda-leve);
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px var(--cor-sombra-leve);
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px var(--cor-sombra);
-            border-color: var(--cor-accent);
-        }
-
-        .benefit-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--cor-accent), var(--cor-accent-light));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            margin: 0 auto var(--space-fluid-md);
-        }
-
-        .benefit-card h3 {
-            font-size: var(--font-size-fluid-xl);
-            margin-bottom: var(--space-fluid-sm);
-        }
-
-        .benefit-card p {
-            color: var(--cor-texto-secundario);
-            font-size: var(--font-size-fluid-sm);
-        }
-
-        /* ===== SECÇÃO CURSOS ===== */
-        .courses-section {
-            padding: clamp(40px, 6vh, 80px) 0;
-            background-color: var(--cor-card-elevado);
-            border-top: 1px solid var(--cor-borda-leve);
-            border-bottom: 1px solid var(--cor-borda-leve);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: var(--space-fluid-2xl);
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            margin-bottom: var(--space-fluid-sm);
-        }
-
-        .section-subtitle {
-            color: var(--cor-texto-secundario);
-        }
-
-        /* Filtros */
-        .courses-filters {
-            display: flex;
-            justify-content: center;
-            margin-bottom: var(--space-fluid-2xl);
-            flex-wrap: wrap;
-        }
-
-        .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-fluid-sm);
-            background-color: var(--cor-card);
-            padding: var(--space-fluid-xs);
-            border-radius: 30px;
-            border: 1px solid var(--cor-borda-leve);
-            box-shadow: 0 2px 10px var(--cor-sombra-leve);
-        }
-
-        .filter-btn {
-            padding: 10px 24px;
-            border: none;
-            background: transparent;
-            color: var(--cor-texto-secundario);
-            font-weight: 600;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover {
-            color: var(--cor-accent);
-            background-color: rgba(37, 99, 235, 0.05);
-        }
-
-        .filter-btn.active {
-            background-color: var(--cor-accent);
-            color: white;
-            box-shadow: 0 4px 12px var(--cor-sombra-colorida);
-        }
-
-        /* Grid de Cursos */
-        .courses-grid-modern {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: var(--space-fluid-xl);
-        }
-
-        .course-card-modern {
-            background-color: var(--cor-card);
-            border: 1px solid var(--cor-borda-leve);
-            border-radius: var(--borda-raio);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-
-        /* Classe de Animação Controlada via JS */
-        .course-card-modern.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .course-card-modern:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px var(--cor-sombra);
-            border-color: var(--cor-accent-light);
-        }
-
-        .course-header {
-            padding: var(--space-fluid-lg);
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, transparent 100%);
-            border-bottom: 1px solid var(--cor-borda-leve);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .course-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--cor-accent), var(--cor-accent-light));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.25rem;
-        }
-
-        .course-badge {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .course-badge.iniciante { background-color: var(--green); color: white; }
-        .course-badge.intermediario { background-color: var(--yellow); color: var(--gray-900); }
-        .course-badge.avancado { background-color: var(--cor-error); color: white; }
-
-        .course-content {
-            padding: var(--space-fluid-xl) var(--space-fluid-lg);
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-fluid-md);
-        }
-
-        .course-content h3 {
-            font-size: var(--font-size-fluid-xl);
-            line-height: 1.3;
-        }
-
-        .course-content p {
-            color: var(--cor-texto-secundario);
-            font-size: var(--font-size-fluid-sm);
-            flex: 1;
-        }
-
-        .course-meta {
-            display: flex;
-            gap: var(--space-fluid-lg);
-            border-top: 1px solid var(--cor-borda-leve);
-            padding-top: var(--space-fluid-md);
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--cor-texto-terciario);
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        .meta-item i { color: var(--cor-accent); }
-
-        .course-footer {
-            padding: var(--space-fluid-md) var(--space-fluid-lg);
-            background-color: var(--cor-fundo);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-top: 1px solid var(--cor-borda-leve);
-        }
-
-        .price-currency {
-            font-weight: 700;
-            color: var(--green);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-primary {
-            background-color: var(--cor-accent);
-            color: white;
-        }
-        .btn-primary:hover { background-color: var(--cor-accent-hover); }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--cor-texto-principal);
-            border: 1px solid var(--cor-borda-leve);
-        }
-        .btn-secondary:hover { background-color: var(--cor-borda-leve); }
-
-        .btn-large { padding: 14px 28px; font-size: 1.1rem; }
-
-        /* ===== SECÇÃO CTA (COMPLETADA) ===== */
-        .cta-section {
-            padding: clamp(60px, 10vh, 100px) 0;
-            background: linear-gradient(135deg, var(--cor-accent-hover) 0%, var(--cor-accent) 100%);
-            color: white;
-            text-align: center;
-        }
-
-        .cta-content-modern {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-fluid-xl);
-            align-items: center;
-        }
-
-        .cta-text h2 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: var(--space-fluid-sm);
-        }
-        .cta-text p {
-            font-size: var(--font-size-fluid-lg);
-            opacity: 0.9;
-        }
-
-        .cta-features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: var(--space-fluid-lg);
-            background: rgba(255, 255, 255, 0.1);
-            padding: var(--space-fluid-lg);
-            border-radius: var(--borda-raio);
-            backdrop-filter: blur(10px);
-        }
-
-        .cta-feature {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
-        }
-        .text-success { color: #34d399; }
-        .text-warning { color: #fbbf24; }
-        .text-accent { color: #93c5fd; }
-
-        .cta-pricing {
-            margin: var(--space-fluid-md) 0;
-        }
-
-        .price-main {
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            gap: 4px;
-        }
-        .price-main .currency {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-top: 8px;
-        }
-        .price-main .amount {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1;
-        }
-        .price-alt {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            margin-top: 5px;
-        }
-
-        .cta-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-fluid-md);
-            justify-content: center;
-        }
-
-        .cta-actions .btn-primary {
-            background-color: white;
-            color: var(--cor-accent);
-        }
-        .cta-actions .btn-primary:hover {
-            background-color: #f1f5f9;
-            transform: translateY(-2px);
-        }
-        .cta-actions .btn-secondary {
-            border-color: rgba(255, 255, 255, 0.3);
-            color: white;
-        }
-        .cta-actions .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .cta-security {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: var(--space-fluid-sm);
-        }
-
-        /* ===== RODAPÉ ===== */
-        .footer {
-            background-color: var(--cor-card);
-            padding: var(--space-fluid-xl) 0;
-            text-align: center;
-            border-top: 1px solid var(--cor-borda-leve);
-            color: var(--cor-texto-secundario);
-        }
-    </style>
+    <link rel="icon" type="image/png" href="./public/favicon.png">
 </head>
 <body>
 
-    <!-- CABEÇALHO --> 
     <header>
         <div class="container header-container">
             <nav class="nav-menu">
-                <a href="./index.html
-                    " class="nav-link">Home</a>
-                <a href="#courses-section" class="nav-link active">Cursos</a>
-                <a href="./conquistas.html" class="nav-link">EA Velociclos</a>
+                <a href="./index.html" class="nav-link">Home</a>
+                <a href="./cursos.html" class="nav-link">Cursos</a>
+                <a href="./conquistas.html" class="nav-link active">EA Velociclos</a>
             </nav>
 
-            <!-- Botão de Tema Acessível -->
-            <button class="theme-switch-wrapper" id="theme-toggle" aria-label="Alternar Tema Claro/Escuro">
-                <i class="bx bx-sun theme-icon" aria-hidden="true"></i>
-                <i class="bx bx-moon theme-icon" aria-hidden="true"></i>
-            </button>
+            <div class="user-info" id="user-info" style="display: none;">
+                <img id="user-avatar" class="user-avatar" src="" alt="Avatar do Usuário" style="display: none;">
+                <span id="user-name" class="user-name"></span>
+                <button id="logout-btn" class="logout-btn" title="Sair">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+
+            <div class="theme-switch-wrapper" id="theme-toggle">
+                <i class="bx bx-sun theme-icon"></i><i class="bx bx-moon theme-icon"></i>
+            </div>
         </div>
     </header>
 
-    <main class="main-container">
-        
-        <!-- SECÇÃO HERO -->
-        <section class="hero-optimized">
-            <div class="container">
-                <div class="hero-content-grid">
-                    <div class="hero-text-content">
-                        <h1 class="hero-title">
-                            Domine o <span class="accent-text">Forex</span>
-                            <span class="text-break">do Zero à Lucratividade</span>
-                        </h1>
-                        <p class="hero-subtitle">
-                            Descubra os pilares da análise técnica e a gestão que realmente constrói consistência.
-                        </p>
-                        <div class="hero-cta">
-                            <div class="hero-stats-compact">
-                                <div class="stat-item">
-                                    <span class="stat-number">Forex</span>
-                                    <span class="stat-label">Descomplicado</span>
+    <main>
+        <div class="container main-container">
+            <!-- Hero Section EA -->
+            <section class="ea-hero-section">
+                <div class="ea-hero-content">
+                    <div class="ea-badge">
+                        <i class="fas fa-robot"></i>
+                        Robô de Trading Automatizado
+                    </div>
+                    <h1 class="ea-hero-title">Expert Advisor <span class="accent-text">Velociclos</span></h1>
+                    <p class="ea-hero-subtitle">Desenvolvido para gerar lucro consistente.</p>
+
+                    <div class="ea-performance-highlights">
+                        <div class="performance-item">
+                            <div class="performance-number">98%</div>
+                            <div class="performance-label">Taxa de Acerto</div>
+                        </div>
+                        <div class="performance-item">
+                            <div class="performance-number">24hs</div>
+                            <div class="performance-label">Operacionais</div>
+                        </div>
+                        <div class="performance-item">
+                            <div class="performance-number">8-15%</div>
+                            <div class="performance-label">Retorno Mensal com Segurança!</div>
+                        </div>
+                    </div>
+
+                    <div class="ea-price-section">
+                        <div class="ea-price">
+                            <span class="ea-price-value">R$ 2.997,00</span>
+                            <span class="ea-price-installments">ou 12x de R$ 249,75</span>
+                        </div>
+                        <button class="btn btn-primary ea-buy-btn" id="ea-buy-btn" data-product-id="expert-advisor-velociclos">
+                            <i class="fas fa-shopping-cart"></i>
+                            Comprar Agora
+                        </button>
+                    </div>
+                </div>
+                <div class="ea-hero-image">
+                    <div class="ea-demo-card">
+                        <div class="demo-screen">
+                            <div class="demo-header">
+                                <div class="demo-dots">
+                                    <span></span><span></span><span></span>
                                 </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">Operar</span>
-                                    <span class="stat-label">Lucrar sempre</span>
+                                <div class="demo-title">MT5 - EA Velociclos</div>
+                            </div>
+                            <div class="demo-content">
+                                <div class="profit-indicator positive">
+                                    <i class="fas fa-arrow-up"></i>
+                                    +R$ 1.247,83
                                 </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">Confiança</span>
-                                    <span class="stat-label">Controlo Emocional</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hero-visual">
-                        <div class="hero-chart-modern">
-                            <div class="chart-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <div class="chart-text">
-                                <h3>O Mercado tem Ciclos</h3>
-                                <p>Adaptar-se a ele é o nosso trabalho</p>
+                                <div class="trades-count">Lucre com os Ciclos</div>
+                                <div class="win-rate">CA+C1+C2=$</div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- SECÇÃO BENEFÍCIOS -->
-        <section class="benefits-section">
-            <div class="container">
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <div class="benefit-icon"><i class="fas fa-users"></i></div>
-                        <h3>Conta Real</h3>
-                        <p>Desenvolvido e refinado com experiências de operações reais do mercado financeiro.</p>
+            <!-- Performance Section -->
+            <section class="ea-performance-section">
+                <h2>Resultados Comprovados</h2>
+                <p class="section-subtitle">Mesmo longe do gráfico</p>
+
+                <div class="performance-grid">
+                    <div class="performance-card">
+                        <div class="performance-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Taxa de Acerto</h3>
+                        <div class="performance-value">98%</div>
+                        <p>Das operações realizadas, 98% foram lucrativas</p>
                     </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
-                        <h3>Método Comprovado</h3>
-                        <p>Técnicas testadas e validadas através de anos de experiência prática e resultados.</p>
+
+                    <div class="performance-card">
+                        <div class="performance-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h3>Profit Factor</h3>
+                        <div class="performance-value">2.4</div>
+                        <p>A cada R$ 1 arriscado, gera R$ 2,40 de lucro</p>
                     </div>
-                    <div class="benefit-card">
-                        <div class="benefit-icon"><i class="fas fa-award"></i></div>
-                        <h3>Receba em Dólares</h3>
-                        <p>Aprenda a escalar o seu capital em mesas proprietárias e alcance as suas metas profissionais.</p>
+
+                    <div class="performance-card">
+                        <div class="performance-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Drawdown Máximo</h3>
+                        <div class="performance-value">Proteção</div>
+                        <p>Proteja seu capital contra perdas excessivas</p>
                     </div>
-                </div>
-            </div>
-        </section>
 
-
-        <!-- SECÇÃO CTA (CHAMADA À AÇÃO) -->
-        <section class="cta-section">
-
-                    <!-- SECÇÃO DE CURSOS -->
-        <section class="courses-section" id="courses-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Nossos Cursos</h2>
-                    <p class="section-subtitle">Escolha o material perfeito para o seu nível e objetivos e acelere a sua evolução no mercado.</p>
-                </div>
-
-                <!-- Filtros -->
-                <div class="courses-filters">
-                    <div class="filter-group">
-                        <button class="filter-btn active" data-filter="all">Todos</button>
-                        <button class="filter-btn" data-filter="iniciante">Iniciantes</button>
-                        <button class="filter-btn" data-filter="intermediario">Intermédio</button>
-                        <button class="filter-btn" data-filter="avancado">Avançado</button>
+                    <div class="performance-card">
+                        <div class="performance-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Feche o mês</h3>
+                        <div class="performance-value">Positivo</div>
+                        <p>Opere e lucre a qualquer momento</p>
                     </div>
                 </div>
+            </section>
 
-                <!-- Grelha de Cursos -->
-                <div class="courses-grid-modern" id="courses-grid">
-                    
-                    <!-- Curso 1 -->
-                    <a href="#" class="course-card-modern" data-category="iniciante">
-                        <div class="course-header">
-                            <div class="course-icon"><i class="fas fa-chart-bar"></i></div>
-                            <div class="course-badge iniciante">Fundamentos</div>
-                        </div>
-                        <div class="course-content">
-                            <h3>5 Mitos sobre Mesas Proprietárias no Forex</h3>
-                            <p>Existem muitos mitos sobre mesas proprietárias circulando no mercado. Entenda o que é verdade, o que é mentira e como identificar uma empresa séria.</p>
-                            <div class="course-meta">
-                                <div class="meta-item"><i class="fas fa-clock"></i> <span>9 min de leitura</span></div>
-                                <div class="meta-item"><i class="fas fa-signal"></i> <span>Básico</span></div>
-                            </div>
-                        </div>
-                        <div class="course-footer">
-                            <div class="course-price"><span class="price-currency">Gratuito</span></div>
-                            <span class="btn btn-primary">Ler Artigo</span>
-                        </div>
-                    </a>
+            <!-- Features Section -->
+            <section class="ea-features-section">
+                <h2>Por que escolher o EA Velociclos?</h2>
 
-                    <!-- Curso 2 -->
-                    <a href="#" class="course-card-modern" data-category="intermediario">
-                        <div class="course-header">
-                            <div class="course-icon"><i class="fas fa-chart-line"></i></div>
-                            <div class="course-badge intermediario">Estratégias</div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
                         </div>
-                        <div class="course-content">
-                            <h3>M15 ou M5: Qual Timeframe Oferece Mais Assertividade?</h3>
-                            <p>Entenda as diferenças entre operar no M5 e no M15, qual oferece mais precisão e qual tem maior poder de recuperação.</p>
-                            <div class="course-meta">
-                                <div class="meta-item"><i class="fas fa-clock"></i> <span>8 min de leitura</span></div>
-                                <div class="meta-item"><i class="fas fa-signal"></i> <span>Intermédio</span></div>
-                            </div>
-                        </div>
-                        <div class="course-footer">
-                            <div class="course-price"><span class="price-currency">Gratuito</span></div>
-                            <span class="btn btn-primary">Ler Artigo</span>
-                        </div>
-                    </a>
-
-                    <!-- Curso 3 -->
-                    <a href="#" class="course-card-modern" data-category="intermediario">
-                        <div class="course-header">
-                            <div class="course-icon"><i class="fas fa-graduation-cap"></i></div>
-                            <div class="course-badge intermediario">Estratégias</div>
-                        </div>
-                        <div class="course-content">
-                            <h3>O Que Precisa de Saber Antes de Operar em Mesa Proprietária</h3>
-                            <p>A maioria falha por não entender as regras do jogo. Aprenda a proteger o seu capital, usar sub-ciclos e evitar erros que destroem contas.</p>
-                            <div class="course-meta">
-                                <div class="meta-item"><i class="fas fa-clock"></i> <span>10 min de leitura</span></div>
-                                <div class="meta-item"><i class="fas fa-signal"></i> <span>Intermédio</span></div>
-                            </div>
-                        </div>
-                        <div class="course-footer">
-                            <div class="course-price"><span class="price-currency">Gratuito</span></div>
-                            <span class="btn btn-primary">Ler Artigo</span>
-                        </div>
-                    </a>
-
-                    <!-- Curso 4 -->
-                    <a href="#" class="course-card-modern" data-category="intermediario">
-                        <div class="course-header">
-                            <div class="course-icon"><i class="fas fa-brain"></i></div>
-                            <div class="course-badge intermediario">Psicologia</div>
-                        </div>
-                        <div class="course-content">
-                            <h3>Overtrading: O Vício que Destrói Contas de Trading</h3>
-                            <p>O overtrading é um dos maiores vilões. Entenda por que acontece e como aplicar um gerenciamento rigoroso para nunca mais cair nesta armadilha.</p>
-                            <div class="course-meta">
-                                <div class="meta-item"><i class="fas fa-clock"></i> <span>9 min de leitura</span></div>
-                                <div class="meta-item"><i class="fas fa-signal"></i> <span>Intermédio</span></div>
-                            </div>
-                        </div>
-                        <div class="course-footer">
-                            <div class="course-price"><span class="price-currency">Gratuito</span></div>
-                            <span class="btn btn-primary">Ler Artigo</span>
-                        </div>
-                    </a>
-
-                    <!-- Curso 5 -->
-                    <a href="#" class="course-card-modern" data-category="avancado">
-                        <div class="course-header">
-                            <div class="course-icon"><i class="fas fa-chart-pie"></i></div>
-                            <div class="course-badge avancado">Estratégias Avançadas</div>
-                        </div>
-                        <div class="course-content">
-                            <h3>Quanto Pode Ganhar um Trader numa Mesa Proprietária?</h3>
-                            <p>Descubra o potencial real de ganhos, com cálculos práticos de lotes, gestão de drawdown e exemplos em contas de $10k a $200k.</p>
-                            <div class="course-meta">
-                                <div class="meta-item"><i class="fas fa-clock"></i> <span>10 min de leitura</span></div>
-                                <div class="meta-item"><i class="fas fa-signal"></i> <span>Avançado</span></div>
-                            </div>
-                        </div>
-                        <div class="course-footer">
-                            <div class="course-price"><span class="price-currency">Gratuito</span></div>
-                            <span class="btn btn-primary">Ler Artigo</span>
-                        </div>
-                    </a>
-
-                    <!-- Curso 6 -->
-                    <a href="#" class="course-card-modern" data-category="intermediario">
-                        <div class="course-header">
-                            <div class="course-icon"><i class="fas fa-newspaper"></i></div>
-                            <div class="course-badge intermediario">Fundamentos</div>
-                        </div>
-                        <div class="course-content">
-                            <h3>Devo Evitar Operar em Notícias? A Visão da Volatilidade</h3>
-                            <p>Muitos evitam notícias por medo. Descubra por que a volatilidade é sua aliada e como usar o calendário económico de forma inteligente.</p>
-                            <div class="course-meta">
-                                <div class="meta-item"><i class="fas fa-clock"></i> <span>8 min de leitura</span></div>
-                                <div class="meta-item"><i class="fas fa-signal"></i> <span>Intermédio</span></div>
-                            </div>
-                        </div>
-                        <div class="course-footer">
-                            <div class="course-price"><span class="price-currency">Gratuito</span></div>
-                            <span class="btn btn-primary">Ler Artigo</span>
-                        </div>
-                    </a>
-
-                </div>
-            </div>
-        </section>
-            <div class="container">
-                <div class="cta-content-modern">
-                    <div class="cta-text">
-                        <h2>Pronto para prosperar de Verdade?</h2>
-                        <p>Acelere os seus resultados e invista no seu futuro financeiro hoje mesmo.</p>
+                        <h3>Inteligência Artificial</h3>
+                        <p>Algoritmos avançados de Machine Learning que aprendem com o mercado em tempo real</p>
                     </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>24/7 Automatizado</h3>
+                        <p>Opera enquanto você dorme, trabalha ou viaja. Nunca perde uma oportunidade</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Risco Controlado</h3>
+                        <p>Sistema avançado de gestão de risco com Stop Loss automático e proteção contra drawdown</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>Auto-Otimização</h3>
+                        <p>Atualizações automáticas e melhorias contínuas baseadas em dados de mercado</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Suporte Especializado</h3>
+                        <p>Equipe técnica dedicada e comunidade exclusiva de usuários do EA</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>Garantia 30 Dias</h3>
+                        <p>Satisfação garantida ou devolução integral do investimento</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section class="ea-testimonials-section">
+                <h2>O que nossos clientes dizem</h2>
+
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"O EA Velociclos mudou minha vida financeira. Em 6 meses, recuperei todo meu investimento inicial e ainda sobrou lucro. Recomendo para todos os traders sérios."</p>
+                        <div class="testimonial-author">
+                            <div class="author-name">Carlos Mendes</div>
+                            <div class="author-location">São Paulo, SP</div>
+                            <div class="author-profit">Lucro: R$ 45.000+</div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Incrível como um robô pode ser tão inteligente! Configurei e deixei rodando. Todo mês recebo relatórios de lucro. Valeu cada centavo investido."</p>
+                        <div class="testimonial-author">
+                            <div class="author-name">Ana Paula Santos</div>
+                            <div class="author-location">Rio de Janeiro, RJ</div>
+                            <div class="author-profit">Lucro: R$ 28.000+</div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Depois de perder muito dinheiro tentando operar manualmente, encontrei o EA Velociclos. Agora tenho renda passiva consistente. Obrigado Velociclos!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-name">Roberto Almeida</div>
+                            <div class="author-location">Belo Horizonte, MG</div>
+                            <div class="author-profit">Lucro: R$ 67.000+</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="ea-faq-section">
+                <h2>Perguntas Frequentes</h2>
+
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>O EA realmente opera sozinho?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim! Após a instalação e configuração inicial (que leva apenas 5 minutos), o EA opera completamente automatizado 24 horas por dia, 5 dias por semana, sem necessidade de intervenção manual.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Qual é o investimento mínimo necessário?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Recomendamos um capital inicial de pelo menos R$ 5.000 para obter resultados ideais. O EA trabalha com lotes micro, permitindo operação com valores menores, mas o capital mínimo garante melhor performance.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Funciona com qualquer corretora?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>O EA é compatível com MetaTrader 4 e MetaTrader 5, funcionando com a maioria das corretoras que oferecem essas plataformas. Fornecemos lista completa de corretoras recomendadas.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>E se eu perder dinheiro?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Oferecemos garantia de 30 dias. Se você não ficar satisfeito com os resultados, devolvemos 100% do seu investimento. Além disso, o EA possui proteção avançada contra perdas excessivas.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Como recebo suporte?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Suporte prioritário 24/7 via WhatsApp, Telegram e email. Incluímos mentoria personalizada para instalação e configuração, além de grupo exclusivo de usuários.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="ea-cta-section">
+                <div class="cta-content">
+                    <h2>Pronto para começar a lucrar automaticamente?</h2>
+                    <p>Não perca mais tempo operando manualmente. Deixe o EA Velociclos trabalhar por você e transforme seu futuro financeiro.</p>
 
                     <div class="cta-features">
                         <div class="cta-feature">
-                            <i class="fas fa-check-circle text-success"></i>
-                            <span>Resultados que falam por si</span>
+                            <i class="fas fa-check"></i>
+                            <span>Instalação em 5 minutos</span>
                         </div>
                         <div class="cta-feature">
-                            <i class="fas fa-users text-accent"></i>
-                            <span>Acompanhamento especializado</span>
+                            <i class="fas fa-check"></i>
+                            <span>Garantia de 30 dias</span>
                         </div>
                         <div class="cta-feature">
-                            <i class="fas fa-headset text-warning"></i>
-                            <span>O que o impede de crescer?</span>
+                            <i class="fas fa-check"></i>
+                            <span>Suporte vitalício</span>
                         </div>
                     </div>
 
-                    <div class="cta-pricing">
-                        <div class="price-main">
-                            <span class="currency">U$</span>
-                            <span class="amount">18</span>
-                        </div>
-                        <div class="price-alt">
-                            ou R$ 97
-                        </div>
+                    <div class="cta-price">
+                        <div class="cta-price-value">R$ 2.997,00</div>
+                        <div class="cta-price-installments">12x de R$ 249,75 sem juros</div>
                     </div>
 
-                    <div class="cta-actions">
-                        <button class="btn btn-primary btn-large">
-                            <i class="fas fa-shopping-cart"></i> Comprar Agora
-                        </button>
-                        <button class="btn btn-secondary btn-large" onclick="document.getElementById('courses-section').scrollIntoView({behavior: 'smooth'})">
-                            <i class="fas fa-arrow-up"></i> Ver Cursos
-                        </button>
-                    </div>
+                    <button class="btn btn-primary cta-buy-btn" id="cta-buy-btn" data-product-id="expert-advisor-velociclos">
+                        <i class="fas fa-shopping-cart"></i>
+                        Garantir Meu EA Agora
+                    </button>
 
-                    <div class="cta-security">
-                        <i class="fas fa-shield-alt text-success"></i>
-                        <span>Compra 100% segura e garantida</span>
-                    </div>
+                    <p class="cta-security">
+                        <i class="fas fa-lock"></i>
+                        Compra 100% segura | Pagamento processado via Stripe
+                    </p>
                 </div>
-            </div>
-        </section>
-
+            </section>
+        </div>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Velociclos. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
 
-    <!-- ===== JAVASCRIPT OTIMIZADO ===== -->
+    <script src="./js/toast.js"></script>
+    <script src="./js/theme-toggle.js"></script>
+    <script src="./js/stripe-checkout.js"></script>
     <script>
+        // Inicialização da página
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // 1. ALTERNAR TEMA CLARO/ESCURO
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            const htmlElement = document.documentElement;
+            // FAQ Accordion
+            const faqItems = document.querySelectorAll('.faq-item');
 
-            themeToggleBtn.addEventListener('click', () => {
-                const currentTheme = htmlElement.getAttribute('data-theme');
-                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                htmlElement.setAttribute('data-theme', newTheme);
-            });
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
 
-            // 2. LÓGICA DO FILTRO DE CURSOS E ANIMAÇÕES
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const courseCards = document.querySelectorAll('.course-card-modern');
+                question.addEventListener('click', () => {
+                    const isOpen = answer.style.display === 'block';
 
-            // Função para animar a entrada inicial dos cartões
-            const animateCardsIn = () => {
-                courseCards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.classList.add('show');
-                    }, index * 100);
-                });
-            };
-
-            // Iniciar animação quando a página carregar
-            animateCardsIn();
-
-            // Adicionar evento de clique aos botões de filtro
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const filterValue = button.getAttribute('data-filter');
-
-                    // Atualizar estado ativo do botão
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-
-                    // Aplicar filtro nos cartões
-                    courseCards.forEach(card => {
-                        // Remove a classe "show" para fazer a animação de saída
-                        card.classList.remove('show');
-
-                        // Aguarda a transição CSS de opacidade terminar antes de esconder (display:none)
-                        setTimeout(() => {
-                            const cardCategory = card.getAttribute('data-category');
-                            
-                            // Verifica se o cartão pertence à categoria clicada
-                            if (filterValue === 'all' || cardCategory === filterValue) {
-                                card.style.display = 'flex'; // Torna visível na árvore de renderização
-                                // Pequeno delay para garantir que o display:flex foi aplicado antes da animação
-                                setTimeout(() => card.classList.add('show'), 20); 
-                            } else {
-                                card.style.display = 'none'; // Esconde completamente
-                            }
-                        }, 400); // 400ms é o tempo de transição definido no CSS
+                    // Close all answers
+                    document.querySelectorAll('.faq-answer').forEach(ans => {
+                        ans.style.display = 'none';
                     });
+                    document.querySelectorAll('.faq-question').forEach(q => {
+                        q.classList.remove('active');
+                    });
+
+                    // Open clicked answer if it wasn't open
+                    if (!isOpen) {
+                        answer.style.display = 'block';
+                        question.classList.add('active');
+                    }
                 });
             });
         });
+
+
+        function showToast(message, type = 'info') {
+            const toastContainer = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type} show`;
+
+            toast.innerHTML = `
+                <div class="toast-content">
+                    <div class="toast-message">${message}</div>
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()">×</button>
+            `;
+
+            toastContainer.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+        }
     </script>
 </body>
 </html>
