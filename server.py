@@ -4,6 +4,7 @@ import socket
 import urllib.parse
 import urllib.request
 import time
+import re
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 import uuid
@@ -24,13 +25,17 @@ def load_env_file(path):
 load_env_file(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '.env'))
 
 CONFIG = {
-    'PORT': 3001,
-    'ADMIN_PASSWORD': 'velociclos2024',
+    'PORT': int(os.environ.get('PORT', '3001')),
+    'ADMIN_PASSWORD': os.environ.get('ADMIN_PASSWORD', 'velociclos2024'),
     'DATA_DIR': os.path.dirname(os.path.abspath(__file__)),
     'YOUTUBE_API_KEY': os.environ.get('YOUTUBE_API_KEY', ''),
-    'ALLOWED_ORIGINS': os.environ.get('ALLOWED_ORIGINS', 'https://velociclos.vercel.app,http://localhost:3000,http://localhost:3001').split(','),
+    'ALLOWED_ORIGINS': [o.strip() for o in os.environ.get('ALLOWED_ORIGINS', 'https://velociclos.vercel.app').split(',') if o.strip()],
     'APP_VERSION': os.environ.get('APP_VERSION', '1.0.0'),
     'APP_ENV': os.environ.get('APP_ENV', 'production'),
+    'CACHE_TTL': int(os.environ.get('CACHE_TTL', '600')),
+    'CACHE_MAX_SIZE': int(os.environ.get('CACHE_MAX_SIZE', '100')),
+    'RATE_LIMIT_WINDOW': int(os.environ.get('RATE_LIMIT_WINDOW', '60')),
+    'RATE_LIMIT_MAX': int(os.environ.get('RATE_LIMIT_MAX', '100')),
     'PLAYLIST_IDS': [
         'PLWhqc48nlRWLhDr-YqQhwVGhCFwUCcw7I',
         'PLWhqc48nlRWIBLg85_VDOcqRAq-BWi-J9',
@@ -68,20 +73,89 @@ def save_json(file_path, data):
     with open(file_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-CACHE = {}
-CACHE_TTL = 600
+class LRUCache:
+    def __init__(self, max_size, ttl):
+        self.max_size = max_size
+        self.ttl = ttl
+        self._cache = {}
+        self._order = []
 
-def cache_get(key):
-    entry = CACHE.get(key)
-    if not entry:
-        return None
-    if time.time() - entry['ts'] > CACHE_TTL:
-        CACHE.pop(key, None)
-        return None
-    return entry['data']
+    def _is_expired(self, entry):
+        return time.time() - entry['ts'] > self.ttl
 
-def cache_set(key, data):
-    CACHE[key] = {'data': data, 'ts': time.time()}
+    def _evict_expired(self):
+        now = time.time()
+        expired_keys = [k for k, v in self._cache.items() if now - v['ts'] > self.ttl]
+        for k in expired_keys:
+            self._cache.pop(k, None)
+            if k in self._order:
+                self._order.remove(k)
+
+    def _evict_lru(self):
+        while len(self._cache) >= self.max_size and self._order:
+            oldest = self._order.pop(0)
+            self._cache.pop(oldest, None)
+
+    def get(self, key):
+        self._evict_expired()
+        entry = self._cache.get(key)
+        if not entry:
+            return None
+        if self._is_expired(entry):
+            self._cache.pop(key, None)
+            if key in self._order:
+                self._order.remove(key)
+            return None
+        self._order.remove(key)
+        self._order.append(key)
+        return entry['data']
+
+    def set(self, key, data):
+        self._evict_expired()
+        self._evict_lru()
+        self._cache[key] = {'data': data, 'ts': time.time()}
+        self._order.append(key)
+
+    def clear(self):
+        self._cache.clear()
+        self._order.clear()
+
+class RateLimiter:
+    def __init__(self, window_seconds, max_requests):
+        self.window = window_seconds
+        self.max_requests = max_requests
+        self._buckets = {}
+
+    def _cleanup(self):
+        now = time.time()
+        expired = [k for k, v in self._buckets.items() if now - v['window_start'] > self.window]
+        for k in expired:
+            self._buckets.pop(k, None)
+
+    def check(self, key):
+        self._cleanup()
+        now = time.time()
+        bucket = self._buckets.get(key)
+        if not bucket or now - bucket['window_start'] > self.window:
+            self._buckets[key] = {'count': 1, 'window_start': now}
+            return True, self.max_requests - 1
+        if bucket['count'] >= self.max_requests:
+            return False, 0
+        bucket['count'] += 1
+        return True, self.max_requests - bucket['count']
+
+    def get_headers(self, remaining, reset_at):
+        return {
+            'X-RateLimit-Limit': str(self.max_requests),
+            'X-RateLimit-Remaining': str(max(0, remaining)),
+            'X-RateLimit-Reset': str(int(reset_at))
+        }
+
+def validate_playlist_id(pid):
+    return bool(pid and re.match(r'^[A-Za-z0-9_-]{10,}$', pid))
+
+CACHE = LRUCache(max_size=CONFIG['CACHE_MAX_SIZE'], ttl=CONFIG['CACHE_TTL'])
+RATE_LIMITER = RateLimiter(window_seconds=CONFIG['RATE_LIMIT_WINDOW'], max_requests=CONFIG['RATE_LIMIT_MAX'])
 
 def request_json(url, timeout=10):
     req = urllib.request.Request(url, headers={'Accept': 'application/json'})
@@ -90,6 +164,10 @@ def request_json(url, timeout=10):
             raw = resp.read().decode('utf-8')
             return json.loads(raw)
     except urllib.error.HTTPError as e:
+        try:
+            body = e.read().decode('utf-8')
+        except Exception:
+            body = ''
         raise RuntimeError(f'HTTP {e.code}') from e
     except urllib.error.URLError as e:
         raise RuntimeError(f'Network error: {e.reason}') from e
@@ -98,40 +176,117 @@ def request_json(url, timeout=10):
     except Exception as e:
         raise RuntimeError(str(e)) from e
 
+def build_playlist_item(item):
+    snippet = item.get('snippet', {})
+    content_details = item.get('contentDetails', {})
+    return {
+        'id': item['id'],
+        'title': snippet.get('title', 'Sem título'),
+        'description': snippet.get('description', ''),
+        'thumbnail': snippet.get('thumbnails', {}).get('medium', {}).get('url', ''),
+        'videoCount': content_details.get('itemCount', 0)
+    }
+
+def build_video_item(item):
+    snippet = item.get('snippet', {})
+    content_details = item.get('contentDetails', {})
+    return {
+        'videoId': content_details.get('videoId', ''),
+        'title': snippet.get('title', 'Sem título'),
+        'description': snippet.get('description', ''),
+        'thumbnail': snippet.get('thumbnails', {}).get('medium', {}).get('url', '')
+    }
+
 class APIHandler(SimpleHTTPRequestHandler):
+    def _get_client_ip(self):
+        return self.client_address[0]
+
+    def _check_rate_limit(self):
+        allowed, remaining = RATE_LIMITER.check(self._get_client_ip())
+        reset_at = int(time.time()) + RATE_LIMITER.window
+        for header, value in RATE_LIMITER.get_headers(remaining, int(time.time()) + RATE_LIMITER.window).items():
+            self.send_header(header, value)
+        return allowed
+
+    def _send_json(self, data, status=200, remaining=None):
+        self.send_response(status)
+        self.send_header('Content-Type', 'application/json')
+        origin = self.headers.get('Origin', '')
+        if origin in CONFIG['ALLOWED_ORIGINS']:
+            self.send_header('Access-Control-Allow-Origin', origin)
+            self.send_header('Vary', 'Origin')
+        if remaining is not None:
+            reset_at = int(time.time()) + RATE_LIMITER.window
+            for header, value in RATE_LIMITER.get_headers(remaining, int(time.time()) + RATE_LIMITER.window).items():
+                self.send_header(header, value)
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        self.end_headers()
+        self.wfile.write(json.dumps(data, ensure_ascii=False).encode('utf-8'))
+
+    def _send_success(self, data, remaining=None):
+        self._send_json({'success': True, 'data': data}, status=200, remaining=remaining)
+
+    def _send_error(self, code, message, status=500, remaining=None):
+        self._send_json({
+            'success': False,
+            'error': {'code': code, 'message': message},
+            'timestamp': datetime.now().isoformat()
+        }, status=status, remaining=remaining)
+
+    def do_OPTIONS(self):
+        allowed = self._check_rate_limit()
+        if not allowed:
+            self.send_response(429)
+            self.end_headers()
+            return
+        self.send_response(204)
+        origin = self.headers.get('Origin', '')
+        if origin in CONFIG['ALLOWED_ORIGINS']:
+            self.send_header('Access-Control-Allow-Origin', origin)
+            self.send_header('Vary', 'Origin')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        self.end_headers()
+
     def do_GET(self):
+        if not self._check_rate_limit():
+            self.send_response(429)
+            self.end_headers()
+            return
+
         parsed = urlparse(self.path)
         path = parsed.path
+        remaining = RATE_LIMITER.max_requests - 1
 
         if path == '/api/videos':
             data = load_json(VIDEOS_FILE)
-            self.send_json(data.get('videos', []))
+            self._send_success(data.get('videos', []), remaining)
             return
 
         if path == '/api/courses':
             data = load_json(COURSES_FILE)
-            self.send_json(data.get('playlists', []))
+            self._send_success(data.get('playlists', []), remaining)
             return
 
         if path == '/api/health':
-            self.send_json({'status': 'ok', 'timestamp': datetime.now().isoformat()})
+            self._send_success({'status': 'ok', 'timestamp': datetime.now().isoformat()}, remaining)
             return
 
         if path == '/api/version':
-            self.send_json({
-                'status': 'ok',
+            self._send_success({
                 'version': CONFIG['APP_VERSION'],
                 'environment': CONFIG['APP_ENV'],
                 'timestamp': datetime.now().isoformat()
-            })
+            }, remaining)
             return
 
         if path.startswith('/api/youtube/playlists'):
-            return self.handle_youtube_playlists()
+            return self._handle_youtube_playlists(remaining)
 
         if path.startswith('/api/youtube/playlist/'):
             playlist_id = path.split('/')[-1]
-            return self.handle_youtube_playlist_items(playlist_id)
+            return self._handle_youtube_playlist_items(playlist_id, remaining)
 
         if path.startswith('/admin/'):
             self.path = '/admin/index.html'
@@ -140,9 +295,81 @@ class APIHandler(SimpleHTTPRequestHandler):
 
         self.send_error(404)
 
+    def _handle_youtube_playlists(self, remaining):
+        if not CONFIG['YOUTUBE_API_KEY']:
+            self._send_error('YOUTUBE_KEY_MISSING', 'YouTube API key not configured', status=500, remaining=remaining)
+            return
+
+        cache_key = 'youtube:playlists'
+        cached = CACHE.get(cache_key)
+        if cached is not None:
+            self._send_success(cached, remaining)
+            return
+
+        try:
+            playlists = []
+            for playlist_id in CONFIG['PLAYLIST_IDS']:
+                url = f'https://www.googleapis.com/youtube/v3/playlists?key={CONFIG["YOUTUBE_API_KEY"]}&id={playlist_id}&maxResults=1&part=snippet,contentDetails'
+                try:
+                    data = request_json(url)
+                    for item in data.get('items', []):
+                        playlists.append(build_playlist_item(item))
+                except Exception:
+                    continue
+
+            if not playlists:
+                self._send_error('YOUTUBE_UNAVAILABLE', 'Não foi possível consultar o YouTube', status=502, remaining=remaining)
+                return
+
+            CACHE.set('youtube:playlists', playlists)
+            self._send_success(playlists, remaining)
+
+        except Exception:
+            self._send_error('YOUTUBE_UNAVAILABLE', 'Não foi possível consultar o YouTube', status=502, remaining=remaining)
+
+    def _handle_youtube_playlist_items(self, playlist_id, remaining):
+        if not validate_playlist_id(playlist_id):
+            self._send_error('INVALID_PLAYLIST_ID', 'ID de playlist inválido', status=400, remaining=remaining)
+            return
+
+        if not CONFIG['YOUTUBE_API_KEY']:
+            self._send_error('YOUTUBE_KEY_MISSING', 'YouTube API key not configured', status=500, remaining=remaining)
+            return
+
+        cache_key = f'youtube:playlist:{playlist_id}'
+        cached = CACHE.get(cache_key)
+        if cached is not None:
+            self._send_success(cached, remaining)
+            return
+
+        try:
+            url = f'https://www.googleapis.com/youtube/v3/playlistItems?key={CONFIG["YOUTUBE_API_KEY"]}&playlistId={playlist_id}&maxResults=50&part=snippet,contentDetails'
+            data = request_json(url)
+            videos = []
+            for item in data.get('items', []):
+                video = build_video_item(item)
+                if video['videoId']:
+                    videos.append(video)
+
+            if not videos:
+                self._send_error('YOUTUBE_UNAVAILABLE', 'Não foi possível carregar itens da playlist', status=502, remaining=remaining)
+                return
+
+            CACHE.set(cache_key, videos)
+            self._send_success(videos, remaining)
+
+        except Exception:
+            self._send_error('YOUTUBE_UNAVAILABLE', 'Não foi possível carregar itens da playlist', status=502, remaining=remaining)
+
     def do_POST(self):
+        if not self._check_rate_limit():
+            self.send_response(429)
+            self.end_headers()
+            return
+
         parsed = urlparse(self.path)
         path = parsed.path
+        remaining = RATE_LIMITER.max_requests - 1
 
         if path == '/api/videos':
             content_length = int(self.headers.get('Content-Length', 0))
@@ -160,127 +387,24 @@ class APIHandler(SimpleHTTPRequestHandler):
             }
             videos['videos'].append(new_video)
             save_json(VIDEOS_FILE, videos)
-            self.send_json(new_video, status=201)
+            self._send_success(new_video, remaining)
             return
 
         if path == '/api/courses/sync':
-            return self.handle_youtube_sync()
+            return self._handle_youtube_sync(remaining)
 
         self.send_error(404)
 
-    def do_PUT(self):
-        parsed = urlparse(self.path)
-        path = parsed.path
-
-        if path.startswith('/api/videos/'):
-            video_id = path.split('/')[-1]
-            content_length = int(self.headers.get('Content-Length', 0))
-            body = self.rfile.read(content_length)
-            data = json.loads(body.decode('utf-8'))
-
-            videos = load_json(VIDEOS_FILE)
-            index = next((i for i, v in enumerate(videos['videos']) if v['id'] == video_id), None)
-
-            if index is None:
-                self.send_error(404, 'Video not found')
-                return
-
-            videos['videos'][index].update(data)
-            videos['videos'][index]['id'] = video_id
-            save_json(VIDEOS_FILE, videos)
-            self.send_json(videos['videos'][index])
-            return
-
-        self.send_error(404)
-
-    def do_DELETE(self):
-        parsed = urlparse(self.path)
-        path = parsed.path
-
-        if path.startswith('/api/videos/'):
-            video_id = path.split('/')[-1]
-            videos = load_json(VIDEOS_FILE)
-            videos['videos'] = [v for v in videos['videos'] if v['id'] != video_id]
-            save_json(VIDEOS_FILE, videos)
-            self.send_response(204)
-            self.end_headers()
-            return
-
-        self.send_error(404)
-
-    def handle_youtube_playlists(self):
+    def _handle_youtube_sync(self, remaining):
         if not CONFIG['YOUTUBE_API_KEY']:
-            self.send_json({'error': 'YouTube API key not configured'}, status=500)
-            return
-
-        cache_key = 'youtube:playlists'
-        cached = cache_get(cache_key)
-        if cached is not None:
-            self.send_json(cached)
-            return
-
-        try:
-            playlists = []
-            for playlist_id in CONFIG['PLAYLIST_IDS']:
-                url = f'https://www.googleapis.com/youtube/v3/playlists?key={CONFIG["YOUTUBE_API_KEY"]}&id={playlist_id}&maxResults=1&part=snippet,contentDetails'
-                try:
-                    data = request_json(url)
-                    for item in data.get('items', []):
-                        snippet = item.get('snippet', {})
-                        content_details = item.get('contentDetails', {})
-                        playlists.append({
-                            'id': item['id'],
-                            'title': snippet.get('title', 'Sem título'),
-                            'description': snippet.get('description', ''),
-                            'thumbnail': snippet.get('thumbnails', {}).get('medium', {}).get('url', ''),
-                            'videoCount': content_details.get('itemCount', 0)
-                        })
-                except Exception:
-                    continue
-            cache_set(cache_key, playlists)
-            self.send_json(playlists)
-        except Exception as e:
-            self.send_json({'error': 'Failed to load playlists'}, status=502)
-
-    def handle_youtube_playlist_items(self, playlist_id):
-        if not CONFIG['YOUTUBE_API_KEY']:
-            self.send_json({'error': 'YouTube API key not configured'}, status=500)
-            return
-
-        cache_key = f'youtube:playlist:{playlist_id}'
-        cached = cache_get(cache_key)
-        if cached is not None:
-            self.send_json(cached)
-            return
-
-        try:
-            url = f'https://www.googleapis.com/youtube/v3/playlistItems?key={CONFIG["YOUTUBE_API_KEY"]}&playlistId={playlist_id}&maxResults=50&part=snippet,contentDetails'
-            data = request_json(url)
-            videos = []
-            for item in data.get('items', []):
-                snippet = item.get('snippet', {})
-                content_details = item.get('contentDetails', {})
-                videos.append({
-                    'videoId': content_details.get('videoId', ''),
-                    'title': snippet.get('title', 'Sem título'),
-                    'description': snippet.get('description', ''),
-                    'thumbnail': snippet.get('thumbnails', {}).get('medium', {}).get('url', '')
-                })
-            cache_set(cache_key, videos)
-            self.send_json(videos)
-        except Exception:
-            self.send_json({'error': 'Failed to load playlist items'}, status=502)
-
-    def handle_youtube_sync(self):
-        if not CONFIG['YOUTUBE_API_KEY']:
-            self.send_json({'error': 'YouTube API key not configured'}, status=500)
+            self._send_error('YOUTUBE_KEY_MISSING', 'YouTube API key not configured', status=500, remaining=remaining)
             return
 
         try:
             playlists = []
             for playlist_id in CONFIG['PLAYLIST_IDS']:
                 cache_key = f'youtube:playlist:{playlist_id}'
-                cached = cache_get(cache_key)
+                cached = CACHE.get(cache_key)
                 if cached is not None:
                     playlists.append({
                         'id': playlist_id,
@@ -295,46 +419,69 @@ class APIHandler(SimpleHTTPRequestHandler):
                 try:
                     data = request_json(url)
                     for item in data.get('items', []):
-                        snippet = item.get('snippet', {})
-                        content_details = item.get('contentDetails', {})
-                        playlists.append({
-                            'id': item['id'],
-                            'title': snippet.get('title', 'Sem título'),
-                            'description': snippet.get('description', ''),
-                            'thumbnail': snippet.get('thumbnails', {}).get('medium', {}).get('url', ''),
-                            'videoCount': content_details.get('itemCount', 0)
-                        })
+                        playlists.append(build_playlist_item(item))
                 except Exception:
                     continue
 
             courses = load_json(COURSES_FILE)
             courses['playlists'] = playlists
             save_json(COURSES_FILE, courses)
-            self.send_json({'synced': len(playlists), 'playlists': playlists})
+            self._send_success({'synced': len(playlists), 'playlists': playlists}, remaining)
+
         except Exception:
-            self.send_json({'error': 'Failed to sync courses'}, status=502)
+            self._send_error('YOUTUBE_UNAVAILABLE', 'Não foi possível sincronizar cursos', status=502, remaining=remaining)
 
-    def send_json(self, data, status=200):
-        self.send_response(status)
-        self.send_header('Content-Type', 'application/json')
-        origin = self.headers.get('Origin', '')
-        if origin in CONFIG['ALLOWED_ORIGINS']:
-            self.send_header('Access-Control-Allow-Origin', origin)
-            self.send_header('Vary', 'Origin')
-        self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-        self.end_headers()
-        self.wfile.write(json.dumps(data, ensure_ascii=False).encode('utf-8'))
+    def do_PUT(self):
+        if not self._check_rate_limit():
+            self.send_response(429)
+            self.end_headers()
+            return
 
-    def do_OPTIONS(self):
-        self.send_response(204)
-        origin = self.headers.get('Origin', '')
-        if origin in CONFIG['ALLOWED_ORIGINS']:
-            self.send_header('Access-Control-Allow-Origin', origin)
-            self.send_header('Vary', 'Origin')
-        self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-        self.end_headers()
+        parsed = urlparse(self.path)
+        path = parsed.path
+        remaining = RATE_LIMITER.max_requests - 1
+
+        if path.startswith('/api/videos/'):
+            video_id = path.split('/')[-1]
+            content_length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(content_length)
+            data = json.loads(body.decode('utf-8'))
+
+            videos = load_json(VIDEOS_FILE)
+            index = next((i for i, v in enumerate(videos['videos']) if v['id'] == video_id), None)
+
+            if index is None:
+                self._send_error('NOT_FOUND', 'Vídeo não encontrado', status=404)
+                return
+
+            videos['videos'][index].update(data)
+            videos['videos'][index]['id'] = video_id
+            save_json(VIDEOS_FILE, videos)
+            self._send_success(videos['videos'][index], remaining)
+            return
+
+        self.send_error(404)
+
+    def do_DELETE(self):
+        if not self._check_rate_limit():
+            self.send_response(429)
+            self.end_headers()
+            return
+
+        parsed = urlparse(self.path)
+        path = parsed.path
+        remaining = RATE_LIMITER.max_requests - 1
+
+        if path.startswith('/api/videos/'):
+            video_id = path.split('/')[-1]
+            videos = load_json(VIDEOS_FILE)
+            videos['videos'] = [v for v in videos['videos'] if v['id'] != video_id]
+            save_json(VIDEOS_FILE, videos)
+            self.send_response(204)
+            self.end_headers()
+            return
+
+        self.send_error(404)
 
 def run():
     server = HTTPServer(('0.0.0.0', CONFIG['PORT']), APIHandler)
