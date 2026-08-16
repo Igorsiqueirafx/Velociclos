@@ -26,6 +26,9 @@ CONFIG = {
     'ADMIN_PASSWORD': 'velociclos2024',
     'DATA_DIR': os.path.dirname(os.path.abspath(__file__)),
     'YOUTUBE_API_KEY': os.environ.get('YOUTUBE_API_KEY', ''),
+    'ALLOWED_ORIGINS': os.environ.get('ALLOWED_ORIGINS', 'https://velociclos.vercel.app,http://localhost:3000,http://localhost:3001').split(','),
+    'APP_VERSION': os.environ.get('APP_VERSION', '1.0.0'),
+    'APP_ENV': os.environ.get('APP_ENV', 'production'),
     'PLAYLIST_IDS': [
         'PLWhqc48nlRWLhDr-YqQhwVGhCFwUCcw7I',
         'PLWhqc48nlRWIBLg85_VDOcqRAq-BWi-J9',
@@ -80,6 +83,15 @@ class APIHandler(SimpleHTTPRequestHandler):
 
         if path == '/api/health':
             self.send_json({'status': 'ok', 'timestamp': datetime.now().isoformat()})
+            return
+
+        if path == '/api/version':
+            self.send_json({
+                'status': 'ok',
+                'version': CONFIG['APP_VERSION'],
+                'environment': CONFIG['APP_ENV'],
+                'timestamp': datetime.now().isoformat()
+            })
             return
 
         if path.startswith('/api/youtube/playlists'):
@@ -254,7 +266,10 @@ class APIHandler(SimpleHTTPRequestHandler):
     def send_json(self, data, status=200):
         self.send_response(status)
         self.send_header('Content-Type', 'application/json')
-        self.send_header('Access-Control-Allow-Origin', '*')
+        origin = self.headers.get('Origin', '')
+        if origin in CONFIG['ALLOWED_ORIGINS']:
+            self.send_header('Access-Control-Allow-Origin', origin)
+            self.send_header('Vary', 'Origin')
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
         self.end_headers()
@@ -262,7 +277,10 @@ class APIHandler(SimpleHTTPRequestHandler):
 
     def do_OPTIONS(self):
         self.send_response(204)
-        self.send_header('Access-Control-Allow-Origin', '*')
+        origin = self.headers.get('Origin', '')
+        if origin in CONFIG['ALLOWED_ORIGINS']:
+            self.send_header('Access-Control-Allow-Origin', origin)
+            self.send_header('Vary', 'Origin')
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
         self.end_headers()
