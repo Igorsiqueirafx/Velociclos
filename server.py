@@ -1,7 +1,9 @@
 import json
 import os
+import socket
 import urllib.parse
 import urllib.request
+import time
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 import uuid
@@ -65,6 +67,36 @@ def load_json(file_path):
 def save_json(file_path, data):
     with open(file_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
+
+CACHE = {}
+CACHE_TTL = 600
+
+def cache_get(key):
+    entry = CACHE.get(key)
+    if not entry:
+        return None
+    if time.time() - entry['ts'] > CACHE_TTL:
+        CACHE.pop(key, None)
+        return None
+    return entry['data']
+
+def cache_set(key, data):
+    CACHE[key] = {'data': data, 'ts': time.time()}
+
+def request_json(url, timeout=10):
+    req = urllib.request.Request(url, headers={'Accept': 'application/json'})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            raw = resp.read().decode('utf-8')
+            return json.loads(raw)
+    except urllib.error.HTTPError as e:
+        raise RuntimeError(f'HTTP {e.code}') from e
+    except urllib.error.URLError as e:
+        raise RuntimeError(f'Network error: {e.reason}') from e
+    except socket.timeout as e:
+        raise RuntimeError('Request timeout') from e
+    except Exception as e:
+        raise RuntimeError(str(e)) from e
 
 class APIHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
@@ -181,51 +213,63 @@ class APIHandler(SimpleHTTPRequestHandler):
             self.send_json({'error': 'YouTube API key not configured'}, status=500)
             return
 
+        cache_key = 'youtube:playlists'
+        cached = cache_get(cache_key)
+        if cached is not None:
+            self.send_json(cached)
+            return
+
         try:
             playlists = []
             for playlist_id in CONFIG['PLAYLIST_IDS']:
                 url = f'https://www.googleapis.com/youtube/v3/playlists?key={CONFIG["YOUTUBE_API_KEY"]}&id={playlist_id}&maxResults=1&part=snippet,contentDetails'
                 try:
-                    with urllib.request.urlopen(url) as resp:
-                        data = json.loads(resp.read().decode('utf-8'))
-                        for item in data.get('items', []):
-                            snippet = item.get('snippet', {})
-                            content_details = item.get('contentDetails', {})
-                            playlists.append({
-                                'id': item['id'],
-                                'title': snippet.get('title', 'Sem título'),
-                                'description': snippet.get('description', ''),
-                                'thumbnail': snippet.get('thumbnails', {}).get('medium', {}).get('url', ''),
-                                'videoCount': content_details.get('itemCount', 0)
-                            })
+                    data = request_json(url)
+                    for item in data.get('items', []):
+                        snippet = item.get('snippet', {})
+                        content_details = item.get('contentDetails', {})
+                        playlists.append({
+                            'id': item['id'],
+                            'title': snippet.get('title', 'Sem título'),
+                            'description': snippet.get('description', ''),
+                            'thumbnail': snippet.get('thumbnails', {}).get('medium', {}).get('url', ''),
+                            'videoCount': content_details.get('itemCount', 0)
+                        })
                 except Exception:
                     continue
+            cache_set(cache_key, playlists)
             self.send_json(playlists)
         except Exception as e:
-            self.send_json({'error': str(e)}, status=500)
+            self.send_json({'error': 'Failed to load playlists'}, status=502)
 
     def handle_youtube_playlist_items(self, playlist_id):
         if not CONFIG['YOUTUBE_API_KEY']:
             self.send_json({'error': 'YouTube API key not configured'}, status=500)
             return
 
+        cache_key = f'youtube:playlist:{playlist_id}'
+        cached = cache_get(cache_key)
+        if cached is not None:
+            self.send_json(cached)
+            return
+
         try:
             url = f'https://www.googleapis.com/youtube/v3/playlistItems?key={CONFIG["YOUTUBE_API_KEY"]}&playlistId={playlist_id}&maxResults=50&part=snippet,contentDetails'
-            with urllib.request.urlopen(url) as resp:
-                data = json.loads(resp.read().decode('utf-8'))
-                videos = []
-                for item in data.get('items', []):
-                    snippet = item.get('snippet', {})
-                    content_details = item.get('contentDetails', {})
-                    videos.append({
-                        'videoId': content_details.get('videoId', ''),
-                        'title': snippet.get('title', 'Sem título'),
-                        'description': snippet.get('description', ''),
-                        'thumbnail': snippet.get('thumbnails', {}).get('medium', {}).get('url', '')
-                    })
-                self.send_json(videos)
-        except Exception as e:
-            self.send_json({'error': str(e)}, status=500)
+            data = request_json(url)
+            videos = []
+            for item in data.get('items', []):
+                snippet = item.get('snippet', {})
+                content_details = item.get('contentDetails', {})
+                videos.append({
+                    'videoId': content_details.get('videoId', ''),
+                    'title': snippet.get('title', 'Sem título'),
+                    'description': snippet.get('description', ''),
+                    'thumbnail': snippet.get('thumbnails', {}).get('medium', {}).get('url', '')
+                })
+            cache_set(cache_key, videos)
+            self.send_json(videos)
+        except Exception:
+            self.send_json({'error': 'Failed to load playlist items'}, status=502)
 
     def handle_youtube_sync(self):
         if not CONFIG['YOUTUBE_API_KEY']:
@@ -235,33 +279,40 @@ class APIHandler(SimpleHTTPRequestHandler):
         try:
             playlists = []
             for playlist_id in CONFIG['PLAYLIST_IDS']:
+                cache_key = f'youtube:playlist:{playlist_id}'
+                cached = cache_get(cache_key)
+                if cached is not None:
+                    playlists.append({
+                        'id': playlist_id,
+                        'title': cached[0].get('title', 'Sem título') if cached else 'Sem título',
+                        'description': cached[0].get('description', '') if cached else '',
+                        'thumbnail': cached[0].get('thumbnail', '') if cached else '',
+                        'videoCount': len(cached)
+                    })
+                    continue
+
                 url = f'https://www.googleapis.com/youtube/v3/playlists?key={CONFIG["YOUTUBE_API_KEY"]}&id={playlist_id}&maxResults=1&part=snippet,contentDetails'
-                print(f'SYNC URL: {url}')
                 try:
-                    with urllib.request.urlopen(url) as resp:
-                        raw = resp.read().decode('utf-8')
-                        print(f'SYNC RESP for {playlist_id}: {raw[:200]}')
-                        data = json.loads(raw)
-                        for item in data.get('items', []):
-                            snippet = item.get('snippet', {})
-                            content_details = item.get('contentDetails', {})
-                            playlists.append({
-                                'id': item['id'],
-                                'title': snippet.get('title', 'Sem título'),
-                                'description': snippet.get('description', ''),
-                                'thumbnail': snippet.get('thumbnails', {}).get('medium', {}).get('url', ''),
-                                'videoCount': content_details.get('itemCount', 0)
-                            })
-                except Exception as e:
-                    print(f'SYNC ERROR for {playlist_id}: {e}')
+                    data = request_json(url)
+                    for item in data.get('items', []):
+                        snippet = item.get('snippet', {})
+                        content_details = item.get('contentDetails', {})
+                        playlists.append({
+                            'id': item['id'],
+                            'title': snippet.get('title', 'Sem título'),
+                            'description': snippet.get('description', ''),
+                            'thumbnail': snippet.get('thumbnails', {}).get('medium', {}).get('url', ''),
+                            'videoCount': content_details.get('itemCount', 0)
+                        })
+                except Exception:
                     continue
 
             courses = load_json(COURSES_FILE)
             courses['playlists'] = playlists
             save_json(COURSES_FILE, courses)
             self.send_json({'synced': len(playlists), 'playlists': playlists})
-        except Exception as e:
-            self.send_json({'error': str(e)}, status=500)
+        except Exception:
+            self.send_json({'error': 'Failed to sync courses'}, status=502)
 
     def send_json(self, data, status=200):
         self.send_response(status)
