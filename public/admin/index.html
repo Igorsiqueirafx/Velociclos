@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Velociclos PCM</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a1a2e; color: #eee; padding: 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { color: #ffd700; margin-bottom: 30px; }
+    .form-section { background: #16213e; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; color: #aaa; }
+    input, select { width: 100%; padding: 10px; background: #0f3460; border: 1px solid #533483; color: #fff; border-radius: 4px; }
+    button { background: #ffd700; color: #1a1a2e; border: none; padding: 12px 24px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    button:hover { background: #ffed4a; }
+    .videos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .video-card { background: #16213e; padding: 15px; border-radius: 8px; border: 1px solid #533483; }
+    .video-card h3 { color: #ffd700; margin-bottom: 10px; }
+    .video-card p { color: #aaa; font-size: 0.9em; margin-bottom: 10px; }
+    .video-card .actions { display: flex; gap: 10px; margin-top: 10px; }
+    .btn-delete { background: #e94560; color: white; padding: 8px 16px; }
+    .btn-delete:hover { background: #ff6b81; }
+    .btn-edit { background: #0f3460; color: #ffd700; padding: 8px 16px; border: 1px solid #ffd700; }
+    .password-section { text-align: center; margin-bottom: 30px; }
+    #loginForm { display: none; max-width: 400px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="password-section">
+      <h1>Admin - Velociclos PCM</h1>
+      <div id="loginForm">
+        <div class="form-group">
+          <label>Senha</label>
+          <input type="password" id="password" placeholder="Digite a senha">
+        </div>
+        <button onclick="login()">Entrar</button>
+      </div>
+    </div>
+
+    <div id="adminPanel" style="display: none;">
+      <div class="form-section">
+        <h2>Adicionar Vídeo</h2>
+        <form id="videoForm">
+          <div class="form-group">
+            <label>Título</label>
+            <input type="text" id="title" required>
+          </div>
+          <div class="form-group">
+            <label>Descrição</label>
+            <input type="text" id="description">
+          </div>
+          <div class="form-group">
+            <label>Módulo</label>
+            <input type="text" id="module">
+          </div>
+          <div class="form-group">
+            <label>YouTube Video ID</label>
+            <input type="text" id="videoId" required placeholder="Ex: dQw4w9WgXcQ">
+          </div>
+          <button type="submit">Adicionar Vídeo</button>
+        </form>
+      </div>
+
+      <div class="form-section">
+        <h2>Vídeos Cadastrados</h2>
+        <div id="videosList" class="videos-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = '/api';
+    const PASSWORD = 'velociclos2024';
+    let isAuthenticated = false;
+
+    function login() {
+      const password = document.getElementById('password').value;
+      if (password === PASSWORD) {
+        isAuthenticated = true;
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('adminPanel').style.display = 'block';
+        loadVideos();
+      } else {
+        alert('Senha incorreta');
+      }
+    }
+
+    async function loadVideos() {
+      try {
+        const response = await fetch(`${API_URL}/videos`);
+        const videos = await response.json();
+        displayVideos(videos);
+      } catch (error) {
+        console.error('Error loading videos:', error);
+      }
+    }
+
+    function displayVideos(videos) {
+      const container = document.getElementById('videosList');
+      if (videos.length === 0) {
+        container.innerHTML = '<p style="color: #aaa;">Nenhum vídeo cadastrado.</p>';
+        return;
+      }
+      
+      container.innerHTML = videos.map(video => `
+        <div class="video-card">
+          <h3>${escapeHtml(video.title)}</h3>
+          <p>${escapeHtml(video.description || '')}</p>
+          <p><strong>Módulo:</strong> ${escapeHtml(video.module || 'N/A')}</p>
+          <p><strong>Video ID:</strong> ${escapeHtml(video.videoId)}</p>
+          <div class="actions">
+            <button class="btn-delete" onclick="deleteVideo('${video.id}')">Excluir</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function addVideo(videoData) {
+      const response = await fetch(`${API_URL}/videos`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${PASSWORD}`
+        },
+        body: JSON.stringify(videoData)
+      });
+      
+      if (response.ok) {
+        loadVideos();
+        document.getElementById('videoForm').reset();
+      }
+    }
+
+    async function deleteVideo(id) {
+      if (!confirm('Tem certeza que deseja excluir este vídeo?')) return;
+      
+      const response = await fetch(`${API_URL}/videos/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${PASSWORD}`
+        }
+      });
+      
+      if (response.ok) {
+        loadVideos();
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    document.getElementById('videoForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      addVideo({
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value,
+        module: document.getElementById('module').value,
+        videoId: document.getElementById('videoId').value
+      });
+    });
+  </script>
+</body>
+</html>
