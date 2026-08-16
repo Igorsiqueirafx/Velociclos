@@ -203,10 +203,7 @@ class APIHandler(SimpleHTTPRequestHandler):
 
     def _check_rate_limit(self):
         allowed, remaining = RATE_LIMITER.check(self._get_client_ip())
-        reset_at = int(time.time()) + RATE_LIMITER.window
-        for header, value in RATE_LIMITER.get_headers(remaining, int(time.time()) + RATE_LIMITER.window).items():
-            self.send_header(header, value)
-        return allowed
+        return allowed, remaining
 
     def _send_json(self, data, status=200, remaining=None):
         self.send_response(status)
@@ -234,13 +231,20 @@ class APIHandler(SimpleHTTPRequestHandler):
             'timestamp': datetime.now().isoformat()
         }, status=status, remaining=remaining)
 
+    def _send_rate_limit_headers(self, remaining):
+        reset_at = int(time.time()) + RATE_LIMITER.window
+        for header, value in RATE_LIMITER.get_headers(remaining, reset_at).items():
+            self.send_header(header, value)
+
     def do_OPTIONS(self):
-        allowed = self._check_rate_limit()
+        allowed, remaining = self._check_rate_limit()
         if not allowed:
             self.send_response(429)
+            self._send_rate_limit_headers(remaining)
             self.end_headers()
             return
         self.send_response(204)
+        self._send_rate_limit_headers(remaining)
         origin = self.headers.get('Origin', '')
         if origin in CONFIG['ALLOWED_ORIGINS']:
             self.send_header('Access-Control-Allow-Origin', origin)
@@ -250,14 +254,15 @@ class APIHandler(SimpleHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        if not self._check_rate_limit():
+        allowed, remaining = self._check_rate_limit()
+        if not allowed:
             self.send_response(429)
+            self._send_rate_limit_headers(remaining)
             self.end_headers()
             return
 
         parsed = urlparse(self.path)
         path = parsed.path
-        remaining = RATE_LIMITER.max_requests - 1
 
         if path == '/api/videos':
             data = load_json(VIDEOS_FILE)
@@ -362,14 +367,12 @@ class APIHandler(SimpleHTTPRequestHandler):
             self._send_error('YOUTUBE_UNAVAILABLE', 'Não foi possível carregar itens da playlist', status=502, remaining=remaining)
 
     def do_POST(self):
-        if not self._check_rate_limit():
+        allowed, remaining = self._check_rate_limit()
+        if not allowed:
             self.send_response(429)
+            self._send_rate_limit_headers(remaining)
             self.end_headers()
             return
-
-        parsed = urlparse(self.path)
-        path = parsed.path
-        remaining = RATE_LIMITER.max_requests - 1
 
         if path == '/api/videos':
             content_length = int(self.headers.get('Content-Length', 0))
@@ -432,14 +435,15 @@ class APIHandler(SimpleHTTPRequestHandler):
             self._send_error('YOUTUBE_UNAVAILABLE', 'Não foi possível sincronizar cursos', status=502, remaining=remaining)
 
     def do_PUT(self):
-        if not self._check_rate_limit():
+        allowed, remaining = self._check_rate_limit()
+        if not allowed:
             self.send_response(429)
+            self._send_rate_limit_headers(remaining)
             self.end_headers()
             return
 
         parsed = urlparse(self.path)
         path = parsed.path
-        remaining = RATE_LIMITER.max_requests - 1
 
         if path.startswith('/api/videos/'):
             video_id = path.split('/')[-1]
@@ -463,14 +467,15 @@ class APIHandler(SimpleHTTPRequestHandler):
         self.send_error(404)
 
     def do_DELETE(self):
-        if not self._check_rate_limit():
+        allowed, remaining = self._check_rate_limit()
+        if not allowed:
             self.send_response(429)
+            self._send_rate_limit_headers(remaining)
             self.end_headers()
             return
 
         parsed = urlparse(self.path)
         path = parsed.path
-        remaining = RATE_LIMITER.max_requests - 1
 
         if path.startswith('/api/videos/'):
             video_id = path.split('/')[-1]
