@@ -5,7 +5,10 @@ import urllib.parse
 import urllib.request
 import time
 import re
-from http.server import HTTPServer, SimpleHTTPRequestHandler
+import base64
+import hmac
+import hashlib
+from http.server import HTTPServer, SimpleHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse, parse_qs
 import uuid
 from datetime import datetime
@@ -26,7 +29,7 @@ load_env_file(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '.e
 
 CONFIG = {
     'PORT': int(os.environ.get('PORT', '3001')),
-    'ADMIN_PASSWORD': os.environ.get('ADMIN_PASSWORD', 'velociclos2024'),
+    'SUPABASE_JWT_SECRET': os.environ.get('SUPABASE_JWT_SECRET', ''),
     'DATA_DIR': os.path.dirname(os.path.abspath(__file__)),
     'YOUTUBE_API_KEY': os.environ.get('YOUTUBE_API_KEY', ''),
     'ALLOWED_ORIGINS': [o.strip() for o in os.environ.get('ALLOWED_ORIGINS', 'https://velociclos.vercel.app').split(',') if o.strip()],
@@ -154,6 +157,29 @@ class RateLimiter:
 def validate_playlist_id(pid):
     return bool(pid and re.match(r'^[A-Za-z0-9_-]{10,}$', pid))
 
+def verify_supabase_jwt(token):
+    secret = CONFIG.get('SUPABASE_JWT_SECRET', '')
+    if not secret:
+        return None
+    try:
+        header_b64, payload_b64, sig_b64 = token.split('.')
+    except Exception:
+        return None
+    signing_input = (header_b64 + '.' + payload_b64).encode('ascii')
+    expected = hmac.new(secret.encode('utf-8'), signing_input, hashlib.sha256).digest()
+    expected_b64 = base64.urlsafe_b64encode(expected).rstrip(b'=').decode('ascii')
+    if not hmac.compare_digest(expected_b64, sig_b64):
+        return None
+    try:
+        pad = '=' * (-len(payload_b64) % 4)
+        payload = json.loads(base64.urlsafe_b64decode(payload_b64 + pad))
+    except Exception:
+        return None
+    exp = payload.get('exp')
+    if exp and time.time() > exp:
+        return None
+    return payload
+
 CACHE = LRUCache(max_size=CONFIG['CACHE_MAX_SIZE'], ttl=CONFIG['CACHE_TTL'])
 RATE_LIMITER = RateLimiter(window_seconds=CONFIG['RATE_LIMIT_WINDOW'], max_requests=CONFIG['RATE_LIMIT_MAX'])
 
@@ -236,6 +262,18 @@ class APIHandler(SimpleHTTPRequestHandler):
         for header, value in RATE_LIMITER.get_headers(remaining, reset_at).items():
             self.send_header(header, value)
 
+    def _require_auth(self):
+        auth = self.headers.get('Authorization', '')
+        if not auth.startswith('Bearer '):
+            self._send_json({'success': False, 'error': {'code': 'UNAUTHENTICATED', 'message': 'Token de autenticacao ausente'}}, status=401)
+            return False
+        token = auth[len('Bearer '):].strip()
+        payload = verify_supabase_jwt(token)
+        if not payload:
+            self._send_json({'success': False, 'error': {'code': 'UNAUTHORIZED', 'message': 'Token invalido ou expirado'}}, status=401)
+            return False
+        return True
+
     def do_OPTIONS(self):
         allowed, remaining = self._check_rate_limit()
         if not allowed:
@@ -294,6 +332,8 @@ class APIHandler(SimpleHTTPRequestHandler):
             return self._handle_youtube_playlist_items(playlist_id, remaining)
 
         if path.startswith('/admin/'):
+            if not self._require_auth():
+                return
             self.path = '/admin/index.html'
             super().do_GET()
             return
@@ -374,6 +414,12 @@ class APIHandler(SimpleHTTPRequestHandler):
             self.end_headers()
             return
 
+        parsed = urlparse(self.path)
+        path = parsed.path
+
+        if not self._require_auth():
+            return
+
         if path == '/api/videos':
             content_length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(content_length)
@@ -445,6 +491,9 @@ class APIHandler(SimpleHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
 
+        if not self._require_auth():
+            return
+
         if path.startswith('/api/videos/'):
             video_id = path.split('/')[-1]
             content_length = int(self.headers.get('Content-Length', 0))
@@ -477,6 +526,9 @@ class APIHandler(SimpleHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
 
+        if not self._require_auth():
+            return
+
         if path.startswith('/api/videos/'):
             video_id = path.split('/')[-1]
             videos = load_json(VIDEOS_FILE)
@@ -489,10 +541,9 @@ class APIHandler(SimpleHTTPRequestHandler):
         self.send_error(404)
 
 def run():
-    server = HTTPServer(('0.0.0.0', CONFIG['PORT']), APIHandler)
+    server = ThreadingHTTPServer(('0.0.0.0', CONFIG['PORT']), APIHandler)
     print(f'Velociclos API running on http://localhost:{CONFIG["PORT"]}')
     print(f'Admin panel: http://localhost:{CONFIG["PORT"]}/admin/index.html')
-    print(f'Password: {CONFIG["ADMIN_PASSWORD"]}')
     server.serve_forever()
 
 if __name__ == '__main__':
