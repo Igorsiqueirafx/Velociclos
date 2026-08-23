@@ -10,7 +10,16 @@ import server
 
 def start():
     threading.Thread(target=server.run, daemon=True).start()
-    time.sleep(1.0)
+    deadline = time.time() + 15
+    while time.time() < deadline:
+        try:
+            urllib.request.urlopen('http://127.0.0.1:' + os.environ['PORT'] + '/api/health', timeout=1)
+            return
+        except urllib.error.HTTPError:
+            return
+        except Exception:
+            time.sleep(0.25)
+    raise RuntimeError('server did not become ready within 15s')
 
 def call(method, path, token=None, body=None):
     url = 'http://127.0.0.1:' + os.environ['PORT'] + path
@@ -23,6 +32,8 @@ def call(method, path, token=None, body=None):
             return r.status
     except urllib.error.HTTPError as e:
         return e.code
+    except (urllib.error.URLError, ConnectionError):
+        return 0
 
 def main():
     start()
